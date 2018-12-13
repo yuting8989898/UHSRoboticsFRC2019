@@ -4,7 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -12,6 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.pidcontroller.DriveDistancePID;
+import frc.robot.subsystems.pidcontroller.DriveStraightPID;
+import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +30,12 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public static DriveStraightPID driveStraightPID = new DriveStraightPID();
+  public static DriveDistancePID driveDistancePID = new DriveDistancePID();
+  public static ArmSubsystem armSubsystem = new ArmSubsystem();
+  public static LiftSubsystem liftSubsystem = new LiftSubsystem();
+  public static OI oi = new OI();
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -33,10 +43,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    double distancePerPulse = Math.PI*Constant.WHEEL_DIAMETER/Constant.ENCODER_FULL_ROTATION;
+    RobotMap.leftEncoder.setDistancePerPulse(distancePerPulse);
+    RobotMap.rightEncoder.setDistancePerPulse(distancePerPulse);
+    RobotMap.liftEncoder.setDistancePerPulse(distancePerPulse);
+    //m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
-
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -116,6 +130,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    
   }
 
   /**
