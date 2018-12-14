@@ -34,4 +34,17 @@ public class OI {
   public double getDriveY() {
     return controller.getY(Hand.kLeft);
   }
+  public boolean getLiftHigh(){
+    
+    return controller.getYButton();
+  }
+  public boolean getLiftLow(){
+    return controller.getAButton();
+  }
+  public boolean getLiftMid(){
+    return controller.getXButton();
+  }
+  public boolean getStopLift(){
+    return controller.getTriggerAxis(Hand.kLeft)!=0;
+  }
 }
