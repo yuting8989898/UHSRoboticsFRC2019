@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.pidcontroller.DriveDistancePID;
 import frc.robot.subsystems.pidcontroller.DriveStraightPID;
-import frc.robot.commands.LiftCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
@@ -131,19 +130,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    if (oi.getLiftHigh()){
-      new LiftCommand(1, Constant.LIFT_HIGH);
-    }
-    if (oi.getLiftLow()){
-      new LiftCommand(1, Constant.LIFT_LOW);
-    }
-    if (oi.getLiftMid()){
-      new LiftCommand(1, Constant.LIFT_MID);
-    }
-    if (oi.getStopLift()){
-      Robot.liftSubsystem.stopMotor();
-    }
-
+    
   }
 
   /**
