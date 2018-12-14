@@ -9,7 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.commands.LiftCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
