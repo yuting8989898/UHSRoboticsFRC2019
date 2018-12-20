@@ -19,7 +19,6 @@ public class StopAllCommand extends InstantCommand {
    */
   public StopAllCommand() {
     super();
-    requires(Robot.driveStraightPID);
     requires(Robot.driveSubsystem);
     requires(Robot.liftSubsystem);
     requires(Robot.armSubsystem);
@@ -28,7 +27,6 @@ public class StopAllCommand extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() { 
-    Robot.driveStraightPID.disable();
     Robot.driveSubsystem.stopMotor();
     Robot.armSubsystem.stopMotor();
     Robot.liftSubsystem.stopMotor();

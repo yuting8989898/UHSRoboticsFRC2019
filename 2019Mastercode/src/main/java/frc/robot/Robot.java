@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.pidcontroller.DriveDistancePID;
-import frc.robot.subsystems.pidcontroller.DriveStraightPID;
+import frc.robot.commands.TestACommand;
+import frc.robot.commands.TestBCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
@@ -31,8 +31,6 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
-  public static DriveStraightPID driveStraightPID = new DriveStraightPID();
-  public static DriveDistancePID driveDistancePID = new DriveDistancePID();
   public static ArmSubsystem armSubsystem = new ArmSubsystem();
   public static LiftSubsystem liftSubsystem = new LiftSubsystem();
   public static OI oi = new OI();
@@ -47,8 +45,8 @@ public class Robot extends TimedRobot {
     RobotMap.leftEncoder.setDistancePerPulse(distancePerPulse);
     RobotMap.rightEncoder.setDistancePerPulse(distancePerPulse);
     RobotMap.liftEncoder.setDistancePerPulse(distancePerPulse);
-    //m_chooser.addDefault("Default Auto", new ExampleCommand());
-    // chooser.addObject("My Auto", new MyAutoCommand());
+    m_chooser.addDefault("Test A", new TestACommand());
+    m_chooser.addObject("Test B", new TestBCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
   /**
