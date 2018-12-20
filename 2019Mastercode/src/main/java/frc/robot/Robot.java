@@ -102,13 +102,15 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.start();
     }
   }
-
+  int i = 0;
   /**
    * This function is called periodically during autonomous.
    */
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    i++;
+    SmartDashboard.putString("Time (ms): ", Integer.toString(i));
   }
 
   @Override
