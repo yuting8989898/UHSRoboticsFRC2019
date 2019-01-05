@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 
 /**
@@ -21,19 +21,37 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  */
 public class RobotMap {
   //Motor
-  public static Spark left1 = new Spark(0);
-  public static Spark left2 = new Spark(1);
-  public static Spark right1 = new Spark(2);
-  public static Spark right2 = new Spark(3);
-  public static Spark liftMotor = new Spark(4);
-  public static Spark armMotor = new Spark(5);
+  public static VictorSP leftDrive1;
+  public static VictorSP leftDrive2;
+  public static VictorSP rightDrive1;
+  public static VictorSP rightDrive2;
+  public static VictorSP liftMotor;
+  public static VictorSP armMotor;
   //Analog Sensor
-  public static Encoder leftEncoder = new Encoder(0,1,false,EncodingType.k4X);
-  public static Encoder rightEncoder = new Encoder(2,3,false,EncodingType.k4X);
-  public static Encoder liftEncoder = new Encoder (4,5,false,EncodingType.k4X);
-  public static Encoder armEncoder = new Encoder(6,7,false,EncodingType.k4X);
-  public static AnalogGyro gyro = new AnalogGyro(6);
+  public static Encoder leftEncoder;
+  public static Encoder rightEncoder;
+  public static Encoder liftEncoder;
+  public static Encoder armEncoder;
+  public static AnalogGyro gyro;
   //Digital Sensor
-  public static DigitalInput liftUpLimit = new DigitalInput(0);
-  public static DigitalInput liftDownLimit = new DigitalInput(1);
+  public static DigitalInput liftUpLimit;
+  public static DigitalInput liftDownLimit;
+
+  public static void initRobotMap(){
+    leftDrive1 = new VictorSP(0);
+    leftDrive2 = new VictorSP(1);
+    rightDrive1 = new VictorSP(2);
+    rightDrive2 = new VictorSP(3);
+    liftMotor = new VictorSP(4);
+    armMotor = new VictorSP(5);
+
+    leftEncoder = new Encoder(0,1,false,EncodingType.k4X);
+    rightEncoder = new Encoder(2,3,false,EncodingType.k4X);
+    liftEncoder = new Encoder (4,5,false,EncodingType.k4X);
+    armEncoder = new Encoder(6,7,false,EncodingType.k4X);
+    gyro = new AnalogGyro(6);
+
+    liftUpLimit = new DigitalInput(0);
+    liftDownLimit = new DigitalInput(1);
+  }
 }
