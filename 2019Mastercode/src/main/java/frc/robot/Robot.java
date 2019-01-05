@@ -17,23 +17,13 @@ import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.gradle file in the
- * project.
- */
+
 public class Robot extends TimedRobot {
   public static OI m_oi;
-
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
-
-  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
-  public static ArmSubsystem armSubsystem = new ArmSubsystem();
-  public static LiftSubsystem liftSubsystem = new LiftSubsystem();
-  public static OI oi = new OI();
+  int i = 0;
+  public static DriveSubsystem driveSubsystem;
+  public static ArmSubsystem armSubsystem;
+  public static LiftSubsystem liftSubsystem;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -45,18 +35,11 @@ public class Robot extends TimedRobot {
     RobotMap.leftEncoder.setDistancePerPulse(distancePerPulse);
     RobotMap.rightEncoder.setDistancePerPulse(distancePerPulse);
     RobotMap.liftEncoder.setDistancePerPulse(distancePerPulse);
-    m_chooser.addDefault("Test A", new TestACommand());
-    m_chooser.addObject("Test B", new TestBCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    driveSubsystem = new DriveSubsystem();
+    armSubsystem = new ArmSubsystem();
+    liftSubsystem = new LiftSubsystem();
   }
-  /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
-   */
+
   @Override
   public void robotPeriodic() {
   }
@@ -75,34 +58,11 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
-  /**
-   * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString code to get the auto name from the text box below the Gyro
-   *
-   * <p>You can add additional auto modes by adding additional commands to the
-   * chooser code above (like the commented example) or additional comparisons
-   * to the switch structure below with additional strings & commands.
-   */
+
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
   }
-  int i = 0;
+  
   /**
    * This function is called periodically during autonomous.
    */
@@ -115,13 +75,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+
   }
 
   /**
