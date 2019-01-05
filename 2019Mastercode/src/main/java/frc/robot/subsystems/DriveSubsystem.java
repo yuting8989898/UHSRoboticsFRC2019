@@ -24,10 +24,10 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void drive(double left, double right){
-    RobotMap.left1.set(left);
-    RobotMap.left2.set(left);
-    RobotMap.right1.set(-right);
-    RobotMap.right2.set(-right);
+    RobotMap.leftDrive1.set(left);
+    RobotMap.leftDrive2.set(left);
+    RobotMap.rightDrive1.set(-right);
+    RobotMap.rightDrive2.set(-right);
   }
 
   public void stopMotor(){
