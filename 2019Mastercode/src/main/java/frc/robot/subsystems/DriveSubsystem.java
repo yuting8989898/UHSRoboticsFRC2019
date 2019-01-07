@@ -8,8 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -20,17 +18,7 @@ public class DriveSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(Robot.driveCommand);
-  }
-
-  public void drive(double left, double right){
-    RobotMap.leftDrive1.set(left);
-    RobotMap.leftDrive2.set(left);
-    RobotMap.rightDrive1.set(right);
-    RobotMap.rightDrive2.set(right);
-  }
-
-  public void stopMotor(){
-    drive(0,0);
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 }

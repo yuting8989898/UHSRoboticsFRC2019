@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
 public class DriveCommand extends Command {
   public DriveCommand() {
@@ -20,14 +19,10 @@ public class DriveCommand extends Command {
   @Override
   protected void initialize() {
   }
- 
+
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("execute");
-    double x = Robot.m_oi.getDriveX();
-    double y = Robot.m_oi.getDriveY();
-    Robot.driveSubsystem.drive(y+x, x-y);
   }
 
   // Make this return true when this Command no longer needs to run execute()
