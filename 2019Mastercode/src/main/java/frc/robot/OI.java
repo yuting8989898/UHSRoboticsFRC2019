@@ -7,9 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.commands.LiftCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,17 +21,18 @@ public class OI {
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
-  private XboxController controller;
+  private Joystick drive;
 
   public OI() {
-    controller = new XboxController(0);
+    drive = new Joystick(0);
   }
 
   public double getDriveX() {
-    return controller.getX(Hand.kRight);
+    System.out.println("x");
+    return drive.getRawAxis(0);
   }
 
   public double getDriveY() {
-    return controller.getY(Hand.kLeft);
+    return -drive.getRawAxis(1);
   }
 }

@@ -38,10 +38,10 @@ public class RobotMap {
   public static DigitalInput liftDownLimit;
 
   public static void initRobotMap(){
-    leftDrive1 = new VictorSP(0);
-    leftDrive2 = new VictorSP(1);
-    rightDrive1 = new VictorSP(2);
-    rightDrive2 = new VictorSP(3);
+    leftDrive1 = new VictorSP(2);
+    leftDrive2 = new VictorSP(3);
+    rightDrive1 = new VictorSP(0);
+    rightDrive2 = new VictorSP(1);
     liftMotor = new VictorSP(4);
     armMotor = new VictorSP(5);
 

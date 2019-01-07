@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.DriveCommand;
 import frc.robot.commands.TestACommand;
 import frc.robot.commands.TestBCommand;
 import frc.robot.subsystems.ArmSubsystem;
@@ -24,6 +25,7 @@ public class Robot extends TimedRobot {
   public static DriveSubsystem driveSubsystem;
   public static ArmSubsystem armSubsystem;
   public static LiftSubsystem liftSubsystem;
+  public static DriveCommand driveCommand;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -38,10 +40,12 @@ public class Robot extends TimedRobot {
     driveSubsystem = new DriveSubsystem();
     armSubsystem = new ArmSubsystem();
     liftSubsystem = new LiftSubsystem();
+    driveCommand = new DriveCommand();
   }
 
   @Override
   public void robotPeriodic() {
+    
   }
 
   /**
