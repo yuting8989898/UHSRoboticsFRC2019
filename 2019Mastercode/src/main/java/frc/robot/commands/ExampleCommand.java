@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
 
 /**
@@ -27,6 +28,8 @@ public class ExampleCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    System.out.println("is pressed" + OI.isSolenoidPressed());
+    Robot.m_subsystem.setSolenoid(OI.isSolenoidPressed());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,9 +43,4 @@ public class ExampleCommand extends Command {
   protected void end() {
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
 }
