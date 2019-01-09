@@ -28,7 +28,6 @@ public class ExampleCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("is pressed" + OI.isSolenoidPressed());
     Robot.m_subsystem.setSolenoid(OI.isSolenoidPressed());
   }
 

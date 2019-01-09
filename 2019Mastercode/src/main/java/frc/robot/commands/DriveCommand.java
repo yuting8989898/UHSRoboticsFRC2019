@@ -27,7 +27,7 @@ public class DriveCommand extends Command {
   @Override
   protected void execute() {
     double x = OI.getDriveX();
-    double y = -OI.getDriveY()*Constant.turnFactor;
+    double y = OI.getDriveY()*Constant.turnFactor;
     Robot.driveSubsystem.drive(x,y);
     
   }

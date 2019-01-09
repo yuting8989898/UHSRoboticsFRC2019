@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 
@@ -23,13 +25,15 @@ public class RobotMap {
   public static VictorSP driveRight1;
   public static VictorSP driveRight2;
 
-  public static Solenoid solenoid;
+  public static Compressor compressor;
+  public static DoubleSolenoid solenoid;
   public static void init(){
     driveLeft1 = new VictorSP(0);
     driveLeft2 = new VictorSP(1);
     driveRight1 = new VictorSP(2);
     driveRight2 = new VictorSP(3);
 
-    solenoid = new Solenoid(0);
+    compressor = new Compressor(0);
+    solenoid = new DoubleSolenoid(0, 1);
   }
 }

@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -24,6 +25,11 @@ public class ExampleSubsystem extends Subsystem {
   }
 
   public void setSolenoid(boolean isOn){
-    RobotMap.solenoid.set(isOn);
+    if(isOn){
+    RobotMap.solenoid.set(Value.kForward);
+    }
+    else{
+      RobotMap.solenoid.set(Value.kOff);
+    }
   }
 }
