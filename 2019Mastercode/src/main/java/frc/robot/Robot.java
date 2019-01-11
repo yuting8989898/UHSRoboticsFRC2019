@@ -7,11 +7,12 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
@@ -21,23 +22,23 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   //subsystem
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+  public static ExampleSubsystem m_subsystem;
   public static DriveSubsystem driveSubsystem;
   
 
   //command
   Command autoCommand;
   public static DriveCommand driveCommand;
-  public static ExampleCommand exampleCommand = new ExampleCommand();
+  public static ExampleCommand exampleCommand;
 
   @Override
   public void robotInit() {
-    OI.init();
     RobotMap.init();
-
-    driveCommand = new DriveCommand();
-
+    OI.init();
     driveSubsystem = new DriveSubsystem();
+    driveCommand = new DriveCommand();
+    m_subsystem = new ExampleSubsystem();
+    exampleCommand = new ExampleCommand();
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);

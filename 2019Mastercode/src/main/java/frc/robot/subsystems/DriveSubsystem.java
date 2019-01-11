@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -24,9 +26,10 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void drive(double x, double y){
-    RobotMap.driveLeft1.set(x+y);
-    RobotMap.driveLeft2.set(x+y);
-    RobotMap.driveRight1.set(x-y);
-    RobotMap.driveRight2.set(x-y);
+    System.out.println("hi");
+    RobotMap.driveLeft1.set(ControlMode.PercentOutput,x+y);
+    RobotMap.driveLeft2.set(ControlMode.PercentOutput,x+y);
+    RobotMap.driveRight1.set(ControlMode.PercentOutput,x-y);
+    RobotMap.driveRight2.set(ControlMode.PercentOutput,x-y);
   }
 }
