@@ -7,11 +7,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -20,20 +19,21 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  * floating around.
  */
 public class RobotMap {
-  //Motor
-  public static Spark left1 = new Spark(0);
-  public static Spark left2 = new Spark(1);
-  public static Spark right1 = new Spark(2);
-  public static Spark right2 = new Spark(3);
-  public static Spark liftMotor = new Spark(4);
-  public static Spark armMotor = new Spark(5);
-  //Analog Sensor
-  public static Encoder leftEncoder = new Encoder(0,1,false,EncodingType.k4X);
-  public static Encoder rightEncoder = new Encoder(2,3,false,EncodingType.k4X);
-  public static Encoder liftEncoder = new Encoder (4,5,false,EncodingType.k4X);
-  public static Encoder armEncoder = new Encoder(6,7,false,EncodingType.k4X);
-  public static AnalogGyro gyro = new AnalogGyro(6);
-  //Digital Sensor
-  public static DigitalInput liftUpLimit = new DigitalInput(0);
-  public static DigitalInput liftDownLimit = new DigitalInput(1);
+
+  public static VictorSPX driveLeft1;
+  public static VictorSPX driveLeft2;
+  public static VictorSPX driveRight1;
+  public static VictorSPX driveRight2;
+
+  public static Compressor compressor;
+  public static DoubleSolenoid solenoid;
+  public static void init(){
+    driveLeft1 = new VictorSPX(0);
+    driveLeft2 = new VictorSPX(1);
+    driveRight1 = new VictorSPX(2);
+    driveRight2 = new VictorSPX(3);
+
+    compressor = new Compressor(0);
+    solenoid = new DoubleSolenoid(0, 1);
+  }
 }

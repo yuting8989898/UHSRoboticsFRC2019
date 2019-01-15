@@ -1,20 +1,15 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package frc.robot;
 
-
 /**
- * Store all constant variable of the robot
- * 
- * Unit:
- * Degree
- * Centermeter
- * Second
+ * Add your docs here.
  */
-public final class Constant{
-
-    public static int ENCODER_FULL_ROTATION = 360;
-    public static int LIFT_HEIGHT_PER_ROTATION = 10;
-    public static int GYRO_DEGREE_PER_TICK = 2;
-    public static double WHEEL_DIAMETER = 4;
-    public static double PID_DRIVE_OUTPUT = 0.5;
-
+public class Constant {
+    public static double turnFactor = 0.5;
 }

@@ -7,7 +7,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -19,18 +22,14 @@ public class DriveSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(Robot.driveCommand);
   }
 
-  public void drive(double left, double right){
-    RobotMap.left1.set(left);
-    RobotMap.left2.set(left);
-    RobotMap.right1.set(-right);
-    RobotMap.right2.set(-right);
-  }
-
-  public void stopMotor(){
-    drive(0,0);
+  public void drive(double x, double y){
+    System.out.println("hi");
+    RobotMap.driveLeft1.set(ControlMode.PercentOutput,x+y);
+    RobotMap.driveLeft2.set(ControlMode.PercentOutput,x+y);
+    RobotMap.driveRight1.set(ControlMode.PercentOutput,x-y);
+    RobotMap.driveRight2.set(ControlMode.PercentOutput,x-y);
   }
 }

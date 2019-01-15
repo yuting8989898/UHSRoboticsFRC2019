@@ -7,31 +7,33 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.commands.LiftCommand;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  private XboxController controller;
+  public static Joystick driveOI;
 
-  public OI() {
-    controller = new XboxController(0);
+  public static void init(){
+    driveOI = new Joystick(0);
   }
 
-  public double getDriveX() {
-    return controller.getX(Hand.kRight);
+  public static double getDriveX(){
+    return driveOI.getRawAxis(0);
   }
 
-  public double getDriveY() {
-    return controller.getY(Hand.kLeft);
+  public static double getDriveY(){
+    return -driveOI.getRawAxis(1);
+  }
+
+  public static boolean isSolenoidPressed(){
+    System.out.println("SolenoidPressed: " + driveOI.getRawButton(0));
+    return driveOI.getRawButton(0);
+  }
+
+  public static boolean isCompressorPressed(){
+    return driveOI.getRawButton(1);
   }
 }
