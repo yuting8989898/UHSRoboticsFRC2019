@@ -33,7 +33,7 @@ public class RobotMap {
     driveRight1 = new VictorSPX(2);
     driveRight2 = new VictorSPX(3);
 
-    compressor = new Compressor(0);
+    compressor = new Compressor(4);
     solenoid = new DoubleSolenoid(0, 1);
   }
 }
