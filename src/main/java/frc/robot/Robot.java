@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testInit(){
     //Start the compressor
-    RobotMap.compressor.setClosedLoopControl(true);
+    //RobotMap.compressor.setClosedLoopControl(true);
   }
   
   @Override
