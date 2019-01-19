@@ -18,7 +18,6 @@ import frc.robot.RobotMap;
  */
 public class LiftCommand extends Command {
   public LiftCommand() {
-
     // Use requires() here to declare subsystem dependencies
     requires(Robot.liftSubsystem);
     requires(Robot.liftPID);
