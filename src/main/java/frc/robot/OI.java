@@ -39,34 +39,27 @@ public class OI {
 
   public static int getLift() {
     //all placeholder values
-    int output = 0;
-    boolean liftLow = driveOI.getRawButton(1);
-    boolean liftMid = driveOI.getRawButton(2);
-    boolean liftHigh = driveOI.getRawButton(3);
-    boolean liftHatchToggle = driveOI.getRawButton(4);
-    if((liftLow&&liftMid)||(liftLow&&liftHigh)||(liftMid&&liftHigh)){
-      return -1;
-    }
+    // int output = 0;
+    // boolean liftLow = driveOI.getRawButton(1);
+    // boolean liftMid = driveOI.getRawButton(2);
+    // boolean liftHigh = driveOI.getRawButton(3);
+    // boolean liftHatchToggle = driveOI.getRawButton(4);
+    // if((liftLow&&liftMid)||(liftLow&&liftHigh)||(liftMid&&liftHigh)){
+    //   return -1;
+    // }
 
-    if(liftLow)output = 1;
-    if(liftMid)output = 3;
-    if(liftHigh)output = 5;
-    if(liftHatchToggle)output--;
-    return output;
-  }
-
-  public static boolean getLiftMid() {
-    // placeholder value
-    return driveOI.getRawButton(2);
-  }
-
-  public static boolean getLiftBot() {
-    // placeholder value
-    return driveOI.getRawButton(3);
-  }
-
-  public static boolean getLiftHatchToggle() {
-    // placeholder value
-    return driveOI.getRawButton(4);
+    // if(liftLow)output = 1;
+    // if(liftMid)output = 3;
+    // if(liftHigh)output = 5;
+    // if(liftHatchToggle)output--;
+    // return output;
+    boolean liftDown = driveOI.getRawButton(1);
+    boolean liftUp = driveOI.getRawButton(2);
+    //if both button pressed or non of the buttons pressed
+    if((liftDown&&liftUp)||(!liftDown&&!liftUp))return 0;
+    //if only lift down is pressed
+    else if(liftDown)return -1;
+    //if only lift up is pressed
+    else return 1;
   }
 }
