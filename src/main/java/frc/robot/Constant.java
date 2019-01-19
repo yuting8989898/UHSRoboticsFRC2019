@@ -11,5 +11,9 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constant {
+
+    public static double[] liftLevels = {5,10,15,20,25,30};
     public static double turnFactor = 0.5;
 }
+
+
