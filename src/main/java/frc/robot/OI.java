@@ -38,4 +38,37 @@ public class OI {
     double y = -mainOI.getRawAxis(1);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
+
+  public static int getLift() {
+    //all placeholder values
+    int output = 0;
+    boolean liftLow = mainOI.getRawButton(1);
+    boolean liftMid = mainOI.getRawButton(2);
+    boolean liftHigh = mainOI.getRawButton(3);
+    boolean liftHatchToggle = mainOI.getRawButton(4);
+    if((liftLow&&liftMid)||(liftLow&&liftHigh)||(liftMid&&liftHigh)){
+      return -1;
+    }
+
+    if(liftLow)output = 1;
+    if(liftMid)output = 3;
+    if(liftHigh)output = 5;
+    if(liftHatchToggle)output--;
+    return output;
+  }
+
+  public static boolean getLiftMid() {
+    // placeholder value
+    return mainOI.getRawButton(2);
+  }
+
+  public static boolean getLiftBot() {
+    // placeholder value
+    return mainOI.getRawButton(3);
+  }
+
+  public static boolean getLiftHatchToggle() {
+    // placeholder value
+    return mainOI.getRawButton(4);
+  }
 }

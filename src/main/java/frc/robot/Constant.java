@@ -13,4 +13,8 @@ package frc.robot;
 public class Constant {
     public static double joystickDeadZone = 0.03;
     public static double autoDriveSpeed = 0.5;
+    public static double[] liftLevels = {5,10,15,20,25,30};
+    public static double turnFactor = 0.5;
 }
+
+
