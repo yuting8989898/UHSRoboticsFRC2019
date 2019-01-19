@@ -8,6 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -20,5 +23,19 @@ public class LiftSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(Robot.LiftCommand);
   }
+
+  public void operateLift(double speed){
+    System.out.println("moving lift");
+    RobotMap.lift1.set(ControlMode.PercentOutput,speed);
+    RobotMap.lift2.set(ControlMode.PercentOutput,speed);
+  }
+
+  public void stopLift(){
+    System.out.println("stopping lift");
+    RobotMap.lift1.set(ControlMode.PercentOutput,0);
+    RobotMap.lift2.set(ControlMode.PercentOutput,0);
+  }
+
 }

@@ -8,26 +8,26 @@
 package frc.robot.subsystems.pidcontroller;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.Constant;
 
 /**
  * Add your docs here.
  */
 public class LiftPID extends PIDSubsystem {
-  /**
-   * Add your docs here.
-   */
-  private double height;
+
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("SubsystemName", 1, 2, 3);
+    super("LiftPID",1,0,0);
+    getPIDController().setContinuous(true);
+    setOutputRange(-1, 1);
+    setSetpoint(0);
+    setAbsoluteTolerance(Constant.liftPIDTolerance);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to
     // enable() - Enables the PID controller.
-  }
-
-  public void setHeight(double height){
-    this.height=height;
   }
 
   @Override
@@ -41,12 +41,19 @@ public class LiftPID extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return 0.0;
+    return RobotMap.liftEncoder.getDistance();
   }
 
   @Override
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
+    Robot.liftSubsystem.operateLift(output);
+  }
+
+  @Override
+  public void disable() {
+    super.disable();
+    Robot.liftSubsystem.stopLift();
   }
 }
