@@ -18,3 +18,5 @@ public class Constant {
     public static double liftDistancePerPulse = Math.PI * 2 / 360; // prob wrong
     public static double liftPIDTolerance = 0.5; // prob wrong
 }
+
+
