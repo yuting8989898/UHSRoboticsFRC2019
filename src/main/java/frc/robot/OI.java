@@ -16,24 +16,57 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
   public static Joystick driveOI;
 
-  public static void init(){
+  public static void init() {
     driveOI = new Joystick(0);
   }
 
-  public static double getDriveX(){
+  public static double getDriveX() {
     return driveOI.getRawAxis(0);
   }
 
-  public static double getDriveY(){
+  public static double getDriveY() {
     return -driveOI.getRawAxis(1);
   }
 
-  public static boolean isSolenoidPressed(){
+  public static boolean isSolenoidPressed() {
     System.out.println("SolenoidPressed: " + driveOI.getRawButton(0));
     return driveOI.getRawButton(0);
   }
 
-  public static boolean isCompressorPressed(){
+  public static boolean isCompressorPressed() {
     return driveOI.getRawButton(1);
+  }
+
+  public static int getLift() {
+    //all placeholder values
+    int output = 0;
+    boolean liftLow = driveOI.getRawButton(1);
+    boolean liftMid = driveOI.getRawButton(2);
+    boolean liftHigh = driveOI.getRawButton(3);
+    boolean liftHatchToggle = driveOI.getRawButton(4);
+    if((liftLow&&liftMid)||(liftLow&&liftHigh)||(liftMid&&liftHigh)){
+      return -1;
+    }
+
+    if(liftLow)output = 1;
+    if(liftMid)output = 3;
+    if(liftHigh)output = 5;
+    if(liftHatchToggle)output--;
+    return output;
+  }
+
+  public static boolean getLiftMid() {
+    // placeholder value
+    return driveOI.getRawButton(2);
+  }
+
+  public static boolean getLiftBot() {
+    // placeholder value
+    return driveOI.getRawButton(3);
+  }
+
+  public static boolean getLiftHatchToggle() {
+    // placeholder value
+    return driveOI.getRawButton(4);
   }
 }

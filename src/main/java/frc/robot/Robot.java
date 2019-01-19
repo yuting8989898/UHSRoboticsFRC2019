@@ -15,6 +15,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.SolenoidCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.SolenoidSubsystem;
+import frc.robot.subsystems.pidcontroller.LiftPID;
 
 public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
