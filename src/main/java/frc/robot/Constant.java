@@ -13,8 +13,8 @@ package frc.robot;
 public class Constant {
     public static double joystickDeadZone = 0.03;
     public static double autoDriveSpeed = 0.5;
-    public static double[] liftLevels = {5,10,15,20,25,30};
     public static double turnFactor = 0.5;
+    public static double[] liftLevels = { 5, 10, 15, 20, 25, 30 }; // prob wrong
+    public static double liftDistancePerPulse = Math.PI * 2 / 360; // prob wrong
+    public static double liftPIDTolerance = 0.5; // prob wrong
 }
-
-
