@@ -11,11 +11,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.LiftCommand;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.LiftSubsystem;
-import frc.robot.subsystems.pidcontroller.LiftPID;
+import frc.robot.commands.*;
+import frc.robot.subsystems.pidcontroller.*;
+import frc.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
   //subsystem
@@ -35,6 +33,9 @@ public class Robot extends TimedRobot {
     OI.init();
     driveSubsystem = new DriveSubsystem();
     driveCommand = new DriveCommand();
+    liftSubsystem = new LiftSubsystem();
+    liftPID = new LiftPID();
+    LiftCommand = new LiftCommand();
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
