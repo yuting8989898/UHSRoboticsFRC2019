@@ -18,9 +18,9 @@ import frc.robot.RobotMap;
  */
 public class LiftCommand extends Command {
   public LiftCommand() {
-    
+
     // Use requires() here to declare subsystem dependencies
-    //requires(Robot.LiftSubsystem);
+    // requires(Robot.LiftSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -32,28 +32,29 @@ public class LiftCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    int input = OI.getLift();
-    if(input!=0){
-      double current = RobotMap.liftEncoder.getDistance();
-      if(input == -1){
-        //when the driver wants to make the lift go down
-        for(int i = Constant.liftLevels.length-1; i >= 0; i--){
-          //find the next lift level to go 
-          if(current>Constant.liftLevels[i]){
-            Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
-            break;
-          }
-        }
-      }else{
-        //when the driver wants the lift go up
-        for(int i = 0; i <= Constant.liftLevels.length-1; i++){
-          //find the next lift level to go
-          if(current<Constant.liftLevels[i]){
-            Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
-            break;
-          }
+    double current = RobotMap.liftEncoder.getDistance();
+    //Finds the next target location for the lift to go
+    switch (OI.getLift()) {
+    case -1:
+      // when the driver wants to make the lift go down
+      for (int i = Constant.liftLevels.length - 1; i >= 0; i--) {
+        // find the next lift level to go
+        if (current > Constant.liftLevels[i]) {
+          Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
+          break;
         }
       }
+      break;
+    case 1:
+      // when the driver wants the lift go up
+      for (int i = 0; i <= Constant.liftLevels.length - 1; i++) {
+        // find the next lift level to go
+        if (current < Constant.liftLevels[i]) {
+          Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
+          break;
+        }
+      }
+      break;
     }
   }
 
