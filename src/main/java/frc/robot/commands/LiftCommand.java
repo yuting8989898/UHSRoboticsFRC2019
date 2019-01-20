@@ -33,12 +33,15 @@ public class LiftCommand extends Command {
   @Override
   protected void execute() {
     double current = RobotMap.liftEncoder.getDistance();
-    //Finds the next target location for the lift to go
+    // Finds the next target location for the lift to go
     switch (OI.getLift()) {
+    /**
+     * For automatically controlling the lift through PID.
+     */
     case -1:
       // when the driver wants to make the lift go down
+      Robot.liftPID.enable();
       for (int i = Constant.liftLevels.length - 1; i >= 0; i--) {
-        // find the next lift level to go
         if (current > Constant.liftLevels[i]) {
           Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
           break;
@@ -47,15 +50,30 @@ public class LiftCommand extends Command {
       break;
     case 1:
       // when the driver wants the lift go up
+      Robot.liftPID.enable();
       for (int i = 0; i <= Constant.liftLevels.length - 1; i++) {
-        // find the next lift level to go
         if (current < Constant.liftLevels[i]) {
           Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
           break;
         }
       }
       break;
+    /**
+     * For manually controlling the lift.
+     */
+    case -2:
+      Robot.liftPID.disable();
+      Robot.liftSubsystem.operateLift(-1);
+      break;
+    case 2:
+      Robot.liftPID.disable();
+      Robot.liftSubsystem.operateLift(1);
+      break;
     }
+
+    // disables the pid if it's on target
+    if (Robot.liftPID.onTarget())
+      Robot.liftPID.disable();
   }
 
   // Make this return true when this Command no longer needs to run execute()
