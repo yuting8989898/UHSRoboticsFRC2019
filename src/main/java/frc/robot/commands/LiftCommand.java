@@ -20,7 +20,8 @@ public class LiftCommand extends Command {
   public LiftCommand() {
 
     // Use requires() here to declare subsystem dependencies
-    // requires(Robot.LiftSubsystem);
+    requires(Robot.liftSubsystem);
+    requires(Robot.liftPID);
   }
 
   // Called just before this Command runs the first time
