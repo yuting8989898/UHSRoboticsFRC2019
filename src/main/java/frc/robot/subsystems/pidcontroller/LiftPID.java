@@ -20,14 +20,10 @@ public class LiftPID extends PIDSubsystem {
   public LiftPID() {
     // Intert a subsystem name and PID values here
     super("LiftPID",1,0,0);
-    getPIDController().setContinuous(true);
+    //getPIDController().setContinuous(true);
     setOutputRange(-1, 1);
     setSetpoint(0);
     setAbsoluteTolerance(Constant.liftPIDTolerance);
-    // Use these to get going:
-    // setSetpoint() - Sets where the PID controller should move the system
-    // to
-    // enable() - Enables the PID controller.
   }
 
   @Override
@@ -41,6 +37,7 @@ public class LiftPID extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
+    //System.out.println(" PID input value: " + RobotMap.liftEncoder.getDistance());
     return RobotMap.liftEncoder.getDistance();
   }
 
@@ -49,6 +46,7 @@ public class LiftPID extends PIDSubsystem {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
     Robot.liftSubsystem.operateLift(output);
+    //System.out.println("PID output value: " + output);
   }
 
   @Override
