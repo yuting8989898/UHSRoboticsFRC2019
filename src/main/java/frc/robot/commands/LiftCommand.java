@@ -39,9 +39,9 @@ public class LiftCommand extends Command {
     /**
      * For automatically controlling the lift through PID.
      */
-    case -1:
+    case -2:
       // when the driver wants to make the lift go down
-      Robot.liftPID.enable();
+      if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable();
       for (int i = Constant.liftLevels.length - 1; i >= 0; i--) {
         if (current > Constant.liftLevels[i]) {
           Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
@@ -49,9 +49,9 @@ public class LiftCommand extends Command {
         }
       }
       break;
-    case 1:
+    case 2:
       // when the driver wants the lift go up
-      Robot.liftPID.enable();
+      if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable();
       for (int i = 0; i <= Constant.liftLevels.length - 1; i++) {
         if (current < Constant.liftLevels[i]) {
           Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
@@ -62,18 +62,18 @@ public class LiftCommand extends Command {
     /**
      * For manually controlling the lift.
      */
-    case -2:
-      Robot.liftPID.disable();
+    case -1:
+      if(Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.disable();
       Robot.liftSubsystem.operateLift(-1);
       break;
-    case 2:
-      Robot.liftPID.disable();
+    case 1:
+    if(Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.disable();
       Robot.liftSubsystem.operateLift(1);
       break;
     }
 
     // disables the pid if it's on target
-    if (Robot.liftPID.onTarget())
+    if (Robot.liftPID.onTarget()&&Robot.liftPID.getPIDController().isEnabled())
       Robot.liftPID.disable();
   }
 

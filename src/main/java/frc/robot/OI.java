@@ -29,8 +29,8 @@ public class OI {
   }
 
   public static boolean isSolenoidPressed() {
-    System.out.println("SolenoidPressed: " + driveOI.getRawButton(0));
-    return driveOI.getRawButton(0);
+    //System.out.println("SolenoidPressed: " + driveOI.getRawButton(0));
+    return driveOI.getRawButton(1);
   }
 
   public static boolean isCompressorPressed() {
@@ -39,18 +39,28 @@ public class OI {
 
   public static int getLift() {
     /**
-     * -2 = manually going down
-     * -1 = use PID to go to a lower level
+     * -2 = use PID to go to a lower level
+     * -1 = manually going down
      *  0 = No action
-     *  1 = use PID to go to a Higher level
-     *  2 = manually going up
+     *  1 = manually going up
+     *  2 = use PID to go to a Higher level
      */
     //all button numbers are placeholders
     int output = 0;
-    boolean liftManualToggle = driveOI.getRawButton(3);
-    if(driveOI.getRawButton(1))output--;
-    if(driveOI.getRawButton(2))output++;
-    if(driveOI.getRawButton(3))output*=2;
+
+
+
+    if(driveOI.getRawButton(2))output--;
+    if(driveOI.getRawButton(4))output++;
+    if(!driveOI.getRawButton(5)){
+      if(driveOI.getRawButtonReleased(2))output=-2;
+      if(driveOI.getRawButtonReleased(4))output=2;
+    }
+    
+    
+    if(output==2||output==-2)System.out.println("\n\n");
+    System.out.println("Output for lift is:    " + output+"");
+    if(output==2||output==-2)System.out.println("\n\n");
     return output;
   }
 }
