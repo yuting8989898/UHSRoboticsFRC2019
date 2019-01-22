@@ -27,7 +27,6 @@ public class LiftSubsystem extends Subsystem {
   }
 
   public void operateLift(double speed){
-    System.out.println("moving lift");
     RobotMap.lift1.set(ControlMode.PercentOutput,speed);
     RobotMap.lift2.set(ControlMode.PercentOutput,speed);
   }

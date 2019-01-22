@@ -41,18 +41,28 @@ public class OI {
 
   public static int getLift() {
     /**
-     * -2 = manually going down
-     * -1 = use PID to go to a lower level
+     * -2 = use PID to go to a lower level
+     * -1 = manually going down
      *  0 = No action
-     *  1 = use PID to go to a Higher level
-     *  2 = manually going up
+     *  1 = manually going up
+     *  2 = use PID to go to a Higher level
      */
     //all button numbers are placeholders
     int output = 0;
-    boolean liftManualToggle = mainOI.getRawButton(3);
-    if(mainOI.getRawButton(1))output--;
-    if(mainOI.getRawButton(2))output++;
-    if(mainOI.getRawButton(3))output*=2;
+
+
+
+    if(mainOI.getRawButton(2))output--;
+    if(mainOI.getRawButton(4))output++;
+    if(!mainOI.getRawButton(5)){
+      if(mainOI.getRawButtonReleased(2))output=-2;
+      if(mainOI.getRawButtonReleased(4))output=2;
+    }
+    
+    
+    if(output==2||output==-2)System.out.println("\n\n");
+    System.out.println("Output for lift is:    " + output+"");
+    if(output==2||output==-2)System.out.println("\n\n");
     return output;
   }
 }
