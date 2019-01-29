@@ -27,13 +27,4 @@ public class OI {
   public static double getDriveY(){
     return -driveOI.getRawAxis(1);
   }
-
-  public static boolean isSolenoidPressed(){
-    System.out.println("SolenoidPressed: " + driveOI.getRawButton(0));
-    return driveOI.getRawButton(0);
-  }
-
-  public static boolean isCompressorPressed(){
-    return driveOI.getRawButton(1);
-  }
 }
