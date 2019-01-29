@@ -10,7 +10,6 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -26,14 +25,10 @@ public class RobotMap {
   public static VictorSPX driveRight2;
 
   public static Compressor compressor;
-  public static DoubleSolenoid solenoid;
   public static void init(){
     driveLeft1 = new VictorSPX(0);
     driveLeft2 = new VictorSPX(1);
-    driveRight1 = new VictorSPX(2);
-    driveRight2 = new VictorSPX(3);
-
-    compressor = new Compressor(4);
-    solenoid = new DoubleSolenoid(0, 1);
+    driveRight1 = new VictorSPX(6);
+    driveRight2 = new VictorSPX(7);
   }
 }

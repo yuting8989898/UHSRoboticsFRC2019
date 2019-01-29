@@ -12,22 +12,18 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.SolenoidCommand;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.SolenoidSubsystem;
 
 public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   //subsystem
-  public static SolenoidSubsystem solenoidSubsystem;
   public static DriveSubsystem driveSubsystem;
   
 
   //command
   Command autoCommand;
   public static DriveCommand driveCommand;
-  public static SolenoidCommand solenoidCommand;
 
   @Override
   public void robotInit() {
@@ -35,8 +31,6 @@ public class Robot extends TimedRobot {
     OI.init();
     driveSubsystem = new DriveSubsystem();
     driveCommand = new DriveCommand();
-    solenoidSubsystem = new SolenoidSubsystem();
-    solenoidCommand = new SolenoidCommand();
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
