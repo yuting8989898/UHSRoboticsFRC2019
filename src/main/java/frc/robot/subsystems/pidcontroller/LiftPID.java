@@ -45,7 +45,7 @@
     protected void usePIDOutput(double output) {
       // Use output to drive your system, like a motor
       // e.g. yourMotor.set(output);
-      System.out.println("Encoder: " + RobotMap.liftEncoder.getDistance() + " Output: " + output + " Setpoint: " + getSetpoint());
+      //System.out.println("Encoder: " + RobotMap.liftEncoder.getDistance() + " Output: " + output + " Setpoint: " + getSetpoint());
       Robot.liftSubsystem.operateLift(output);
       //System.out.println("PID output value: " + output);
     }

@@ -33,6 +33,8 @@ public class LiftCommand extends Command {
   @Override
   protected void execute() {
     double current = RobotMap.liftEncoder.getDistance();
+    System.out.println("lift position: " + current);
+
     //System.out.println("Encoder: " + current);
     // Finds the next target location for the lift to go
     switch (OI.getLift()) {
@@ -64,11 +66,15 @@ public class LiftCommand extends Command {
      */
     case -1:
       if(Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.disable();
-      Robot.liftSubsystem.operateLift(-1);
+      if(current>Constant.liftDownLimit){
+        Robot.liftSubsystem.operateLift(-1);
+      }
       break;
     case 1:
     if(Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.disable();
-      Robot.liftSubsystem.operateLift(1);
+      if(current<Constant.liftUpLimit){
+        Robot.liftSubsystem.operateLift(1);
+      }
       break;
     }
 

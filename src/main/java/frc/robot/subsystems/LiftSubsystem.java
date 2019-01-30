@@ -28,17 +28,15 @@ public class LiftSubsystem extends Subsystem {
     setDefaultCommand(Robot.LiftCommand);
   }
 
-  public void operateLift(double speed){
-    if(RobotMap.liftEncoder.getDistance()<Constant.liftDownLimit||RobotMap.liftEncoder.getDistance()>Constant.liftUpLimit){
-      RobotMap.lift2.set(ControlMode.PercentOutput,speed);
-      RobotMap.lift1.set(ControlMode.PercentOutput,speed);
-    }else System.out.println("Lift limit reached");
+  public void operateLift(double speed) {
+    RobotMap.lift2.set(ControlMode.PercentOutput, speed);
+    RobotMap.lift1.set(ControlMode.PercentOutput, speed);
   }
 
-  public void stopLift(){
+  public void stopLift() {
     System.out.println("stopping lift");
-    RobotMap.lift1.set(ControlMode.PercentOutput,0);
-    RobotMap.lift2.set(ControlMode.PercentOutput,0);
+    RobotMap.lift1.set(ControlMode.PercentOutput, 0);
+    RobotMap.lift2.set(ControlMode.PercentOutput, 0);
   }
 
 }
