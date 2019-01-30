@@ -33,6 +33,7 @@ public class LiftCommand extends Command {
   @Override
   protected void execute() {
     double current = RobotMap.liftEncoder.getDistance();
+    //System.out.println("Encoder: " + current);
     // Finds the next target location for the lift to go
     switch (OI.getLift()) {
     /**

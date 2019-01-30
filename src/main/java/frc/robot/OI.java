@@ -63,9 +63,7 @@ public class OI {
     }
     
     
-    if(output==2||output==-2)System.out.println("\n\n");
-    System.out.println("Output for lift is:    " + output+"");
-    if(output==2||output==-2)System.out.println("\n\n");
+    if(output==2||output==-2)System.out.println("\n\n\nButton Input: " + output + "\n\n\n");
     return output;
   }
 }
