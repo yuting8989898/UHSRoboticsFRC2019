@@ -11,5 +11,5 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constant {
-    public static double turnFactor = 0.5;
+    public static double joystickDeadZone = 0.05;
 }

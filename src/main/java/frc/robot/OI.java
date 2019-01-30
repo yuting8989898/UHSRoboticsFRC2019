@@ -14,17 +14,28 @@ import edu.wpi.first.wpilibj.Joystick;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  public static Joystick driveOI;
+  public static Joystick mainOI;
 
+   /**
+ * Initialize all the controller
+ */
   public static void init(){
-    driveOI = new Joystick(0);
+    mainOI = new Joystick(0);
   }
 
+   /**
+ * Cartesian X-Axis
+ */
   public static double getDriveX(){
-    return driveOI.getRawAxis(0);
+    double x = mainOI.getRawAxis(0);
+    return x > Constant.joystickDeadZone || x < -Constant.joystickDeadZone ? x : 0;
   }
 
+  /**
+ * Cartesian Y-Axis
+ */
   public static double getDriveY(){
-    return -driveOI.getRawAxis(1);
+    double y = -mainOI.getRawAxis(4);
+    return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
 }

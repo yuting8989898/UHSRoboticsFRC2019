@@ -15,14 +15,9 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class Robot extends TimedRobot {
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
-
   //subsystem
   public static DriveSubsystem driveSubsystem;
   
-
-  //command
-  Command autoCommand;
   public static DriveCommand driveCommand;
 
   @Override
@@ -31,9 +26,6 @@ public class Robot extends TimedRobot {
     OI.init();
     driveSubsystem = new DriveSubsystem();
     driveCommand = new DriveCommand();
-    //m_chooser.setDefaultOption("Default Auto", driveCommand);
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    //SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   @Override
@@ -43,19 +35,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    //autoCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    // if (m_autonomousCommand != null) {
-    //   autoCommand.start();
-    // }
+    driveCommand.isAuto = true;
   }
 
   @Override
@@ -65,9 +45,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (autoCommand != null) {
-      autoCommand.cancel();
-    }
+    driveCommand.isAuto = false;
   }
 
   /**
@@ -80,8 +58,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit(){
-    //Start the compressor
-    //RobotMap.compressor.setClosedLoopControl(true);
   }
   
   @Override

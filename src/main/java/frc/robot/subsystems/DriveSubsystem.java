@@ -26,9 +26,10 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void drive(double x, double y){
-    RobotMap.driveLeft1.set(ControlMode.PercentOutput,x+y);
-    RobotMap.driveLeft2.set(ControlMode.PercentOutput,x+y);
-    RobotMap.driveRight1.set(ControlMode.PercentOutput,x-y);
-    RobotMap.driveRight2.set(ControlMode.PercentOutput,x-y);
+    //since x+y in full power is 2, percentage only reach up to 1
+    RobotMap.driveLeft1.set(ControlMode.PercentOutput,(x+y)/2);
+    RobotMap.driveLeft2.set(ControlMode.PercentOutput,(x+y/2));
+    RobotMap.driveRight1.set(ControlMode.PercentOutput,(x-y/2));
+    RobotMap.driveRight2.set(ControlMode.PercentOutput,(x-y/2));
   }
 }
