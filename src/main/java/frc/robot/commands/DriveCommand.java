@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -31,10 +32,20 @@ public class DriveCommand extends Command {
     double y = OI.getDriveY();
     //Constant speed in autonomous mode
     if(isAuto){
-      x = x == 0 ? 0 : 0.5;
-      y = y == 0 ? 0 : 0.5;
+      if(y > 0){
+        x = Constant.autoDriveSpeed;
+      }
+      else if(y < 0){
+        x = -Constant.autoDriveSpeed;
+      }
+      if(x > 0){
+        x = Constant.autoDriveSpeed;
+      }
+      else if(x < 0){
+        x = -Constant.autoDriveSpeed;
+      }
     }
-    Robot.driveSubsystem.drive(x,y);
+    Robot.driveSubsystem.drive(y,x);
     
   }
 

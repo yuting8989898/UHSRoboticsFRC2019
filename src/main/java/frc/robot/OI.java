@@ -27,7 +27,7 @@ public class OI {
  * Cartesian X-Axis
  */
   public static double getDriveX(){
-    double x = mainOI.getRawAxis(0);
+    double x = mainOI.getRawAxis(3);
     return x > Constant.joystickDeadZone || x < -Constant.joystickDeadZone ? x : 0;
   }
 
@@ -35,7 +35,7 @@ public class OI {
  * Cartesian Y-Axis
  */
   public static double getDriveY(){
-    double y = -mainOI.getRawAxis(4);
+    double y = -mainOI.getRawAxis(1);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
 }

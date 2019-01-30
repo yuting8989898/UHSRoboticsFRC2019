@@ -12,4 +12,5 @@ package frc.robot;
  */
 public class Constant {
     public static double joystickDeadZone = 0.05;
+    public static double autoDriveSpeed = 0.5;
 }
