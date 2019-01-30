@@ -37,14 +37,16 @@ public class OI {
     return driveOI.getRawButton(1);
   }
 
+  /**
+   * <pre>
+   * -2 = use PID to go to a lower level
+   * -1 = manually going down
+   *  0 = No action
+   *  1 = manually going up
+   *  2 = use PID to go to a Higher level
+   * </pre>
+   */
   public static int getLift() {
-    /**
-     * -2 = use PID to go to a lower level
-     * -1 = manually going down
-     *  0 = No action
-     *  1 = manually going up
-     *  2 = use PID to go to a Higher level
-     */
     //all button numbers are placeholders
     int output = 0;
 
