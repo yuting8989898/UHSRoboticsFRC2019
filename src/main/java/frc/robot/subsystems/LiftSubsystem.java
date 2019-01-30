@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import frc.robot.Constant;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -27,8 +29,10 @@ public class LiftSubsystem extends Subsystem {
   }
 
   public void operateLift(double speed){
-    RobotMap.lift1.set(ControlMode.PercentOutput,speed);
-    RobotMap.lift2.set(ControlMode.PercentOutput,speed);
+    if(RobotMap.liftEncoder.getDistance()<Constant.liftDownLimit||RobotMap.liftEncoder.getDistance()>Constant.liftUpLimit){
+      RobotMap.lift2.set(ControlMode.PercentOutput,speed);
+      RobotMap.lift1.set(ControlMode.PercentOutput,speed);
+    }else System.out.println("Lift limit reached");
   }
 
   public void stopLift(){
