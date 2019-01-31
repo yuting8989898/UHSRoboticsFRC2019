@@ -15,8 +15,6 @@ public class Constant {
     public static double autoDriveSpeed = 0.5;
     public static double turnFactor = 50;
     public static double[] liftLevels = { 50, 150, 250, 350, 450, 550 }; // prob wrong
-    public static double liftUpLimit = 350;
-    public static double liftDownLimit = 0;
     public static double liftDistancePerPulse = Math.PI * 2 / 360; // prob wrong
-    public static double liftPIDTolerance = 1; // prob wrong
+    public static double liftPIDTolerance = 0.5; // prob wrong
 }

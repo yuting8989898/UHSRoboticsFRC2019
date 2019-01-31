@@ -8,79 +8,50 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-/**
- * Solenoid Command
- */
 public class LiftCommand extends Command {
+  int targetLevel = 0;
+
   public LiftCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.liftSubsystem);
     requires(Robot.liftPID);
+    targetLevel = 0;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     RobotMap.liftEncoder.reset();
+    Robot.liftPID.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double current = RobotMap.liftEncoder.getDistance();
-    System.out.println("lift position: " + current);
-
-    //System.out.println("Encoder: " + current);
+    //targetLevel = (int)SmartDashboard.getNumber("Lift Target Number", 0);
+    SmartDashboard.putNumber("Lift Height", RobotMap.liftEncoder.getDistance());
+    SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
+    SmartDashboard.putNumber("Lift Target Number", targetLevel);
     // Finds the next target location for the lift to go
     switch (OI.getLift()) {
-    /**
-     * For automatically controlling the lift through PID.
-     */
-    case -2:
-      // when the driver wants to make the lift go down
-      if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable();
-      for (int i = Constant.liftLevels.length - 1; i >= 0; i--) {
-        if (current > Constant.liftLevels[i]) {
-          Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
-          break;
-        }
-      }
-      break;
-    case 2:
-      // when the driver wants the lift go up
-      if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable();
-      for (int i = 0; i <= Constant.liftLevels.length - 1; i++) {
-        if (current < Constant.liftLevels[i]) {
-          Robot.liftPID.setSetpoint(Constant.liftLevels[i]);
-          break;
-        }
-      }
-      break;
-    /**
-     * For manually controlling the lift.
-     */
     case -1:
-      if(Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.disable();
-      if(current>Constant.liftDownLimit){
-        Robot.liftSubsystem.operateLift(-1);
-      }
+      // when the driver wants to make the lift go down
+      if(targetLevel>0)targetLevel--;
+      Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
       break;
     case 1:
-    if(Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.disable();
-      if(current<Constant.liftUpLimit){
-        Robot.liftSubsystem.operateLift(1);
-      }
-      break;
+      // when the driver wants the lift go up
+      if(targetLevel<Constant.liftLevels.length-1)targetLevel++;
+      Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
     }
 
-    // disables the pid if it's on target
-    if (Robot.liftPID.onTarget()&&Robot.liftPID.getPIDController().isEnabled())
-      Robot.liftPID.disable();
   }
 
   // Make this return true when this Command no longer needs to run execute()

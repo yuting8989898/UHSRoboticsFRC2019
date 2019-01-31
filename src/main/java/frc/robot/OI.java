@@ -8,7 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -52,18 +53,9 @@ public class OI {
   public static int getLift() {
     //all button numbers are placeholders
     int output = 0;
-
-
-
-    if(mainOI.getRawButton(2))output--;
-    if(mainOI.getRawButton(4))output++;
-    if(!mainOI.getRawButton(5)){
-      if(mainOI.getRawButtonReleased(2))output=-2;
-      if(mainOI.getRawButtonReleased(4))output=2;
-    }
-    
-    
-    if(output==2||output==-2)System.out.println("\n\n\nButton Input: " + output + "\n\n\n");
+    if(mainOI.getRawButtonPressed(2))output--;
+    if(mainOI.getRawButtonPressed(4))output++;
+    SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
   }
 }
