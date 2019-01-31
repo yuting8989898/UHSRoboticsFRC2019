@@ -30,6 +30,7 @@ public class DriveCommand extends Command {
   protected void execute() {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
+    double left, right;
     //Constant speed in autonomous mode
     if(isAuto){
       if(y > 0){
@@ -45,7 +46,9 @@ public class DriveCommand extends Command {
         x = -Constant.autoDriveSpeed;
       }
     }
-    Robot.driveSubsystem.drive(y,x);
+    left = (y-x)/2;
+    right = (y+x)/2;
+    Robot.driveSubsystem.drive(left,right);
     
   }
 
