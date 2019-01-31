@@ -28,7 +28,6 @@ public class LiftSubsystem extends Subsystem {
   }
 
   public void operateLift(double speedPercentage) {
-    
     speedPercentage=speedPercentage/100;
     SmartDashboard.putNumber("Lift Speed", speedPercentage);
     RobotMap.lift2.set(ControlMode.PercentOutput, speedPercentage);

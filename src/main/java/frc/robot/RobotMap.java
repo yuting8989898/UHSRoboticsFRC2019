@@ -31,8 +31,8 @@ public class RobotMap {
     driveLeft1 = new VictorSPX(0);
     driveLeft2 = new VictorSPX(1);
     driveRight1 = new VictorSPX(6);
-    driveRight2 = new VictorSPX(7);
-    lift1 = new VictorSPX(4);
+    driveRight2 = new VictorSPX(8);
+    lift1 = new VictorSPX(7);
     lift2 = new VictorSPX(5);
 
     //0,1 are just place holders

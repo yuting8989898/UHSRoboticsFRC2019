@@ -20,7 +20,7 @@ public class LiftPID extends PIDSubsystem {
 
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("LiftPID", 0.5, 0, 0.5);
+    super("LiftPID", 0.5, 0, 0.05);
     // getPIDController().setContinuous(true);
     setOutputRange(-100, 100);
     setSetpoint(0);
