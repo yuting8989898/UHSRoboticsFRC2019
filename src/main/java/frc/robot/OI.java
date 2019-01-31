@@ -15,12 +15,14 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  */
 public class OI {
   public static Joystick mainOI;
+  public static Joystick subOI;
 
    /**
  * Initialize all the controller
  */
   public static void init(){
     mainOI = new Joystick(0);
+    subOI = new Joystick(1);
   }
 
    /**
@@ -65,5 +67,15 @@ public class OI {
     if(mainOI.getRawButtonPressed(4))output++;
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
+  }
+
+  public static boolean getIntakePressed(){
+    //TO-DO check which button to use
+    return subOI.getRawButton(1);
+  }
+  
+  public static boolean getRevIntakePressed(){
+    //To-DO check which button to use
+    return subOI.getRawButton(2);
   }
 }
