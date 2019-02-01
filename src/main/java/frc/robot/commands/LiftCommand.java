@@ -34,10 +34,10 @@ public class LiftCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //targetLevel = (int)SmartDashboard.getNumber("Lift Target Number", 0);
     SmartDashboard.putNumber("Lift Height", RobotMap.liftEncoder.getDistance());
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
     SmartDashboard.putNumber("Lift Target Number", targetLevel);
+    
     // Finds the next target location for the lift to go
     switch (OI.getLift()) {
     case -1:

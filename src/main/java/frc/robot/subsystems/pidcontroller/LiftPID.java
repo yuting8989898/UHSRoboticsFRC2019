@@ -18,11 +18,12 @@ import frc.robot.Constant;
  */
 public class LiftPID extends PIDSubsystem {
 
+  double lastOutput = 1;
+
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("LiftPID", 0.5, 0, 0.05);
+    super("LiftPID", 5, 0, 0);
     // getPIDController().setContinuous(true);
-    setInputRange(-100, 100);
     setOutputRange(-100, 100);
     setSetpoint(0);
     setAbsoluteTolerance(Constant.liftPIDTolerance);
@@ -39,17 +40,18 @@ public class LiftPID extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    // System.out.println(" PID input value: " +
-    // RobotMap.liftEncoder.getDistance());
     return RobotMap.liftEncoder.getDistance();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    // Use output to drive your system, like a motor
-    // e.g. yourMotor.set(output);
+    SmartDashboard.putNumber("Lift PID raw Output", output);
+    output = lastOutput + (output - lastOutput)/Constant.liftSmoothingFactor;
+    if(output<Constant.liftSmoothingDeadZone&&output>-Constant.liftSmoothingDeadZone)output=0;
     Robot.liftSubsystem.operateLift(output);
     SmartDashboard.putNumber("Lift PID Setpoint", getSetpoint());
+    SmartDashboard.putNumber("Lift Speed", output);
+    lastOutput = output;
   }
 
   @Override

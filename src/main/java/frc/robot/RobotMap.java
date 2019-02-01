@@ -28,11 +28,11 @@ public class RobotMap {
 
   public static Encoder liftEncoder;
   public static void init(){
-    driveLeft1 = new VictorSPX(0);
+    driveLeft1 = new VictorSPX(2);
     driveLeft2 = new VictorSPX(1);
     driveRight1 = new VictorSPX(6);
-    driveRight2 = new VictorSPX(8);
-    lift1 = new VictorSPX(7);
+    driveRight2 = new VictorSPX(7);
+    lift1 = new VictorSPX(0);
     lift2 = new VictorSPX(5);
 
     //0,1 are just place holders

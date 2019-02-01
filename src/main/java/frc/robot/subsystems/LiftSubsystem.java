@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -19,7 +18,6 @@ import frc.robot.RobotMap;
 public class LiftSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -29,7 +27,6 @@ public class LiftSubsystem extends Subsystem {
 
   public void operateLift(double speedPercentage) {
     speedPercentage=speedPercentage/100;
-    SmartDashboard.putNumber("Lift Speed", speedPercentage);
     RobotMap.lift2.set(ControlMode.PercentOutput, speedPercentage);
     RobotMap.lift1.set(ControlMode.PercentOutput, speedPercentage);
   }
