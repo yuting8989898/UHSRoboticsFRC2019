@@ -16,20 +16,19 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class DriveSubsystem extends Subsystem {
+public class WristSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(Robot.driveCommand);
+    setDefaultCommand(Robot.wristCommand);
   }
 
-  public void drive(double right, double left){
-    //since x+y in full power is 2, percentage only reach up to 1
-    RobotMap.driveLeft1.set(ControlMode.PercentOutput,left);
-    RobotMap.driveLeft2.set(ControlMode.PercentOutput,left);
-    RobotMap.driveRight1.set(ControlMode.PercentOutput,right);
-    RobotMap.driveRight2.set(ControlMode.PercentOutput,right);
+  /**
+ * A@param val - up is positive
+ */
+  public void rotate(double val){
+    RobotMap.wrist.set(ControlMode.PercentOutput, val);
   }
 }

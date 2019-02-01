@@ -9,35 +9,47 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
 
+
 public class Robot extends TimedRobot {
   //subsystem
   public static DriveSubsystem driveSubsystem;
-
   public static LiftSubsystem liftSubsystem;
   public static LiftPID liftPID;
-
+  public static ArmSubsystem armSubsystem;
+  public static WristSubsystem wristSubsystem;
+  
   //command
   Command autoCommand;
   public static DriveCommand driveCommand;
   public static LiftCommand LiftCommand;
+  public static ArmCommand armCommand;
+  public static WristCommand wristCommand;
+  
 
   @Override
   public void robotInit() {
     RobotMap.init();
     OI.init();
     driveSubsystem = new DriveSubsystem();
-    driveCommand = new DriveCommand();
+    armSubsystem = new ArmSubsystem();
+    wristSubsystem = new WristSubsystem();
     liftSubsystem = new LiftSubsystem();
     liftPID = new LiftPID();
+    
+    driveCommand = new DriveCommand();
     LiftCommand = new LiftCommand();
+    armCommand = new ArmCommand();
+    wristCommand = new WristCommand();
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
     RobotMap.liftEncoder.setDistancePerPulse(Constant.liftDistancePerPulse);
+
   }
 
   @Override
