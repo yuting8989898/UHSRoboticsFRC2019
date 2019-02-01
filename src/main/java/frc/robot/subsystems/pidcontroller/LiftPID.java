@@ -22,6 +22,7 @@ public class LiftPID extends PIDSubsystem {
     // Intert a subsystem name and PID values here
     super("LiftPID", 0.5, 0, 0.05);
     // getPIDController().setContinuous(true);
+    setInputRange(-100, 100);
     setOutputRange(-100, 100);
     setSetpoint(0);
     setAbsoluteTolerance(Constant.liftPIDTolerance);
