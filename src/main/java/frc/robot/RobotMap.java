@@ -9,11 +9,12 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
@@ -24,23 +25,26 @@ public class RobotMap {
   public static VictorSPX driveLeft2;
   public static VictorSPX driveRight1;
   public static VictorSPX driveRight2;
-
+  public static VictorSPX lift1;
+  public static VictorSPX lift2;
   public static VictorSPX arm;
   public static VictorSPX wrist;
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
+  public static Encoder liftEncoder;
 
   public static void init(){
+    lift1 = new VictorSPX(0);
+    lift2 = new VictorSPX(1);
+    arm = new VictorSPX(2);
+    wrist = new VictorSPX(3);
     driveLeft1 = new VictorSPX(4);
     driveLeft2 = new VictorSPX(5);
     driveRight1 = new VictorSPX(6);
     driveRight2 = new VictorSPX(7);
-
-    arm = new VictorSPX(2);
-    wrist = new VictorSPX(3);
-    
     armPot = new AnalogPotentiometer(3, 3600,0);
     wristPot = new AnalogPotentiometer(4, 3600,0);
-
+  
+    liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
   }
 }
