@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
-
+import edu.wpi.first.wpilibj.CameraServer;
 
 public class Robot extends TimedRobot {
   //subsystem
@@ -45,6 +45,9 @@ public class Robot extends TimedRobot {
     LiftCommand = new LiftCommand();
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
+
+    CameraServer.getInstance().startAutomaticCapture();
+    
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);

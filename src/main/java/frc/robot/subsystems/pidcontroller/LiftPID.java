@@ -22,7 +22,7 @@ public class LiftPID extends PIDSubsystem {
 
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("LiftPID", 5, 0, 5);
+    super("LiftPID", 5, 0, 10);
     // getPIDController().setContinuous(true);
     setOutputRange(-100, 100);
     setSetpoint(0);
@@ -51,6 +51,7 @@ public class LiftPID extends PIDSubsystem {
     Robot.liftSubsystem.operateLift(output);
     SmartDashboard.putNumber("Lift PID Setpoint", getSetpoint());
     SmartDashboard.putNumber("Lift Speed", output);
+    SmartDashboard.putNumber("Lift Actuall Speed", RobotMap.liftEncoder.getRate());
     lastOutput = output;
   }
 
