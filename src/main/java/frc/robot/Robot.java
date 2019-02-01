@@ -11,21 +11,34 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.commands.ArmCommand;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.WristCommand;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 
 public class Robot extends TimedRobot {
   //subsystem
   public static DriveSubsystem driveSubsystem;
+  public static ArmSubsystem armSubsystem;
+  public static WristSubsystem wristSubsystem;
   
   public static DriveCommand driveCommand;
+  public static ArmCommand armCommand;
+  public static WristCommand wristCommand;
 
   @Override
   public void robotInit() {
     RobotMap.init();
     OI.init();
     driveSubsystem = new DriveSubsystem();
+    armSubsystem = new ArmSubsystem();
+    wristSubsystem = new WristSubsystem();
+    
     driveCommand = new DriveCommand();
+    armCommand = new ArmCommand();
+    wristCommand = new WristCommand();
   }
 
   @Override

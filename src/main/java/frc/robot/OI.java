@@ -38,4 +38,14 @@ public class OI {
     double y = -mainOI.getRawAxis(1);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
+
+  public static double getArm(){
+    double y = mainOI.getRawAxis(3);
+    return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
+  }
+  
+  public static double getWrist(){
+    double y = -mainOI.getRawAxis(4);
+    return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
+  }
 }
