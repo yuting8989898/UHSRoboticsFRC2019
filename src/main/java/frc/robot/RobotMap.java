@@ -31,8 +31,8 @@ public class RobotMap {
   public static AnalogPotentiometer wristPot;
 
   public static void init(){
-    driveLeft1 = new VictorSPX(0);
-    driveLeft2 = new VictorSPX(1);
+    driveLeft1 = new VictorSPX(4);
+    driveLeft2 = new VictorSPX(5);
     driveRight1 = new VictorSPX(6);
     driveRight2 = new VictorSPX(7);
 
@@ -40,7 +40,7 @@ public class RobotMap {
     wrist = new VictorSPX(3);
     
     armPot = new AnalogPotentiometer(3, 3600,0);
-    wristPot = new AnalogPotentiometer(3, 3600,0);
+    wristPot = new AnalogPotentiometer(4, 3600,0);
 
   }
 }
