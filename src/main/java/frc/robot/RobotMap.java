@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -32,6 +33,7 @@ public class RobotMap {
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
   public static Encoder liftEncoder;
+  public static DigitalInput liftUpSwitch;
 
   public static void init(){
     lift1 = new VictorSPX(0);
@@ -46,5 +48,6 @@ public class RobotMap {
     wristPot = new AnalogPotentiometer(4, 3600,0);
   
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
+    liftUpSwitch = new DigitalInput(3);
   }
 }

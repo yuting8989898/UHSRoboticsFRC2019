@@ -37,6 +37,7 @@ public class LiftCommand extends Command {
     SmartDashboard.putNumber("Lift Height", RobotMap.liftEncoder.getDistance());
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
     SmartDashboard.putNumber("Lift Target Number", targetLevel);
+    SmartDashboard.putBoolean("Limit Switch Pressed", RobotMap.liftUpSwitch.get());
     
     // Finds the next target location for the lift to go
     switch (OI.getLift()) {
