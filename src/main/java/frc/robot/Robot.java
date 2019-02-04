@@ -16,6 +16,7 @@ import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
@@ -40,9 +41,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     RobotMap.init();
     OI.init();
-    new Thread(() -> {
-      cameraThread();
-    }).start();
+    cameraThread();
     driveSubsystem = new DriveSubsystem();
     armSubsystem = new ArmSubsystem();
     wristSubsystem = new WristSubsystem();
@@ -103,28 +102,31 @@ public class Robot extends TimedRobot {
       https://wpilib.screenstepslive.com/s/currentCS/m/vision/l/669166-using-the-cameraserver-on-the-roborio
       OpenCV is a very good library for vision processing it seems
     */
+    new Thread(() -> {
     try{
       int width = 640;
       int length = 480;
       int crossHair = 30;
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
       camera.setResolution(640, 480);
+      camera.setFPS(40);
       CvSink cvSink = CameraServer.getInstance().getVideo();
       CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, length);
-
+      
       //OpenCV matrix
       Mat source = new Mat();
-      Mat output = new Mat();
-
       while(!Thread.interrupted()) {
-        cvSink.grabFrame(source); //store image file in three 3-bit channels in BGR format
-        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.line(output,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255),5);
-        outputStream.putFrame(output);
+        cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
+        //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
+        Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255),5);
+        Imgproc.line(source,new Point(width/2, length/2-crossHair), new Point(width/2,length/2+crossHair), new Scalar(0,0,255),5);
+        outputStream.putFrame(source);
       }
     }
     catch(Exception e){
       e.printStackTrace();
     }
+    
+  }).start();
   }
 }
