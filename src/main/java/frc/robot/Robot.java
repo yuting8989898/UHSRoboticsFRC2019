@@ -115,12 +115,15 @@ public class Robot extends TimedRobot {
       
       //OpenCV matrix
       Mat source = new Mat();
+      Mat output = new Mat();
       while(!Thread.interrupted()) {
         cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
         //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
-        Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255),5);
-        Imgproc.line(source,new Point(width/2, length/2-crossHair), new Point(width/2,length/2+crossHair), new Scalar(0,0,255),5);
-        outputStream.putFrame(source);
+        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.line(output,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255),5);
+        Imgproc.line(output,new Point(width/2, length/2-crossHair), new Point(width/2,length/2+crossHair), new Scalar(0,0,255),5);
+        
+        outputStream.putFrame(output);
       }
     }
     catch(Exception e){
