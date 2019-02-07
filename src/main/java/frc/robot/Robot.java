@@ -97,6 +97,12 @@ public class Robot extends TimedRobot {
   
   @Override
   public void testPeriodic(){
+    if(OI.getIntakePressed()){
+      Robot.intakeSubsystem.set(Constant.intakeSpeed);
+    }
+    else{
+      Robot.intakeSubsystem.set(0);
+    }
   }
 
   public void cameraThread(){

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
@@ -25,14 +26,14 @@ public class IntakeCommand extends Command {
   @Override
   protected void initialize() {
     curSpeed = 0;
-    increment = Constant.intakeSpeed/5;
+    increment = Constant.intakeSpeed/40;
   }
   
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.getIntakePressed() && RobotMap.intakeSwitch.get()){
+    if(OI.getIntakePressed()){
       if(curSpeed < Constant.intakeSpeed){
         curSpeed += increment; //accelerate in 100ms (1s)
       }
@@ -41,24 +42,22 @@ public class IntakeCommand extends Command {
       }
     }
     else if(OI.getRevIntakePressed()){
-      if(curSpeed > -Constant.intakeSpeed){
-        curSpeed -= curSpeed > 0 ? 2*increment : increment; //accelerate in the other direction in 100ms (1sec)
-      }
-      else{
-        curSpeed = -Constant.intakeSpeed;
-      }
+      
+        curSpeed = -3*Constant.intakeSpeed;
     }
     else{ //nothing pressed
-      if (Math.abs(curSpeed) < increment) { //tolerance
-        curSpeed = 0;
-      }
-      else if(curSpeed > 0) {
+      if(curSpeed > 0) {
         curSpeed -= increment; //deccelerate in 100ms (1s)
       }
       else if(curSpeed < 0){
         curSpeed += increment;
       }
+      if (Math.abs(curSpeed) < increment) { //tolerance
+        curSpeed = 0;
+      }
     }
+    
+    SmartDashboard.putNumber("curSpeed", curSpeed);
     Robot.intakeSubsystem.set(curSpeed);
   }
 

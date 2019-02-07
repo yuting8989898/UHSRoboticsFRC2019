@@ -35,7 +35,7 @@ public class RobotMap {
   public static Encoder liftEncoder;
   public static DigitalInput intakeSwitch;
   public static void init(){
-    lift1 = new VictorSPX(0);
+    lift1 = new VictorSPX(9);
     lift2 = new VictorSPX(1);
     arm = new VictorSPX(2);
     wrist = new VictorSPX(3);
