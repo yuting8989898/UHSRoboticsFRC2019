@@ -68,7 +68,7 @@ public class DriveCommand extends Command {
       double left, right;
       left = (y-x)/2;
       right = (y+x)/2;
-      Robot.driveSubsystem.drive(left,right);
+      Robot.driveSubsystem.drive(right, left);
     }
     
   }
