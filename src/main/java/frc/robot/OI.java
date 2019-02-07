@@ -70,12 +70,12 @@ public class OI {
   }
 
   public static boolean getIntakePressed(){
-    //TO-DO check which button to use
+    //TODO check which button to use
     return subOI.getRawButton(1);
   }
   
   public static boolean getRevIntakePressed(){
-    //To-DO check which button to use
+    //TODO check which button to use
     return subOI.getRawButton(2);
   }
 }
