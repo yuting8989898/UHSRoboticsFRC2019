@@ -7,16 +7,21 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveCommand extends Command {
 
   public boolean isAuto;
+  public boolean pidOn;
   public DriveCommand() {
     isAuto = true;
+    pidOn = false;
     requires(Robot.driveSubsystem);
   }
 
@@ -30,7 +35,6 @@ public class DriveCommand extends Command {
   protected void execute() {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
-    double left, right;
     //Constant speed in autonomous mode
     if(isAuto){
       if(y > 0){
@@ -46,9 +50,26 @@ public class DriveCommand extends Command {
         x = -Constant.autoDriveSpeed;
       }
     }
-    left = (y-x)/2;
-    right = (y+x)/2;
-    Robot.driveSubsystem.drive(left,right);
+    if(!pidOn && x == 0){
+      double[] ypr = new double[3];
+      RobotMap.gyro.getYawPitchRoll(ypr);
+      SmartDashboard.putNumber("gyro", ypr[0]);
+      Robot.drivePID.setSetpoint(ypr[0]);
+      Robot.drivePID.setPower(y);
+      Robot.drivePID.enable();
+    }
+    else if (pidOn && x != 0){
+      Robot.drivePID.disable();
+    }
+    if(pidOn){
+      Robot.drivePID.setPower(y);
+    }
+    else{
+      double left, right;
+      left = (y-x)/2;
+      right = (y+x)/2;
+      Robot.driveSubsystem.drive(left,right);
+    }
     
   }
 

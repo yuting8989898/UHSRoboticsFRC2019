@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.PigeonIMU.CalibrationMode;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -23,6 +26,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   //subsystem
   public static DriveSubsystem driveSubsystem;
+  public static DrivePID drivePID;
   public static LiftSubsystem liftSubsystem;
   public static LiftPID liftPID;
   public static ArmSubsystem armSubsystem;
@@ -44,6 +48,7 @@ public class Robot extends TimedRobot {
     OI.init();
     cameraThread();
     driveSubsystem = new DriveSubsystem();
+    drivePID = new DrivePID();
     armSubsystem = new ArmSubsystem();
     wristSubsystem = new WristSubsystem();
     liftSubsystem = new LiftSubsystem();
@@ -59,6 +64,10 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
+
+    PigeonIMU.GeneralStatus generalStatus = new PigeonIMU.GeneralStatus();
+    RobotMap.gyro.getGeneralStatus(generalStatus);
+    RobotMap.gyro.enterCalibrationMode(CalibrationMode.BootTareGyroAccel);
     RobotMap.liftEncoder.setDistancePerPulse(Constant.liftDistancePerPulse);
   }
 
