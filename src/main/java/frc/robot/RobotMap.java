@@ -8,9 +8,11 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -32,6 +34,7 @@ public class RobotMap {
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
   public static Encoder liftEncoder;
+  public static PigeonIMU gyro;
 
   public static void init(){
     lift1 = new VictorSPX(0);
@@ -46,5 +49,6 @@ public class RobotMap {
     wristPot = new AnalogPotentiometer(4, 3600,0);
   
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
+    gyro = new PigeonIMU(8);
   }
 }
