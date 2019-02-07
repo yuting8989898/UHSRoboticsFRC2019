@@ -33,7 +33,7 @@ public class RobotMap {
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
   public static Encoder liftEncoder;
-  public static DigitalInput liftUpSwitch;
+  public static DigitalInput liftResetSwitch;
 
   public static void init(){
     lift1 = new VictorSPX(0);
@@ -48,6 +48,6 @@ public class RobotMap {
     wristPot = new AnalogPotentiometer(4, 3600,0);
   
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
-    liftUpSwitch = new DigitalInput(3);
+    liftResetSwitch = new DigitalInput(3);
   }
 }
