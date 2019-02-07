@@ -7,13 +7,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.Utils;
 
 public class DriveCommand extends Command {
 
@@ -37,18 +37,12 @@ public class DriveCommand extends Command {
     double y = OI.getDriveY();
     //Constant speed in autonomous mode
     if(isAuto){
-      if(y > 0){
-        x = Constant.autoDriveSpeed;
-      }
-      else if(y < 0){
-        x = -Constant.autoDriveSpeed;
-      }
-      if(x > 0){
-        x = Constant.autoDriveSpeed;
-      }
-      else if(x < 0){
-        x = -Constant.autoDriveSpeed;
-      }
+      y = Utils.sign(y)*Constant.autoDriveSpeed;
+      x = Utils.sign(x)*Constant.autoDriveSpeed;
+    }
+    if(OI.getDriveRefine()){
+      y *=Constant.driveRefinePerc;
+      x *=Constant.driveRefinePerc;
     }
     if(!pidOn && x == 0){
       double[] ypr = new double[3];

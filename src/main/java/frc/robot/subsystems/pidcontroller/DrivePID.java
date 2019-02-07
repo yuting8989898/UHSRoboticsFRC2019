@@ -24,6 +24,8 @@ public class DrivePID extends PIDSubsystem {
     // Intert a subsystem name and PID values here
     super("DrivePID", 1, 0, 0);
     ypr = new double[3];
+    power = 0;
+    setOutputRange(-1, 1);
     setAbsoluteTolerance(5);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system

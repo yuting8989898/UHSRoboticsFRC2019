@@ -12,7 +12,6 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -54,6 +53,7 @@ public class RobotMap {
 
     intake = new VictorSPX(0);
     intakeSwitch = new DigitalInput(3);
+    //TODO Correct the port
     gyro = new PigeonIMU(8);
   }
 }
