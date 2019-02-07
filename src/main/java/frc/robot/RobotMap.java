@@ -12,9 +12,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.Victor;
 
 /**
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -49,6 +47,7 @@ public class RobotMap {
     wristPot = new AnalogPotentiometer(4, 3600,0);
   
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
+    //TODO Correct the port
     gyro = new PigeonIMU(8);
   }
 }

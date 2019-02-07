@@ -39,6 +39,10 @@ public class OI {
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
   
+  public static boolean getDriveRefine(){
+    //TODO Correct driveRefine button
+    return mainOI.getRawButtonPressed(0);
+  }
   public static double getArm(){
     double y = mainOI.getRawAxis(3);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
