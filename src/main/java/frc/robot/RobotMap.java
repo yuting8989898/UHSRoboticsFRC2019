@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -32,6 +33,7 @@ public class RobotMap {
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
   public static Encoder liftEncoder;
+  public static DigitalInput intakeSwitch;
   public static void init(){
     lift1 = new VictorSPX(0);
     lift2 = new VictorSPX(1);
@@ -47,5 +49,6 @@ public class RobotMap {
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
 
     intake = new VictorSPX(0);
+    intakeSwitch = new DigitalInput(3);
   }
 }

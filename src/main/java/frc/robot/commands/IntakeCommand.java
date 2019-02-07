@@ -24,6 +24,7 @@ public class IntakeCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    curSpeed = 0;
     increment = Constant.intakeSpeed/5;
   }
   
@@ -31,8 +32,7 @@ public class IntakeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    curSpeed = RobotMap.intake.get();
-    if(OI.getIntakePressed()){
+    if(OI.getIntakePressed() && RobotMap.intakeSwitch.get()){
       if(curSpeed < Constant.intakeSpeed){
         curSpeed += increment; //accelerate in 100ms (1s)
       }
@@ -42,13 +42,13 @@ public class IntakeCommand extends Command {
     }
     else if(OI.getRevIntakePressed()){
       if(curSpeed > -Constant.intakeSpeed){
-        curSpeed -= increment; //accelerate in the other direction in 100 or 200ms (1 or 2s)
+        curSpeed -= curSpeed > 0 ? 2*increment : increment; //accelerate in the other direction in 100ms (1sec)
       }
       else{
         curSpeed = -Constant.intakeSpeed;
       }
     }
-    else{
+    else{ //nothing pressed
       if (Math.abs(curSpeed) < increment) { //tolerance
         curSpeed = 0;
       }

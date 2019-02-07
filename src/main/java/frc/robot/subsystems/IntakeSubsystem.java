@@ -7,9 +7,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.*;
 
 /**
  * Add your docs here.
@@ -28,10 +29,10 @@ public class IntakeSubsystem extends Subsystem {
  * @param val - Positive value will roll in the ball
  */
   public void set(double val){
-    RobotMap.intake.set(val);
+    RobotMap.intake.set(ControlMode.PercentOutput, val);
   }
 
   public void stop(){
-    RobotMap.intake.stopMotor();
+    RobotMap.intake.set(ControlMode.PercentOutput, 0);
   }
 }
