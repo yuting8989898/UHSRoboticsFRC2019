@@ -81,6 +81,8 @@ public class LiftCommand extends Command {
         if (targetLevel < Constant.liftLevels.length - 1)
           targetLevel++;
         Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
+      case 100:
+        Robot.liftPID.setSetpoint(-1000);
       }
     }
   }

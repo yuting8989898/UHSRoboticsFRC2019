@@ -16,53 +16,56 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 public class OI {
   public static Joystick mainOI;
 
-   /**
- * Initialize all the controller
- */
-  public static void init(){
+  /**
+   * Initialize all the controller
+   */
+  public static void init() {
     mainOI = new Joystick(0);
   }
 
-   /**
- * Cartesian X-Axis
- */
-  public static double getDriveX(){
+  /**
+   * Cartesian X-Axis
+   */
+  public static double getDriveX() {
     double x = mainOI.getRawAxis(2);
     return x > Constant.joystickDeadZone || x < -Constant.joystickDeadZone ? x : 0;
   }
 
   /**
- * Cartesian Y-Axis
- */
-  public static double getDriveY(){
+   * Cartesian Y-Axis
+   */
+  public static double getDriveY() {
     double y = -mainOI.getRawAxis(1);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
-  
-  public static double getArm(){
+
+  public static double getArm() {
     double y = mainOI.getRawAxis(3);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
-  
-  public static double getWrist(){
+
+  public static double getWrist() {
     double y = -mainOI.getRawAxis(4);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
-  
+
   /**
    * <pre>
-   * -2 = use PID to go to a lower level
-   * -1 = manually going down
+   * -1 = use PID to go to a lower level
    *  0 = No action
-   *  1 = manually going up
-   *  2 = use PID to go to a Higher level
+   *  1 = use PID to go to a Higher level
+   * 100= use PID to go to -1000(as low as possible) to reset the lift
    * </pre>
    */
   public static int getLift() {
-    //all button numbers are placeholders
+    // all button numbers are placeholders
     int output = 0;
-    if(mainOI.getRawButtonPressed(2))output--;
-    if(mainOI.getRawButtonPressed(4))output++;
+    if (mainOI.getRawButtonPressed(2))
+      output--;
+    if (mainOI.getRawButtonPressed(4))
+      output++;
+    if (mainOI.getRawButtonPressed(13))
+      output = 100;
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
   }
