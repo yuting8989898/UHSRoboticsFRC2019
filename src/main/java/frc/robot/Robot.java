@@ -106,9 +106,9 @@ public class Robot extends TimedRobot {
     try{
       int width = 256;
       int length = 144;
-      int crossHair = 30;
+      int crossHair = 20;
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(256, 144);
+      camera.setResolution(width, length);
       camera.setFPS(40);
       CvSink cvSink = CameraServer.getInstance().getVideo();
       CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, length);
