@@ -52,7 +52,8 @@ public class LiftCommand extends Command {
     if (resetTimer == 0) {
       // for recovering the lift system from the reseted state
       resetTimer = -1;
-      Robot.liftPID.enable();
+      // Robot.liftPID.enable();
+      Robot.liftSubsystem.enable();
     }
     if (resetTimer == -1 && !RobotMap.liftResetSwitch.get()) {
       limitSwitchPressed = false;
@@ -67,9 +68,10 @@ public class LiftCommand extends Command {
       targetLevel = 0;
       Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
       // disables pid
-      Robot.liftPID.disable();
+      // Robot.liftPID.disable();
       // stops lift
       Robot.liftSubsystem.stopLift();
+      Robot.liftSubsystem.disable();
     }
     // Finds the next target location for the lift to go
     if (resetTimer == -1) {
