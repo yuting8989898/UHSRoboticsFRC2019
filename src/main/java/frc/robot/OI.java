@@ -27,7 +27,7 @@ public class OI {
  * Cartesian X-Axis
  */
   public static double getDriveX(){
-    double x = mainOI.getRawAxis(2)*0.5; //the *0.8 is important
+    double x = mainOI.getRawAxis(2)*0.5; //the *0.5 is important
     return x > Constant.joystickDeadZone || x < -Constant.joystickDeadZone ? x : 0;
   }
 
@@ -41,7 +41,7 @@ public class OI {
   
   public static boolean getDriveRefine(){
     //TODO Correct driveRefine button
-    return mainOI.getRawButtonPressed(0);
+    return mainOI.getRawButtonPressed(5); //L1
   }
   public static double getArm(){
     double y = mainOI.getRawAxis(3);
