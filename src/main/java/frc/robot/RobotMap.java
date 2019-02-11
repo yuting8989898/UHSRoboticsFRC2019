@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
@@ -36,7 +37,7 @@ public class RobotMap {
   public static Encoder liftEncoder;
   public static DigitalInput intakeSwitch;
   public static PigeonIMU gyro;
-
+  public static TalonSRX talon;
   public static void init(){
     lift1 = new VictorSPX(9);
     lift2 = new VictorSPX(1);
@@ -48,12 +49,12 @@ public class RobotMap {
     driveRight2 = new VictorSPX(7);
     armPot = new AnalogPotentiometer(3, 3600,0);
     wristPot = new AnalogPotentiometer(4, 3600,0);
-  
+    talon = new TalonSRX(16);
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
 
     intake = new VictorSPX(0);
     intakeSwitch = new DigitalInput(3);
     //TODO Correct the port
-    gyro = new PigeonIMU(8);
+    gyro = new PigeonIMU(talon);
   }
 }

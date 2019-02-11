@@ -37,6 +37,7 @@ public class DriveCommand extends Command {
   protected void execute() {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
+    
     // Constant speed in autonomous mode
     if (isAuto) {
       y = Utils.sign(y) * Constant.autoDriveSpeed;
@@ -49,7 +50,6 @@ public class DriveCommand extends Command {
     if (!pidOn && x == 0) { // If wasn't using pid previously, but driving foward rn
       double[] ypr = new double[3];
       RobotMap.gyro.getYawPitchRoll(ypr);
-      SmartDashboard.putNumber("gyro", ypr[0]);
       Robot.drivePID.setSetpoint(ypr[0]);
       Robot.driveSubsystem.drive(y, y);
       Robot.drivePID.enable();
@@ -61,8 +61,8 @@ public class DriveCommand extends Command {
       Robot.driveSubsystem.drive(y, y);
     } else { // if not using pid and want to turn rn
       double left, right;
-      left = (y - x) / 2;
-      right = (y + x) / 2;
+      left = y - x;
+      right = y + x;
       Robot.driveSubsystem.drive(right, left);
     }
 
