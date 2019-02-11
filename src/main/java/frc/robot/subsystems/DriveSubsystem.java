@@ -19,17 +19,20 @@ import frc.robot.RobotMap;
 public class DriveSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
+  double turnBias = 0;
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(Robot.driveCommand);
   }
 
   public void drive(double right, double left){
-    //since x+y in full power is 2, percentage only reach up to 1
-    RobotMap.driveLeft1.set(ControlMode.PercentOutput,left);
-    RobotMap.driveLeft2.set(ControlMode.PercentOutput,left);
-    RobotMap.driveRight1.set(ControlMode.PercentOutput,right);
-    RobotMap.driveRight2.set(ControlMode.PercentOutput,right);
+    RobotMap.driveLeft1.set(ControlMode.PercentOutput,left*(1+turnBias));
+    RobotMap.driveLeft2.set(ControlMode.PercentOutput,left*(1+turnBias));
+    RobotMap.driveRight1.set(ControlMode.PercentOutput,right*(1-turnBias));
+    RobotMap.driveRight2.set(ControlMode.PercentOutput,right*(1-turnBias));
+  }
+
+  public void setPIDTurnFactor(double turnBias){
+    this.turnBias = turnBias;
   }
 }
