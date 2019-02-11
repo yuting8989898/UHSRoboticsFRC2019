@@ -19,10 +19,12 @@ public class DriveCommand extends Command {
 
   public boolean isAuto;
   public boolean pidOn;
+
   public DriveCommand() {
     isAuto = true;
     pidOn = false;
     requires(Robot.driveSubsystem);
+    requires(Robot.drivePID);
   }
 
   // Called just before this Command runs the first time
@@ -35,36 +37,35 @@ public class DriveCommand extends Command {
   protected void execute() {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
-    //Constant speed in autonomous mode
-    if(isAuto){
-      y = Utils.sign(y)*Constant.autoDriveSpeed;
-      x = Utils.sign(x)*Constant.autoDriveSpeed;
+    // Constant speed in autonomous mode
+    if (isAuto) {
+      y = Utils.sign(y) * Constant.autoDriveSpeed;
+      x = Utils.sign(x) * Constant.autoDriveSpeed;
     }
-    if(OI.getDriveRefine()){
-      y *=Constant.driveRefinePerc;
-      x *=Constant.driveRefinePerc;
+    if (OI.getDriveRefine()) {
+      y *= Constant.driveRefinePerc;
+      x *= Constant.driveRefinePerc;
     }
-    if(!pidOn && x == 0){
+    if (!pidOn && x == 0) { // If wasn't using pid previously, but driving foward rn
       double[] ypr = new double[3];
       RobotMap.gyro.getYawPitchRoll(ypr);
       SmartDashboard.putNumber("gyro", ypr[0]);
       Robot.drivePID.setSetpoint(ypr[0]);
-      Robot.drivePID.setPower(y);
+      Robot.driveSubsystem.drive(y, y);
       Robot.drivePID.enable();
-    }
-    else if (pidOn && x != 0){
+      pidOn = true;
+    } else if (pidOn && x != 0) { // if using pid previously, but want to turn rn
       Robot.drivePID.disable();
-    }
-    if(pidOn){
-      Robot.drivePID.setPower(y);
-    }
-    else{
+      pidOn = false;
+    } else if (pidOn) { // if using pid and don't want to turn
+      Robot.driveSubsystem.drive(y, y);
+    } else { // if not using pid and want to turn rn
       double left, right;
-      left = (y-x)/2;
-      right = (y+x)/2;
+      left = (y - x) / 2;
+      right = (y + x) / 2;
       Robot.driveSubsystem.drive(right, left);
     }
-    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

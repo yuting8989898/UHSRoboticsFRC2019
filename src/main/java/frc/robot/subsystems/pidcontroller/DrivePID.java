@@ -21,11 +21,11 @@ public class DrivePID extends PIDSubsystem {
   private double power;
   private double[] ypr;
   public DrivePID() {
-    // Intert a subsystem name and PID values here
-    super("DrivePID", 1, 0, 0);
+    //TODO: tune PID
+    super("DrivePID", 0.05, 0, 0.1);
     ypr = new double[3];
     power = 0;
-    setOutputRange(-1, 1);
+    setOutputRange(-0.5,0.5);
     setAbsoluteTolerance(5);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
@@ -50,10 +50,6 @@ public class DrivePID extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    output /=2;
-    Robot.driveSubsystem.drive(power-output, power+output);
-  }
-  public void setPower(double power){
-    this.power = power;
+    Robot.driveSubsystem.setPIDTurnFactor(output);
   }
 }
