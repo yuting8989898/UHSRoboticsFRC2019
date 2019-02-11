@@ -8,6 +8,7 @@
 package frc.robot.subsystems.pidcontroller;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -18,13 +19,11 @@ public class DrivePID extends PIDSubsystem {
   /**
    * Add your docs here.
    */
-  private double power;
   private double[] ypr;
   public DrivePID() {
     //TODO: tune PID
     super("DrivePID", 0.05, 0, 0.1);
     ypr = new double[3];
-    power = 0;
     setOutputRange(-0.5,0.5);
     setAbsoluteTolerance(5);
     // Use these to get going:
@@ -45,6 +44,7 @@ public class DrivePID extends PIDSubsystem {
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
     RobotMap.gyro.getYawPitchRoll(ypr);
+    SmartDashboard.putNumber("gyro", ypr[0]);
     return ypr[0];
   }
 
