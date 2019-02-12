@@ -19,4 +19,6 @@ public class Constant {
     public static double liftPIDPercentTolerance = 0.05; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static int liftSmoothingDeadZone = 10; //Too complicated to explain, just dont touch it.
+
+    public static double intakeSpeed = 0.2;
 }
