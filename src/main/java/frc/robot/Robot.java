@@ -16,7 +16,6 @@ import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;

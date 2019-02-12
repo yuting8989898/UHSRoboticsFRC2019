@@ -8,11 +8,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class IntakeCommand extends Command {
 
@@ -56,8 +54,6 @@ public class IntakeCommand extends Command {
         curSpeed = 0;
       }
     }
-    
-    SmartDashboard.putNumber("curSpeed", curSpeed);
     Robot.intakeSubsystem.set(curSpeed);
   }
 
