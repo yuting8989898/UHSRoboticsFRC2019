@@ -22,10 +22,10 @@ public class DrivePID extends PIDSubsystem {
   private double[] ypr;
   public DrivePID() {
     //TODO: tune PID
-    super("DrivePID", 0.05, 0, 0.1);
+    super("DrivePID", 0.05, 0, 0); //P controller is enough
     ypr = new double[3];
-    setOutputRange(-0.5,0.5);
-    setAbsoluteTolerance(5);
+    setOutputRange(-0.2,0.2);
+    setAbsoluteTolerance(1);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to
