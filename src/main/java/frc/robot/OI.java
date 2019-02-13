@@ -58,12 +58,16 @@ public class OI {
    * </pre>
    */
   public static int getLift() {
-    // all button numbers are placeholders
+    // TODO: change liftCommand to match these output values
     int output = 0;
-    if (mainOI.getRawButtonPressed(2))
-      output--;
-    if (mainOI.getRawButtonPressed(4))
-      output++;
+    if (mainOI.getRawButtonPressed(1))output =  0; //hatch loading station
+    if (mainOI.getPOV()==90 )output = 1; //cargo loading station
+    if (mainOI.getRawButtonPressed(2))output =  2; //hatch level 1
+    if (mainOI.getPOV()==180)output = 3; //cargo level 1
+    if (mainOI.getRawButtonPressed(3))output =  4; //hatch level 2
+    if (mainOI.getPOV()==270)output = 5; //cargo level 2
+    if (mainOI.getRawButtonPressed(4))output =  6; //hatch level 3
+    if (mainOI.getPOV()==0  )output = 7; //cargo level 3
     if (mainOI.getRawButtonPressed(13))
       output = 100;
     SmartDashboard.putNumber("Lift Controller Value", output);
