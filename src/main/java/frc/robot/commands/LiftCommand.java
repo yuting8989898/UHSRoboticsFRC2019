@@ -44,8 +44,8 @@ public class LiftCommand extends Command {
     // if timer is going
     if (resetTimer > 0)
       resetTimer--;
-    if (resetTimer == Constant.liftResetTimer - 50){// should be manually tuned
-      //resets pid "lastOutput"
+    if (resetTimer == Constant.liftResetTimer - 50) {// should be manually tuned
+      // resets pid "lastOutput"
       Robot.liftPID.resetLastOutput();
       RobotMap.liftEncoder.reset();// finally, resets the encoder after a 100ms delay for the motor to fully stop
     }
@@ -73,24 +73,14 @@ public class LiftCommand extends Command {
       Robot.liftSubsystem.stopLift();
       Robot.liftSubsystem.disable();
     }
-    // Finds the next target location for the lift to go
+    
     if (resetTimer == -1) {
-      switch (OI.getLift()) {
-      case -1:
-        // when the driver wants to make the lift go down
-        if (targetLevel > 0)
-          targetLevel--;
-        Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
-        break;
-      case 1:
-        // when the driver wants the lift go up
-        if (targetLevel < Constant.liftLevels.length - 1)
-          targetLevel++;
-        Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
-        break;
-      case 100:
+      targetLevel = OI.getLift();
+      if (targetLevel == 100) {
         if (!RobotMap.liftResetSwitch.get())
           Robot.liftPID.setSetpoint(-1000);
+      } else {
+        Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
       }
     }
   }
