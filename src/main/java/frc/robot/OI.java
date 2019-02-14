@@ -41,39 +41,39 @@ public class OI {
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
 
+  //TODO map all the buttons for subOI correctly
   public static double getArm() {
-    double y = mainOI.getRawAxis(3);
+    double y = subOI.getRawAxis(3);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
 
   public static double getWrist() {
-    double y = -mainOI.getRawAxis(4);
+    double y = -subOI.getRawAxis(4);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
 
   public static int getLift() {
     int output = 0;
-    if (mainOI.getRawButtonPressed(1))output =  1; //hatch loading station
-    if (mainOI.getPOV()==90 )output = 2; //cargo loading station
-    if (mainOI.getRawButtonPressed(2))output =  3; //hatch level 1
-    if (mainOI.getPOV()==180)output = 4; //cargo level 1
-    if (mainOI.getRawButtonPressed(3))output =  5; //hatch level 2
-    if (mainOI.getPOV()==270)output = 6; //cargo level 2
-    if (mainOI.getRawButtonPressed(4))output =  7; //hatch level 3
-    if (mainOI.getPOV()==0  )output = 8; //cargo level 3
-    if (mainOI.getRawButtonPressed(13))
-      output = 100;
+    if (subOI.getRawButtonPressed(1))  output = 1; //hatch loading station
+    if (subOI.getPOV()==90 )           output = 2; //cargo loading station
+    if (subOI.getRawButtonPressed(2))  output = 3; //hatch level 1
+    if (subOI.getPOV()==180)           output = 4; //cargo level 1
+    if (subOI.getRawButtonPressed(3))  output = 5; //hatch level 2
+    if (subOI.getPOV()==270)           output = 6; //cargo level 2
+    if (subOI.getRawButtonPressed(4))  output = 7; //hatch level 3
+    if (subOI.getPOV()==0)             output = 8; //cargo level 3
+    if (subOI.getRawButtonPressed(13)) output = 100;
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
   }
 
   public static boolean getIntakePressed(){
     //TODO check which button to use
-    return mainOI.getRawButton(4);
+    return subOI.getRawButton(4);
   }
   
   public static boolean getRevIntakePressed(){
     //TODO check which button to use
-    return mainOI.getRawButton(1);
+    return subOI.getRawButton(1);
   }
 }

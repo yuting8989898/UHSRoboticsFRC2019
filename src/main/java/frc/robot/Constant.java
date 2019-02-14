@@ -14,12 +14,27 @@ public class Constant {
     public static double joystickDeadZone = 0.03;
     public static double autoDriveSpeed = 0.5;
     public static double turnFactor = 50;
-    public static int liftResetTimer = 150;
-    public static double[] liftLevels = { 0, 50, 100, 100, 150, 200, 250, 300, 350 }; // Need testing
+
+    public static double intakeSpeed = 0.2;
+
+    /**
+     * <pre>
+     * [0]: default starting position
+     * [1]: hatch loading station
+     * [2]: cargo loading station
+     * [3]: hatch level 1
+     * [4]: cargo level 1
+     * [5]: hatch level 2
+     * [6]: cargo level 2
+     * [7]: hath level 3
+     * [8]: cargo level 3
+     * </pre>
+     */
+    public static double[] liftLevels = { 0, 50, 100, 150, 200, 250, 300, 350, 400 }; 
+    public static int liftResetTimer = 100;
     public static double liftDistancePerPulse = Math.PI * 2 / 360; // Need testing
     public static double liftPIDPercentTolerance = 0.05; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static int liftSmoothingDeadZone = 10; //Too complicated to explain, just dont touch it.
 
-    public static double intakeSpeed = 0.2;
 }

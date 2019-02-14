@@ -25,32 +25,38 @@ public class RobotMap {
   public static VictorSPX driveLeft2;
   public static VictorSPX driveRight1;
   public static VictorSPX driveRight2;
+
   public static VictorSPX lift1;
   public static VictorSPX lift2;
+  public static Encoder liftEncoder;
+  public static DigitalInput liftResetSwitch;
+
   public static VictorSPX arm;
   public static VictorSPX wrist;
   public static VictorSPX intake;
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
-  public static Encoder liftEncoder;
-  public static DigitalInput liftResetSwitch;
   public static DigitalInput intakeSwitch;
-  
-  public static void init(){
-    lift1 = new VictorSPX(0);
-    lift2 = new VictorSPX(1);
-    arm = new VictorSPX(2);
-    wrist = new VictorSPX(3);
+
+  public static void init() {
+    // the driving stuffs
     driveLeft1 = new VictorSPX(4);
     driveLeft2 = new VictorSPX(5);
     driveRight1 = new VictorSPX(6);
     driveRight2 = new VictorSPX(8);
-    armPot = new AnalogPotentiometer(3, 3600,0);
-    wristPot = new AnalogPotentiometer(4, 3600,0);
-  
-    liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
+
+    // the lift stuffs
+    lift1 = new VictorSPX(16);
+    lift2 = new VictorSPX(17);
+    liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
     liftResetSwitch = new DigitalInput(3);
+
+    // the arm stuffs
+    arm = new VictorSPX(2);
+    wrist = new VictorSPX(3);
     intake = new VictorSPX(0);
-    intakeSwitch = new DigitalInput(3);
+    armPot = new AnalogPotentiometer(3, 3600, 0);
+    wristPot = new AnalogPotentiometer(4, 3600, 0);
+    intakeSwitch = new DigitalInput(4);
   }
 }

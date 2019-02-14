@@ -41,18 +41,16 @@ public class LiftCommand extends Command {
     SmartDashboard.putNumber("Lift Target Number", targetLevel);
     SmartDashboard.putBoolean("Limit Switch Pressed", RobotMap.liftResetSwitch.get());
     SmartDashboard.putNumber("Lift reset timer", resetTimer);
-    // if timer is going
-    if (resetTimer > 0)
-      resetTimer--;
+    // for making the timer work
+    if (resetTimer > 0) resetTimer--;
     if (resetTimer == Constant.liftResetTimer - 50) {// should be manually tuned
-      // resets pid "lastOutput"
+      // resets pid "lastOutput" value
       Robot.liftPID.resetLastOutput();
-      RobotMap.liftEncoder.reset();// finally, resets the encoder after a 100ms delay for the motor to fully stop
+      RobotMap.liftEncoder.reset();// finally, resets the encoder after a 1s delay for the motor to fully stop (hopefully)
     }
     if (resetTimer == 0) {
-      // for recovering the lift system from the reseted state
+      // for recovering the lift system from the reseted state, only runs once when the time finishes
       resetTimer = -1;
-      // Robot.liftPID.enable();
       Robot.liftSubsystem.enable();
     }
     if (resetTimer == -1 && !RobotMap.liftResetSwitch.get()) {
@@ -67,10 +65,9 @@ public class LiftCommand extends Command {
       // resets pid setpoint
       targetLevel = 0;
       Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
-      // disables pid
-      // Robot.liftPID.disable();
       // stops lift
       Robot.liftSubsystem.stopLift();
+      // disables lift
       Robot.liftSubsystem.disable();
     }
     
