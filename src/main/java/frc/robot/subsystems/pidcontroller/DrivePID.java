@@ -44,7 +44,10 @@ public class DrivePID extends PIDSubsystem {
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
     RobotMap.gyro.getYawPitchRoll(ypr);
-    SmartDashboard.putNumber("gyro", ypr[0]);
+    SmartDashboard.putNumber("gyro 0", ypr[0]);
+    SmartDashboard.putNumber("gyro 1", ypr[1]);
+    SmartDashboard.putNumber("gyro 2", ypr[2]);
+
     return ypr[0];
   }
 
