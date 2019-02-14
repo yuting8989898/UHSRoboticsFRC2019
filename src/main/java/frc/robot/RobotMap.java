@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Victor;
 
 /**
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -30,13 +29,15 @@ public class RobotMap {
   public static VictorSPX lift2;
   public static VictorSPX arm;
   public static VictorSPX wrist;
+  public static VictorSPX intake;
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
   public static Encoder liftEncoder;
   public static DigitalInput liftResetSwitch;
-
+  public static DigitalInput intakeSwitch;
+  
   public static void init(){
-    lift1 = new VictorSPX(7);
+    lift1 = new VictorSPX(0);
     lift2 = new VictorSPX(1);
     arm = new VictorSPX(2);
     wrist = new VictorSPX(3);
@@ -49,5 +50,7 @@ public class RobotMap {
   
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
     liftResetSwitch = new DigitalInput(3);
+    intake = new VictorSPX(0);
+    intakeSwitch = new DigitalInput(3);
   }
 }

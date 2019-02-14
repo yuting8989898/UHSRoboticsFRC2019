@@ -7,13 +7,18 @@
 
 package frc.robot;
 
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.cscore.*;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
-import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.CameraServer;
 
 public class Robot extends TimedRobot {
   //subsystem
@@ -22,6 +27,7 @@ public class Robot extends TimedRobot {
   public static LiftPID liftPID;
   public static ArmSubsystem armSubsystem;
   public static WristSubsystem wristSubsystem;
+  public static IntakeSubsystem intakeSubsystem;
   
   //command
   Command autoCommand;
@@ -31,28 +37,29 @@ public class Robot extends TimedRobot {
   public static WristCommand wristCommand;
   
 
+  public static IntakeCommand intakeCommand;
   @Override
   public void robotInit() {
     RobotMap.init();
     OI.init();
+    cameraThread();
     driveSubsystem = new DriveSubsystem();
     armSubsystem = new ArmSubsystem();
     wristSubsystem = new WristSubsystem();
     liftSubsystem = new LiftSubsystem();
+    intakeSubsystem = new IntakeSubsystem();
     liftPID = new LiftPID();
     
     driveCommand = new DriveCommand();
     LiftCommand = new LiftCommand();
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
-
-    CameraServer.getInstance().startAutomaticCapture();
+    intakeCommand = new IntakeCommand();
     
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
     RobotMap.liftEncoder.setDistancePerPulse(Constant.liftDistancePerPulse);
-
   }
 
   @Override
@@ -89,5 +96,48 @@ public class Robot extends TimedRobot {
   
   @Override
   public void testPeriodic(){
+    if(OI.getIntakePressed()){
+      Robot.intakeSubsystem.set(Constant.intakeSpeed);
+    }
+    else{
+      Robot.intakeSubsystem.set(0);
+    }
+  }
+
+  public void cameraThread(){
+    /*Ask me if you don't understand the description of these method (hover over them)
+      I am just following this
+      https://wpilib.screenstepslive.com/s/currentCS/m/vision/l/669166-using-the-cameraserver-on-the-roborio
+      OpenCV is a very good library for vision processing it seems
+    */
+    new Thread(() -> {
+    try{
+      int width = 256;
+      int length = 144;
+      int crossHair = 20;
+      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      camera.setResolution(width, length);
+      camera.setFPS(40);
+      CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, length);
+      
+      //OpenCV matrix
+      Mat source = new Mat();
+      Mat output = new Mat();
+      while(!Thread.interrupted()) {
+        cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
+        //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
+        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.line(output,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255),5);
+        Imgproc.line(output,new Point(width/2, length/2-crossHair), new Point(width/2,length/2+crossHair), new Scalar(0,0,255),5);
+        
+        outputStream.putFrame(output);
+      }
+    }
+    catch(Exception e){
+      e.printStackTrace();
+    }
+    
+  }).start();
   }
 }
