@@ -54,15 +54,15 @@ public class OI {
 
   public static int getLift() {
     int output = 0;
-    if (subOI.getRawButtonPressed(1))  output = 1; //hatch loading station
+    if (subOI.getRawButton(1))  output = 1; //hatch loading station
     if (subOI.getPOV()==90 )           output = 2; //cargo loading station
-    if (subOI.getRawButtonPressed(2))  output = 3; //hatch level 1
+    if (subOI.getRawButton(2))  output = 3; //hatch level 1
     if (subOI.getPOV()==180)           output = 4; //cargo level 1
-    if (subOI.getRawButtonPressed(3))  output = 5; //hatch level 2
+    if (subOI.getRawButton(3))  output = 5; //hatch level 2
     if (subOI.getPOV()==270)           output = 6; //cargo level 2
-    if (subOI.getRawButtonPressed(4))  output = 7; //hatch level 3
+    if (subOI.getRawButton(4))  output = 7; //hatch level 3
     if (subOI.getPOV()==0)             output = 8; //cargo level 3
-    if (subOI.getRawButtonPressed(13)) output = 100;
+    if (subOI.getRawButton(13)) output = 100;
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
   }

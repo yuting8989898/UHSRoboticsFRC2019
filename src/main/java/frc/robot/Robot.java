@@ -59,7 +59,6 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
-    RobotMap.liftEncoder.setDistancePerPulse(Constant.liftDistancePerPulse);
   }
 
   @Override

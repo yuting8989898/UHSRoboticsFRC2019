@@ -32,7 +32,7 @@ public class Constant {
      */
     public static double[] liftLevels = { 0, 50, 100, 150, 200, 250, 300, 350, 400 }; 
     public static int liftResetTimer = 100;
-    public static double liftDistancePerPulse = Math.PI * 2 / 360; // Need testing
+    public static double liftDistancePerPulse = 0.0003882; // TODO Calibrate lift distance per pulse
     public static double liftPIDPercentTolerance = 0.05; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static int liftSmoothingDeadZone = 10; //Too complicated to explain, just dont touch it.

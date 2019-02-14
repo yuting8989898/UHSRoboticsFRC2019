@@ -31,6 +31,7 @@ public class LiftCommand extends Command {
   protected void initialize() {
     RobotMap.liftEncoder.reset();
     Robot.liftPID.enable();
+    RobotMap.liftEncoder.setDistancePerPulse(Constant.liftDistancePerPulse);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -41,6 +42,7 @@ public class LiftCommand extends Command {
     SmartDashboard.putNumber("Lift Target Number", targetLevel);
     SmartDashboard.putBoolean("Limit Switch Pressed", RobotMap.liftResetSwitch.get());
     SmartDashboard.putNumber("Lift reset timer", resetTimer);
+    SmartDashboard.putNumber("Lift encoder raw value", RobotMap.liftEncoder.getRaw());
     // for making the timer work
     if (resetTimer > 0) resetTimer--;
     if (resetTimer == Constant.liftResetTimer - 50) {// should be manually tuned
@@ -72,11 +74,11 @@ public class LiftCommand extends Command {
     }
     
     if (resetTimer == -1) {
-      targetLevel = OI.getLift();
-      if (targetLevel == 100) {
+      if (OI.getLift()==100) {
         if (!RobotMap.liftResetSwitch.get())
           Robot.liftPID.setSetpoint(-1000);
-      } else {
+      } else if(OI.getLift()!=0){
+        targetLevel = OI.getLift();
         Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
       }
     }
