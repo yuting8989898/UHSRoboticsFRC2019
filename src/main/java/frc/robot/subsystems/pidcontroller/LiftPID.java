@@ -60,4 +60,8 @@ public class LiftPID extends PIDSubsystem {
     super.disable();
     Robot.liftSubsystem.stopLift();
   }
+
+  public void resetLastOutput(){
+    lastOutput = 0;
+  }
 }

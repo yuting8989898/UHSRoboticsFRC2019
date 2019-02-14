@@ -14,7 +14,8 @@ public class Constant {
     public static double joystickDeadZone = 0.03;
     public static double autoDriveSpeed = 0.5;
     public static double turnFactor = 50;
-    public static double[] liftLevels = { 0, 50, 150, 250, 350, 450, 550 }; // Need testing
+    public static int liftResetTimer = 150;
+    public static double[] liftLevels = { 0, 50, 100, 100, 150, 200, 250, 300, 350 }; // Need testing
     public static double liftDistancePerPulse = Math.PI * 2 / 360; // Need testing
     public static double liftPIDPercentTolerance = 0.05; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing

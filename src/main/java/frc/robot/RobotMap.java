@@ -33,21 +33,23 @@ public class RobotMap {
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
   public static Encoder liftEncoder;
+  public static DigitalInput liftResetSwitch;
   public static DigitalInput intakeSwitch;
+  
   public static void init(){
-    lift1 = new VictorSPX(9);
+    lift1 = new VictorSPX(0);
     lift2 = new VictorSPX(1);
     arm = new VictorSPX(2);
     wrist = new VictorSPX(3);
     driveLeft1 = new VictorSPX(4);
     driveLeft2 = new VictorSPX(5);
     driveRight1 = new VictorSPX(6);
-    driveRight2 = new VictorSPX(7);
+    driveRight2 = new VictorSPX(8);
     armPot = new AnalogPotentiometer(3, 3600,0);
     wristPot = new AnalogPotentiometer(4, 3600,0);
   
     liftEncoder = new Encoder(0,1,false,EncodingType.k4X);
-
+    liftResetSwitch = new DigitalInput(3);
     intake = new VictorSPX(0);
     intakeSwitch = new DigitalInput(3);
   }

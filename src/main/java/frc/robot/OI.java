@@ -17,54 +17,52 @@ public class OI {
   public static Joystick mainOI;
   public static Joystick subOI;
 
-   /**
- * Initialize all the controller
- */
-  public static void init(){
+  /**
+   * Initialize all the controller
+   */
+  public static void init() {
     mainOI = new Joystick(0);
     subOI = new Joystick(1);
   }
 
-   /**
- * Cartesian X-Axis
- */
-  public static double getDriveX(){
+  /**
+   * Cartesian X-Axis
+   */
+  public static double getDriveX() {
     double x = mainOI.getRawAxis(2);
     return x > Constant.joystickDeadZone || x < -Constant.joystickDeadZone ? x : 0;
   }
 
   /**
- * Cartesian Y-Axis
- */
-  public static double getDriveY(){
+   * Cartesian Y-Axis
+   */
+  public static double getDriveY() {
     double y = -mainOI.getRawAxis(1);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
-  
-  public static double getArm(){
+
+  public static double getArm() {
     double y = mainOI.getRawAxis(3);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
-  
-  public static double getWrist(){
+
+  public static double getWrist() {
     double y = -mainOI.getRawAxis(4);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
-  
-  /**
-   * <pre>
-   * -2 = use PID to go to a lower level
-   * -1 = manually going down
-   *  0 = No action
-   *  1 = manually going up
-   *  2 = use PID to go to a Higher level
-   * </pre>
-   */
+
   public static int getLift() {
-    //all button numbers are placeholders
     int output = 0;
-    if(mainOI.getRawButtonPressed(2))output--;
-    if(mainOI.getRawButtonPressed(4))output++;
+    if (mainOI.getRawButtonPressed(1))output =  1; //hatch loading station
+    if (mainOI.getPOV()==90 )output = 2; //cargo loading station
+    if (mainOI.getRawButtonPressed(2))output =  3; //hatch level 1
+    if (mainOI.getPOV()==180)output = 4; //cargo level 1
+    if (mainOI.getRawButtonPressed(3))output =  5; //hatch level 2
+    if (mainOI.getPOV()==270)output = 6; //cargo level 2
+    if (mainOI.getRawButtonPressed(4))output =  7; //hatch level 3
+    if (mainOI.getPOV()==0  )output = 8; //cargo level 3
+    if (mainOI.getRawButtonPressed(13))
+      output = 100;
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
   }
