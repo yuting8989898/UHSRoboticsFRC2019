@@ -30,7 +30,7 @@ public class Constant {
      * [8]: cargo level 3
      * </pre>
      */
-    public static double[] liftLevels = { 300, 400, 500, 1000, 5000, 10000, 15419, 350, 400 }; 
+    public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 9000, 10000, 14500 }; 
     public static int liftResetTimer = 100;
     public static double liftDistancePerPulse = 31.75/15419; // TODO Calibrate lift distance per pulse
     public static double liftPIDPercentTolerance = 0.1; // Need testing

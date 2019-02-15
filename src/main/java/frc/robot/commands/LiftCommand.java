@@ -37,11 +37,9 @@ public class LiftCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putNumber("Lift Height", Robot.liftSubsystem.getDistance());
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
     SmartDashboard.putBoolean("Limit Switch Pressed", RobotMap.liftResetSwitch.get());
     SmartDashboard.putNumber("Lift encoder raw value", RobotMap.liftEncoder.getRaw());
-    SmartDashboard.putNumber("dist to raw", Robot.liftSubsystem.distToRaw(Constant.liftLevels[targetLevel]));
     // for making the timer work
     if (resetTimer > 0) resetTimer--;
 

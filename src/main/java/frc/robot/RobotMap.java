@@ -40,13 +40,13 @@ public class RobotMap {
 
   public static void init() {
     // the driving stuffs
-    driveLeft1 = new VictorSPX(4);
-    driveLeft2 = new VictorSPX(5);
-    driveRight1 = new VictorSPX(6);
-    driveRight2 = new VictorSPX(8);
+    driveLeft1 = new VictorSPX(6);
+    driveLeft2 = new VictorSPX(7);
+    driveRight1 = new VictorSPX(9);
+    driveRight2 = new VictorSPX(10);
 
     // the lift stuffs
-    lift = new VictorSPX(0);
+    lift = new VictorSPX(8);
     liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
     liftResetSwitch = new DigitalInput(3);
 

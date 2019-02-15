@@ -48,12 +48,4 @@ public class LiftSubsystem extends Subsystem {
     enabled = false;
   }
 
-  public double getDistance(){
-    return RobotMap.liftEncoder.getRaw()*Constant.liftDistancePerPulse;
-  }
-
-  public double distToRaw(double dist){
-    return dist/Constant.liftDistancePerPulse;
-
-  }
 }
