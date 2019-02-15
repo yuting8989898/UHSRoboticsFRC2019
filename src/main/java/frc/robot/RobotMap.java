@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -26,13 +27,12 @@ public class RobotMap {
   public static VictorSPX driveRight1;
   public static VictorSPX driveRight2;
 
-  public static VictorSPX lift1;
-  public static VictorSPX lift2;
+  public static VictorSPX lift;
   public static Encoder liftEncoder;
   public static DigitalInput liftResetSwitch;
 
   public static VictorSPX arm;
-  public static VictorSPX wrist;
+  public static TalonSRX wrist;
   public static VictorSPX intake;
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
@@ -46,17 +46,14 @@ public class RobotMap {
     driveRight2 = new VictorSPX(8);
 
     // the lift stuffs
-    lift1 = new VictorSPX(16);
-    lift2 = new VictorSPX(17);
+    lift = new VictorSPX(16);
     liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
     liftResetSwitch = new DigitalInput(3);
 
     // the arm stuffs
     arm = new VictorSPX(2);
-    wrist = new VictorSPX(3);
+    wrist = new TalonSRX(3);
     intake = new VictorSPX(0);
-    armPot = new AnalogPotentiometer(3, 3600, 0);
-    wristPot = new AnalogPotentiometer(4, 3600, 0);
     intakeSwitch = new DigitalInput(4);
   }
 }
