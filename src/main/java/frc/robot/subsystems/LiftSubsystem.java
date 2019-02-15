@@ -29,7 +29,6 @@ public class LiftSubsystem extends Subsystem {
 
   public void operateLift(double speedPercentage) {
     if(!enabled)return;
-    speedPercentage=speedPercentage/100;
     RobotMap.lift.set(ControlMode.PercentOutput, speedPercentage);
   }
 

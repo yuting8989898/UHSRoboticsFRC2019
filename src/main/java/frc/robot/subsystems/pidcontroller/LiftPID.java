@@ -18,13 +18,13 @@ import frc.robot.Constant;
  */
 public class LiftPID extends PIDSubsystem {
 
-  double lastOutput = 1;
+  double lastOutput = 0;
 
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("LiftPID", 5, 0, 10);
+    super("LiftPID", 0.05, 0, 0.1);
     // getPIDController().setContinuous(true);
-    setOutputRange(-100, 100);
+    setOutputRange(-1, 1);
     setSetpoint(0);
     setPercentTolerance(Constant.liftPIDPercentTolerance);
   }
