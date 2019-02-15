@@ -13,8 +13,6 @@ import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.LiftSubsystem;
-import frc.robot.subsystems.pidcontroller.LiftPID;
 
 public class LiftCommand extends Command {
   int targetLevel = 0;
