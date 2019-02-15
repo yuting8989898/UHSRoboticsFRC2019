@@ -52,17 +52,21 @@ public class OI {
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
 
-  public static int getLift() {
-    int output = 0;
-    if (subOI.getRawButton(1))  output = 1; //hatch loading station
-    if (subOI.getPOV()==90 )           output = 2; //cargo loading station
-    if (subOI.getRawButton(2))  output = 3; //hatch level 1
-    if (subOI.getPOV()==180)           output = 4; //cargo level 1
-    if (subOI.getRawButton(3))  output = 5; //hatch level 2
-    if (subOI.getPOV()==270)           output = 6; //cargo level 2
-    if (subOI.getRawButton(4))  output = 7; //hatch level 3
-    if (subOI.getPOV()==0)             output = 8; //cargo level 3
+  public static double getLift() {
+    double output = mainOI.getRawAxis(1);
+    output = output > Constant.joystickDeadZone || output < -Constant.joystickDeadZone ? output : 0;
+    if(output == 0){
+      //-1~1 is reserved for the joystick
+    if (subOI.getRawButton(1))  output = 2; //hatch loading station
+    if (subOI.getPOV()==90 )           output = 3; //cargo loading station
+    if (subOI.getRawButton(2))  output = 4; //hatch level 1
+    if (subOI.getPOV()==180)           output = 5; //cargo level 1
+    if (subOI.getRawButton(3))  output = 6; //hatch level 2
+    if (subOI.getPOV()==270)           output = 7; //cargo level 2
+    if (subOI.getRawButton(4))  output = 8; //hatch level 3
+    if (subOI.getPOV()==0)             output = 9; //cargo level 3
     if (subOI.getRawButton(13)) output = 100;
+    }
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
   }
