@@ -30,7 +30,8 @@ public class Robot extends TimedRobot {
   public static ArmSubsystem armSubsystem;
   public static WristSubsystem wristSubsystem;
   public static IntakeSubsystem intakeSubsystem;
-  
+  public static SolenoidSubsystem solenoidSubsystem;
+
   //command
   Command autoCommand;
   public static DriveCommand driveCommand;
@@ -40,6 +41,8 @@ public class Robot extends TimedRobot {
   
 
   public static IntakeCommand intakeCommand;
+
+  public static SolenoidCommand solenoidCommand;
   @Override
   public void robotInit() {
     RobotMap.init();
@@ -50,6 +53,7 @@ public class Robot extends TimedRobot {
     wristSubsystem = new WristSubsystem();
     liftSubsystem = new LiftSubsystem();
     intakeSubsystem = new IntakeSubsystem();
+    solenoidSubsystem = new SolenoidSubsystem();
     liftPID = new LiftPID();
     
     driveCommand = new DriveCommand();
@@ -57,7 +61,8 @@ public class Robot extends TimedRobot {
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
     intakeCommand = new IntakeCommand();
-    
+    solenoidCommand = new SolenoidCommand();
+
     //m_chooser.setDefaultOption("Default Auto", driveCommand);
     // chooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);

@@ -13,7 +13,9 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -38,6 +40,10 @@ public class RobotMap {
   public static AnalogPotentiometer wristPot;
   public static DigitalInput intakeSwitch;
 
+  public static Compressor compressor;
+  public static DoubleSolenoid solenoid1;
+  public static DoubleSolenoid solenoid2;
+  public static DoubleSolenoid solenoid3;
   public static void init() {
     // the driving stuffs
     driveLeft1 = new VictorSPX(4);
@@ -55,5 +61,14 @@ public class RobotMap {
     wrist = new TalonSRX(3);
     intake = new VictorSPX(0);
     intakeSwitch = new DigitalInput(4);
+  
+    // Pnewmatics stuffs
+    //TODO correct port number
+    compressor = new Compressor(0); 
+    solenoid1 = new DoubleSolenoid(0, 1);
+    solenoid2 = new DoubleSolenoid(2, 3);
+
+    //the solenoid that's alone
+    solenoid3 = new DoubleSolenoid(4, 5);
   }
 }
