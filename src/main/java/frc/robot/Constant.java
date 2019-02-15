@@ -22,7 +22,7 @@ public class Constant {
      * [0]: default starting position
      * [1]: hatch loading station
      * [2]: cargo loading station
-     * [3]: hatch level 1
+     * [3]: hatch level 1   
      * [4]: cargo level 1
      * [5]: hatch level 2
      * [6]: cargo level 2
@@ -30,10 +30,10 @@ public class Constant {
      * [8]: cargo level 3
      * </pre>
      */
-    public static double[] liftLevels = { 0, 50, 100, 150, 200, 250, 300, 350, 400 }; 
+    public static double[] liftLevels = { 300, 400, 500, 1000, 5000, 10000, 15419, 350, 400 }; 
     public static int liftResetTimer = 100;
-    public static double liftDistancePerPulse = 62/15970; // TODO Calibrate lift distance per pulse
-    public static double liftPIDPercentTolerance = 0.05; // Need testing
+    public static double liftDistancePerPulse = 31.75/15419; // TODO Calibrate lift distance per pulse
+    public static double liftPIDPercentTolerance = 0.1; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
 

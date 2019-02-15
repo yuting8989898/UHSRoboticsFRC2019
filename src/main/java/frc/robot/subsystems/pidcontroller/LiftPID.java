@@ -22,7 +22,7 @@ public class LiftPID extends PIDSubsystem {
 
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("LiftPID", 0.05, 0, 0.1);
+    super("LiftPID", 0.035, 0.001, 0.1);
     // getPIDController().setContinuous(true);
     setOutputRange(-1, 1);
     setSetpoint(0);
@@ -40,7 +40,7 @@ public class LiftPID extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return RobotMap.liftEncoder.getDistance();
+    return RobotMap.liftEncoder.getRaw();
   }
 
   @Override

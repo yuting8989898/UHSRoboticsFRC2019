@@ -46,14 +46,14 @@ public class RobotMap {
     driveRight2 = new VictorSPX(8);
 
     // the lift stuffs
-    lift = new VictorSPX(16);
+    lift = new VictorSPX(0);
     liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
     liftResetSwitch = new DigitalInput(3);
 
     // the arm stuffs
     arm = new VictorSPX(2);
     wrist = new TalonSRX(3);
-    intake = new VictorSPX(0);
+    intake = new VictorSPX(11);
     intakeSwitch = new DigitalInput(4);
   }
 }

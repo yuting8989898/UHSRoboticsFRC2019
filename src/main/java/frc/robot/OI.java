@@ -53,7 +53,7 @@ public class OI {
   }
 
   public static double getLift() {
-    double output = mainOI.getRawAxis(1);
+    double output = -subOI.getRawAxis(1);
     output = output > Constant.joystickDeadZone || output < -Constant.joystickDeadZone ? output : 0;
     if(output == 0){
       //-1~1 is reserved for the joystick

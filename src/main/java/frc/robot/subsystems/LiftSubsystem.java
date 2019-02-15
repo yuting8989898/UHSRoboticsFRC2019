@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import frc.robot.Constant;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -46,4 +48,12 @@ public class LiftSubsystem extends Subsystem {
     enabled = false;
   }
 
+  public double getDistance(){
+    return RobotMap.liftEncoder.getRaw()*Constant.liftDistancePerPulse;
+  }
+
+  public double distToRaw(double dist){
+    return dist/Constant.liftDistancePerPulse;
+
+  }
 }
