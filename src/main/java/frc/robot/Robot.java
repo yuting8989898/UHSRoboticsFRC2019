@@ -21,6 +21,8 @@ import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
+  
+  private static int testFlag;
   //subsystem
   public static DriveSubsystem driveSubsystem;
   public static LiftSubsystem liftSubsystem;
@@ -91,15 +93,21 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit(){
+    testFlag = 0;
   }
   
   @Override
   public void testPeriodic(){
-    if(OI.getIntakePressed()){
-      Robot.intakeSubsystem.set(Constant.intakeSpeed);
+    double arm = -OI.subOI.getRawAxis(3);
+    arm = arm > Constant.joystickDeadZone || arm < -Constant.joystickDeadZone ? arm : 0;
+    if(arm != 0){
+      liftPID.disable();
+      liftSubsystem.operateLift(arm);
     }
-    else{
-      Robot.intakeSubsystem.set(0);
+    else if(testFlag == 0){
+      testFlag++;
+      liftPID.setSetpoint(RobotMap.liftEncoder.getRaw()); //set it to the current height
+      liftPID.enable();
     }
   }
 
