@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
@@ -46,9 +47,13 @@ public class DriveCommand extends Command {
         x = -Constant.autoDriveSpeed;
       }
     }
-    left = (y-x)/2;
-    right = (y+x)/2;
-    Robot.driveSubsystem.drive(left,right);
+    // SmartDashboard.putNumber("x", x);
+    // SmartDashboard.putNumber("y", y);
+    left = (y+x)/2;
+    right = (y-x)/2;
+    // SmartDashboard.putNumber("left", left);
+    // SmartDashboard.putNumber("right", right);
+    Robot.driveSubsystem.drive(right, left);
     
   }
 
