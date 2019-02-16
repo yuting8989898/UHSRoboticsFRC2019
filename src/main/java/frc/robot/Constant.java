@@ -30,7 +30,7 @@ public class Constant {
      * [8]: cargo level 3
      * </pre>
      */
-    public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 9000, 10000, 14500 }; 
+    public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 9000, 10000, 14500 }; //TODO tune these values
     public static int liftResetTimer = 100;
     public static double liftPIDPercentTolerance = 0.1; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
