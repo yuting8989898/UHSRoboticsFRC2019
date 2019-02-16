@@ -77,13 +77,7 @@ public class LiftCommand extends Command {
     
     if (resetTimer == -1) {
       double input = OI.getLift();
-      if (input==100) {
-        //reseting lift my making it go down, a lot
-        if (!RobotMap.liftResetSwitch.get()){
-          if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable(); //enables the pid if pid not enabled
-          Robot.liftPID.setSetpoint(-1000);
-        }
-      } else if(input>1){
+      if(input>1){
         //using the pid to move the lift
         if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable(); //enables the pid if pid not enabled
         targetLevel = ((int)input)-1; 

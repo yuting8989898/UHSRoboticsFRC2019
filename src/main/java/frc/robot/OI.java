@@ -65,7 +65,6 @@ public class OI {
     if (subOI.getPOV()==270)           output = 7; //cargo level 2
     if (subOI.getRawButton(4))  output = 8; //hatch level 3
     // if (subOI.getPOV()==0)             output = 9; //cargo level 3
-    if (subOI.getRawButton(13)) output = 100;
     }
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
