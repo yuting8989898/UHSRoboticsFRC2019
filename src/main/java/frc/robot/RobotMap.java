@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -31,9 +32,9 @@ public class RobotMap {
   public static Encoder liftEncoder;
   public static DigitalInput liftResetSwitch;
 
-  public static VictorSPX arm;
+  public static TalonSRX arm;
   public static TalonSRX wrist;
-  public static VictorSPX intake;
+  public static Spark intake;
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
   public static DigitalInput intakeSwitch;
@@ -51,9 +52,9 @@ public class RobotMap {
     liftResetSwitch = new DigitalInput(3);
 
     // the arm stuffs
-    arm = new VictorSPX(2);
-    wrist = new TalonSRX(3);
-    intake = new VictorSPX(11);
-    intakeSwitch = new DigitalInput(4);
+    arm = new TalonSRX(16);
+    wrist = new TalonSRX(17);
+    intake = new Spark(0);
+    intakeSwitch = new DigitalInput(3);
   }
 }

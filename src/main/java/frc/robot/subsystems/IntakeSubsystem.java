@@ -29,10 +29,10 @@ public class IntakeSubsystem extends Subsystem {
  * @param val - Positive value will roll in the ball
  */
   public void set(double val){
-    RobotMap.intake.set(ControlMode.PercentOutput, val);
+    RobotMap.intake.set(val);
   }
 
   public void stop(){
-    RobotMap.intake.set(ControlMode.PercentOutput, 0);
+    RobotMap.intake.set(0);
   }
 }
