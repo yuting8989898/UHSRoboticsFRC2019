@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class IntakeCommand extends Command {
 
@@ -31,7 +32,7 @@ public class IntakeCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.getIntakePressed()){
+    if(OI.getIntakePressed() && !RobotMap.intakeSwitch.get()){
       if(curSpeed < Constant.intakeSpeed){
         curSpeed += increment; //accelerate in 100ms (1s)
       }
