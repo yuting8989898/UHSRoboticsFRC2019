@@ -43,7 +43,7 @@ public class OI {
 
   //TODO map all the buttons for subOI correctly
   public static double getArm() {
-    double y = subOI.getRawAxis(3);
+    double y = -subOI.getRawAxis(3);
     return y > Constant.joystickDeadZone || y < -Constant.joystickDeadZone ? y : 0;
   }
 
