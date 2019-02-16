@@ -49,7 +49,6 @@ public class RobotMap {
     // the lift stuffs
     lift = new VictorSPX(8);
     liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-    liftResetSwitch = new DigitalInput(3);
 
     // the arm stuffs
     arm = new TalonSRX(16);
