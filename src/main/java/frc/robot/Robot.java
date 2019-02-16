@@ -16,6 +16,7 @@ import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
@@ -105,14 +106,14 @@ public class Robot extends TimedRobot {
     */
     new Thread(() -> {
     try{
-      int width = 256;
-      int length = 144;
+      int width = 416;
+      int height = 240;
       int crossHair = 20;
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(width, length);
-      camera.setFPS(40);
+      camera.setResolution(width, height);
+      camera.setFPS(60);
       CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, length);
+      CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, height);
       
       //OpenCV matrix
       Mat source = new Mat();
@@ -121,9 +122,10 @@ public class Robot extends TimedRobot {
         cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
         //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
         Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.line(output,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255),5);
-        Imgproc.line(output,new Point(width/2, length/2-crossHair), new Point(width/2,length/2+crossHair), new Scalar(0,0,255),5);
-        
+        Imgproc.line(output,new Point(width/2-crossHair, height/2), new Point(width/2+crossHair,height/2), new Scalar(0,0,255),4);
+        Imgproc.line(output,new Point(width/2, height/2-crossHair), new Point(width/2,height/2+crossHair), new Scalar(0,0,255),4);
+        SmartDashboard.putNumber("Vision 1 width", output.width());
+        SmartDashboard.putNumber("Vision 1 height", output.height());
         outputStream.putFrame(output);
       }
     }
