@@ -35,7 +35,6 @@ public class LiftCommand extends Command {
   @Override
   protected void execute() {
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
-    SmartDashboard.putBoolean("Limit Switch Pressed", RobotMap.liftResetSwitch.get());
     SmartDashboard.putNumber("Lift encoder raw value", RobotMap.liftEncoder.getRaw());
     // for making the timer work
 

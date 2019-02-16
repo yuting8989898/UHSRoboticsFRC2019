@@ -106,8 +106,8 @@ public class Robot extends TimedRobot {
     */
     new Thread(() -> {
     try{
-      int width = 350;
-      int height = 197;
+      int width = 176;
+      int height = 144;
       int crossHair = 20;
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
       camera.setResolution(width, height);
@@ -122,8 +122,8 @@ public class Robot extends TimedRobot {
         cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
         //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
         Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.line(output,new Point(width/2-crossHair, height/2), new Point(width/2+crossHair,height/2), new Scalar(0,0,255),4);
-        Imgproc.line(output,new Point(width/2, height/2-crossHair), new Point(width/2,height/2+crossHair), new Scalar(0,0,255),4);
+        Imgproc.line(output,new Point(output.width()/2-crossHair, output.height()/2), new Point(output.width()/2+crossHair,output.height()/2), new Scalar(0,0,255),4);
+        Imgproc.line(output,new Point(output.width()/2, output.height()/2-crossHair), new Point(output.width()/2,output.height()/2+crossHair), new Scalar(0,0,255),4);
         SmartDashboard.putNumber("Vision 1 width", output.width());
         SmartDashboard.putNumber("Vision 1 height", output.height());
         outputStream.putFrame(output);
