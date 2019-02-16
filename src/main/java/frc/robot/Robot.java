@@ -16,15 +16,11 @@ import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
-  
-  private static int testFlag;
-  private static int testFlagPID;
   //subsystem
   public static DriveSubsystem driveSubsystem;
   public static LiftSubsystem liftSubsystem;
@@ -34,14 +30,13 @@ public class Robot extends TimedRobot {
   public static IntakeSubsystem intakeSubsystem;
   
   //command
-  Command autoCommand;
   public static DriveCommand driveCommand;
   public static LiftCommand LiftCommand;
   public static ArmCommand armCommand;
   public static WristCommand wristCommand;
-  
-
   public static IntakeCommand intakeCommand;
+
+  
   @Override
   public void robotInit() {
     RobotMap.init();
@@ -95,34 +90,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit(){
-    testFlag = 0;
-    testFlagPID = 0;
-    RobotMap.liftEncoder.reset();
   }
   
   @Override
   public void testPeriodic(){
-    SmartDashboard.putNumber("Lift Height", RobotMap.liftEncoder.getRaw()*Constant.liftDistancePerPulse);
-    SmartDashboard.putBoolean("Limit Switch Pressed", RobotMap.liftResetSwitch.get());
-    SmartDashboard.putNumber("Lift encoder raw value", RobotMap.liftEncoder.getRaw());
-    System.out.println(RobotMap.liftEncoder.getRaw());
-    double arm = -OI.subOI.getRawAxis(1);
-    arm = arm > Constant.joystickDeadZone || arm < -Constant.joystickDeadZone ? arm : 0;
-    if(arm != 0){
-      testFlag = 0;
-      if(testFlagPID == 0){
-        liftPID.disable();
-        testFlagPID++;
-      }
-      liftSubsystem.operateLift(arm);
-    }
-    else if(testFlag == 0){
-      testFlagPID = 0;
-      testFlag++;
-      liftSubsystem.operateLift(0);
-      liftPID.setSetpoint(RobotMap.liftEncoder.getDistance()); //set it to the current height
-      liftPID.enable();
-    }
+   
   }
 
   public void cameraThread(){

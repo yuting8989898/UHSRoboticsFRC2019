@@ -31,7 +31,6 @@ public class LiftCommand extends Command {
   protected void initialize() {
     RobotMap.liftEncoder.reset();
     Robot.liftPID.enable();
-    RobotMap.liftEncoder.setDistancePerPulse(Constant.liftDistancePerPulse);
   }
 
   // Called repeatedly when this Command is scheduled to run
