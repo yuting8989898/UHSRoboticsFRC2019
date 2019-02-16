@@ -16,8 +16,6 @@ import frc.robot.RobotMap;
 
 public class LiftCommand extends Command {
   int targetLevel = 0;
-  int resetTimer = -1;
-  boolean limitSwitchPressed = false;
 
   public LiftCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -40,53 +38,19 @@ public class LiftCommand extends Command {
     SmartDashboard.putBoolean("Limit Switch Pressed", RobotMap.liftResetSwitch.get());
     SmartDashboard.putNumber("Lift encoder raw value", RobotMap.liftEncoder.getRaw());
     // for making the timer work
-    if (resetTimer > 0) resetTimer--;
 
-    // if timer is not going, the limit switch was released and is now pressed
-    if (RobotMap.liftResetSwitch.get() && !limitSwitchPressed && resetTimer == -1) {
-      // for starting the reset
-      limitSwitchPressed = true;
-      // starts timer
-      resetTimer = Constant.liftResetTimer;
-      //enables the pid if pid not enabled
-      if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable(); 
-      // resets pid setpoint
-      targetLevel = 0;
+    double input = OI.getLift();
+    if (input > 1) {
+      // using the pid to move the lift
+      if (!Robot.liftPID.getPIDController().isEnabled())
+        Robot.liftPID.enable(); // enables the pid if pid not enabled
+      targetLevel = ((int) input) - 1;
       Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
-      // stops lift
-      Robot.liftSubsystem.stopLift();
-      // disables lift
-      Robot.liftSubsystem.disable();
-    }
-
-    if (resetTimer == Constant.liftResetTimer - 50) {// should be manually tuned
-      // resets pid "lastOutput" value
-      Robot.liftPID.resetLastOutput();
-      RobotMap.liftEncoder.reset();// finally, resets the encoder after a 1s delay for the motor to fully stop (hopefully)
-    }
-    
-    if (resetTimer == 0) {
-      // for recovering the lift system from the reseted state, only runs once when the time finishes
-      resetTimer = -1;
-      Robot.liftSubsystem.enable();
-    }
-
-    if (resetTimer == -1 && !RobotMap.liftResetSwitch.get()) {
-      limitSwitchPressed = false;
-    }
-    
-    if (resetTimer == -1) {
-      double input = OI.getLift();
-      if(input>1){
-        //using the pid to move the lift
-        if(!Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.enable(); //enables the pid if pid not enabled
-        targetLevel = ((int)input)-1; 
-        Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
-      } else{
-        //manually controlling the lift
-        if(Robot.liftPID.getPIDController().isEnabled())Robot.liftPID.disable(); //disables the pid if pid enabled
-        Robot.liftSubsystem.operateLift(input);
-      }
+    } else {
+      // manually controlling the lift
+      if (Robot.liftPID.getPIDController().isEnabled())
+        Robot.liftPID.disable(); // disables the pid if pid enabled
+      Robot.liftSubsystem.operateLift(input);
     }
   }
 
