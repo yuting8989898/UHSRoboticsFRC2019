@@ -46,8 +46,8 @@ public class DriveCommand extends Command {
         x = -Constant.autoDriveSpeed;
       }
     }
-    left = (y+x)/2;
-    right = (y-x)/2;
+    left = y+x;
+    right = y-x;
     Robot.driveSubsystem.drive(right, left);
     
   }
