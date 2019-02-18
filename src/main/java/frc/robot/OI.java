@@ -40,12 +40,13 @@ public class OI {
   }
 
   public static double getArm() {
-    return correctJoystick(-subOI.getRawAxis(5)); //Right joystick
+    return correctJoystick(subOI.getRawAxis(5)); //Right joystick
   }
 
   public static double getWrist() {
     double output = correctJoystick(mainOI.getRawAxis(3)); //downward (left trigger) 
-    return output - correctJoystick(mainOI.getRawAxis(4)); //upward (right trigger)
+    return (output - correctJoystick(mainOI.getRawAxis(4)))*0.2; //upward (right trigger)
+
   }
 
   public static double getLift() {

@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -34,6 +35,7 @@ public class RobotMap {
 
   public static TalonSRX arm;
   public static TalonSRX wrist;
+  public static VictorSPX wrist1;
   public static Spark intake;
   public static AnalogPotentiometer armPot;
   public static AnalogPotentiometer wristPot;
@@ -52,6 +54,7 @@ public class RobotMap {
 
     // the arm stuffs
     arm = new TalonSRX(16);
+    wrist1 = new VictorSPX(11);
     wrist = new TalonSRX(17);
     intake = new Spark(0);
     intakeSwitch = new DigitalInput(3);

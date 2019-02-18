@@ -24,7 +24,11 @@ public class WristCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wristSubsystem.rotate(OI.getWrist());
+    double output = OI.getWrist();
+    if (output < 0.05){
+      output = 0.1;
+    }
+    Robot.wristSubsystem.rotate(output);
   }
 
   // Make this return true when this Command no longer needs to run execute()
