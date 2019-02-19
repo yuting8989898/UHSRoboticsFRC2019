@@ -87,14 +87,4 @@ public class OI {
   if(mainOI.getRawButton(2))return 2;
   return 0;
   }
-  /**
-   * 1 for toggeling solenoidA
-   * 2 for toggeling solenoidB
-   */
-  public static int getSolenoid(){
-    //TODO correct button id
-  if(mainOI.getRawButton(1))return 1;
-  if(mainOI.getRawButton(2))return 2;
-  return 0;
-  }
 }
