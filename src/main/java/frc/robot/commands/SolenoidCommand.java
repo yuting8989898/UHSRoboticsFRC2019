@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -24,7 +25,8 @@ public class SolenoidCommand extends Command {
   @Override
   protected void initialize() {
     RobotMap.compressor.setClosedLoopControl(true);
-    Robot.solenoidSubsystem.stopSolenoids();
+    Robot.solenoidSubsystem.stopSolenoidA();
+    Robot.solenoidSubsystem.stopSolenoidB();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,6 +39,10 @@ public class SolenoidCommand extends Command {
       }else if(input == 2){
         Robot.solenoidSubsystem.operateSolenoidB(!solenoidBState);
         solenoidBState=!solenoidBState;
+    }else if(input == -1){
+      Robot.solenoidSubsystem.stopSolenoidA();
+    }else if(input == -2){
+      Robot.solenoidSubsystem.stopSolenoidB();
     }
   }
 
@@ -49,11 +55,15 @@ public class SolenoidCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    RobotMap.compressor.setClosedLoopControl(false);
+    Robot.solenoidSubsystem.stopSolenoidA();
+    Robot.solenoidSubsystem.stopSolenoidB();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

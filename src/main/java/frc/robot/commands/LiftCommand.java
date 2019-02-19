@@ -46,7 +46,7 @@ public class LiftCommand extends Command {
       targetLevel = ((int) input) - 1;
       Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
     } else {
-      // manually controlling the lift
+      // for manually controlling the lift
       if (Robot.liftPID.getPIDController().isEnabled())
         Robot.liftPID.disable(); // disables the pid if pid enabled
       Robot.liftSubsystem.operateLift(input);

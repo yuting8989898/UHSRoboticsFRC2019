@@ -37,6 +37,11 @@ public class SolenoidSubsystem extends Subsystem {
     }
   }
   
+  public void stopSolenoidA() {
+    RobotMap.solenoid1.set(DoubleSolenoid.Value.kOff);
+    RobotMap.solenoid2.set(DoubleSolenoid.Value.kOff);
+  }
+
   // true = extend, false = retract
   public void operateSolenoidB(boolean direction) {
     if (direction) {
@@ -46,9 +51,7 @@ public class SolenoidSubsystem extends Subsystem {
     }
   }
   
-  public void stopSolenoids() {
-    RobotMap.solenoid1.set(DoubleSolenoid.Value.kOff);
-    RobotMap.solenoid2.set(DoubleSolenoid.Value.kOff);
+  public void stopSolenoidB() {
     RobotMap.solenoid3.set(DoubleSolenoid.Value.kOff);
   }
 

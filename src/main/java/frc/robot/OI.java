@@ -83,8 +83,11 @@ public class OI {
    */
   public static int getSolenoid(){
     //TODO correct button id
-  if(mainOI.getRawButton(1))return 1;
-  if(mainOI.getRawButton(2))return 2;
+  if(mainOI.getRawButtonPressed(1))return 1;
+  if(mainOI.getRawButtonReleased(1)) return -1;
+  if(mainOI.getRawButtonPressed(2))return 2;
+  if(mainOI.getRawButtonReleased(2)) return -2;
+
   return 0;
   }
 }
