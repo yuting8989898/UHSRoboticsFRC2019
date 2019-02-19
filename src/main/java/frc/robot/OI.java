@@ -77,4 +77,17 @@ public class OI {
   public static double correctJoystick(double input){
     return input > Constant.joystickDeadZone || input < -Constant.joystickDeadZone ? input : 0;
   }
+  /**
+   * 1 for toggeling solenoidA
+   * 2 for toggeling solenoidB
+   */
+  public static int getSolenoid(){
+    //TODO correct button id
+  if(mainOI.getRawButtonPressed(1))return 1;
+  if(mainOI.getRawButtonReleased(1)) return -1;
+  if(mainOI.getRawButtonPressed(2))return 2;
+  if(mainOI.getRawButtonReleased(2)) return -2;
+
+  return 0;
+  }
 }
