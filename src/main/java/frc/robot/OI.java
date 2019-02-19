@@ -53,7 +53,6 @@ public class OI {
     double output = correctJoystick(-subOI.getRawAxis(1)); //Left joystick
     if(output == 0){
       //-1~1 is reserved for the joystick
-<<<<<<< HEAD
     if (subOI.getRawButton(1))  output = 2; //hatch loading station (left btn)
     if (subOI.getPOV()==270 )           output = 3; //cargo loading station(left pov)
     if (subOI.getRawButton(2))  output = 4; //hatch level 1 (down btn)
@@ -62,17 +61,6 @@ public class OI {
     if (subOI.getPOV()==90)           output = 7; //cargo level 2 (right pov)
     if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
     // if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
-=======
-    if (subOI.getRawButton(1))  output = 2; //hatch loading station
-    if (subOI.getPOV()==90 )    output = 3; //cargo loading station
-    if (subOI.getRawButton(2))  output = 4; //hatch level 1
-    if (subOI.getPOV()==180)    output = 5; //cargo level 1
-    if (subOI.getRawButton(3))  output = 6; //hatch level 2
-    if (subOI.getPOV()==270)    output = 7; //cargo level 2
-    if (subOI.getRawButton(4))  output = 8; //hatch level 3
-    if (subOI.getPOV()==0)      output = 9; //cargo level 3
-    if (subOI.getRawButton(13)) output = 100;
->>>>>>> untested solenoid code
     }
     SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
