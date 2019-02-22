@@ -25,9 +25,6 @@ public class WristCommand extends Command {
   @Override
   protected void execute() {
     double output = OI.getWrist();
-    if (output < 0.05){
-      output = 0.1;
-    }
     Robot.wristSubsystem.rotate(output);
   }
 

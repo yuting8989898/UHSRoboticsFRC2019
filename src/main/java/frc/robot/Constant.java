@@ -15,7 +15,7 @@ public class Constant {
     public static double autoDriveSpeed = 0.5;
     public static double turnFactor = 50;
 
-    public static double intakeSpeed = 0.2;
+    public static double intakeSpeed = 0.4;
 
     /**
      * <pre>
