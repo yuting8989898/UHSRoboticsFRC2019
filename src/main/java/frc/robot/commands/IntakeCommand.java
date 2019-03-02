@@ -25,14 +25,14 @@ public class IntakeCommand extends Command {
   @Override
   protected void initialize() {
     curSpeed = 0;
-    increment = Constant.intakeSpeed/40;
+    increment = Constant.intakeSpeed/10;
   }
   
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.getIntakePressed() && !RobotMap.intakeSwitch.get()){
+    if(OI.getIntakePressed()){
       if(curSpeed < Constant.intakeSpeed){
         curSpeed += increment; //accelerate in 100ms (1s)
       }
