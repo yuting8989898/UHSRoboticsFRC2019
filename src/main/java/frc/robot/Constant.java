@@ -36,4 +36,6 @@ public class Constant {
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
 
+    public static double[] armLevels = { 0, 200, 400, 700, 1000, 2000, 2300 };
+    public static int kTimeoutMs = 30;
 }

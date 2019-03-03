@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -23,13 +24,19 @@ public class ArmSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(Robot.armCommand);
+    rotate(0,false);
   }
 
 
   /**
  * @param val - up is positive
  */
-  public void Rotate(double val){
-    RobotMap.arm.set(ControlMode.PercentOutput,val);
+  public void rotate(double val,boolean isPosition){
+    if(isPosition){
+      RobotMap.arm.set(ControlMode.Position,val);
+    }
+    else{
+      RobotMap.arm.set(ControlMode.PercentOutput,val);
+    }
   }
 }

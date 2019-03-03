@@ -8,25 +8,57 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ArmCommand extends Command {
+  private int startControl;
+  private double lastOutput;
   public ArmCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    startControl = 0;
+    lastOutput = 0;
     requires(Robot.armSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    RobotMap.arm.getSensorCollection().setQuadraturePosition(0, Constant.kTimeoutMs);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.armSubsystem.Rotate(OI.getArm());
+    SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
+    SmartDashboard.putNumber("arm output",RobotMap.arm.getMotorOutputPercent());
+    double in = OI.getArm();
+    SmartDashboard.putNumber("arm control", in);
+    if(in >= 2){ //Using pid
+      if(startControl == 1){
+        startControl = 0;
+        RobotMap.arm.configPeakOutputReverse(-0.45, Constant.kTimeoutMs);
+      }
+      if(in != lastOutput){
+        lastOutput = in;
+        double target = -Constant.armLevels[(int)in-2];
+        SmartDashboard.putNumber("Target ", target);
+        Robot.armSubsystem.rotate(target,true);
+      }
+    }
+    else { 
+      if(startControl == 0) {
+        startControl = 1;
+        lastOutput = 0;
+        RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
+      }
+      Robot.armSubsystem.rotate(in, false);
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

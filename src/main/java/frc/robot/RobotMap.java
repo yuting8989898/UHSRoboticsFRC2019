@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -60,8 +61,10 @@ public class RobotMap {
 
     // the arm stuffs
   arm = new TalonSRX(16);
-  wrist1 = new VictorSPX(11);
+  configArm();
   wrist = new TalonSRX(17);
+  wrist1 = new VictorSPX(11);
+  wrist1.follow(wrist);
   intake = new Spark(0);
   intakeSwitch = new DigitalInput(3);
   
@@ -73,5 +76,20 @@ public class RobotMap {
 
     //the solenoid that's alone
     solenoid3 = new DoubleSolenoid(4, 5);
+  }
+
+  private static void configArm(){
+    /* Ensure sensor velocity is positive when output is positive */
+    arm.setSensorPhase(true);
+    arm.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    arm.setSelectedSensorPosition(0);
+		arm.configNominalOutputForward(0, Constant.kTimeoutMs);
+		arm.configNominalOutputReverse(0, Constant.kTimeoutMs);
+    arm.configAllowableClosedloopError(50,0, Constant.kTimeoutMs);
+    RobotMap.arm.configPeakOutputForward(0, Constant.kTimeoutMs);
+
+    arm.config_kP(0, 2.95,Constant.kTimeoutMs);
+    arm.config_kI(0, 0.0001,Constant.kTimeoutMs);
+    arm.config_kD(0, 0.000005,Constant.kTimeoutMs);
   }
 }

@@ -30,6 +30,5 @@ public class WristSubsystem extends Subsystem {
  */
   public void rotate(double val){
     RobotMap.wrist.set(ControlMode.PercentOutput, val);
-    RobotMap.wrist1.set(ControlMode.Follower, RobotMap.wrist.getDeviceID()); //follow wrist motor
   }
 }
