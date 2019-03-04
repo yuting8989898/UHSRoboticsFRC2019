@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -41,18 +40,22 @@ public class OI {
 
   public static double getArm(){ //negative is going up
     double output = subOI.getRawAxis(5);
-    output = output < -0.128 || output > Constant.joystickDeadZone ? output : -0.128;
-    if(output == -0.128){
+    output = output < Constant.armHoldSpeed || output > Constant.joystickDeadZone ? output : Constant.armHoldSpeed; //value to hold
+    if(output == Constant.armHoldSpeed){
       //1 and 0 reserved for joystick
       if (subOI.getRawButton(1))  output = 2; //hatch loading station
-    if (subOI.getPOV()==90 )           output = 3; //cargo loading station
-    if (subOI.getRawButton(2))  output = 4; //hatch level 1
-    if (subOI.getPOV()==180)           output = 5; //cargo level 1
-    if (subOI.getRawButton(3))  output = 6; //hatch level 2
-    if (subOI.getPOV()==270)           output = 7; //cargo level 2
-    if (subOI.getRawButton(4))  output = 8; //hatch level 3
-    if (subOI.getPOV()==0)             output = 9; //cargo level 3
+      else if (subOI.getPOV()==90 )           output = 3; //cargo loading station
+      else if (subOI.getRawButton(2))  output = 4; //hatch level 1
+      else if (subOI.getPOV()==180)           output = 5; //cargo level 1
+      else if (subOI.getRawButton(3))  output = 6; //hatch level 2
+      else if (subOI.getPOV()==270)           output = 7; //cargo level 2
+      else if (subOI.getRawButton(4))  output = 8; //hatch level 3
+      //else if (subOI.getPOV()==0)             output = 9; //cargo level 3
     }
+    if(subOI.getRawButtonPressed(6)){ //back right btn
+      RobotMap.arm.setSelectedSensorPosition(0);
+    }
+
     return output;
   }
 
@@ -66,14 +69,17 @@ public class OI {
     double output = correctJoystick(-subOI.getRawAxis(1)); //Left joystick
     if(output == 0){
       //-1~1 is reserved for the joystick
-    if (subOI.getRawButton(1))  output = 2; //hatch loading station (left btn)
-    if (subOI.getPOV()==270 )           output = 3; //cargo loading station(left pov)
-    if (subOI.getRawButton(2))  output = 4; //hatch level 1 (down btn)
-    if (subOI.getPOV()==180)           output = 5; //cargo level 1 (down pov)
-    if (subOI.getRawButton(3))  output = 6; //hatch level 2 (right btn)
-    if (subOI.getPOV()==90)           output = 7; //cargo level 2 (right pov)
-    if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
-    // if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
+      if (subOI.getRawButton(1))  output = 2; //hatch loading station (left btn)
+      else if (subOI.getPOV()==270 )           output = 3; //cargo loading station(left pov)
+      else if (subOI.getRawButton(2))  output = 4; //hatch level 1 (down btn)
+      else if (subOI.getPOV()==180)           output = 5; //cargo level 1 (down pov)
+      else if (subOI.getRawButton(3))  output = 6; //hatch level 2 (right btn)
+      else if (subOI.getPOV()==90)           output = 7; //cargo level 2 (right pov)
+      else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
+      //else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
+    }
+    if(subOI.getRawButtonPressed(5)){ //back left btn
+      RobotMap.liftEncoder.reset();
     }
     return output;
   }
