@@ -14,8 +14,10 @@ import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
@@ -33,12 +35,14 @@ public class Robot extends TimedRobot {
 
   //command
   public static DriveCommand driveCommand;
-  public static LiftCommand LiftCommand;
+  public static LiftCommand liftCommand;
   public static ArmCommand armCommand;
   public static WristCommand wristCommand;
   public static IntakeCommand intakeCommand;
-
   public static SolenoidCommand solenoidCommand;
+
+  public static SendableChooser<Boolean> liftLimitChooser;
+  public static SendableChooser<Boolean> armLimitChooser;
   @Override
   public void robotInit() {
     RobotMap.init();
@@ -53,15 +57,20 @@ public class Robot extends TimedRobot {
     liftPID = new LiftPID();
     
     driveCommand = new DriveCommand();
-    LiftCommand = new LiftCommand();
+    liftCommand = new LiftCommand();
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
     intakeCommand = new IntakeCommand();
     solenoidCommand = new SolenoidCommand();
 
-    //m_chooser.setDefaultOption("Default Auto", driveCommand);
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    //SmartDashboard.putData("Auto mode", m_chooser);
+    liftLimitChooser = new SendableChooser<Boolean>();
+    armLimitChooser = new SendableChooser<Boolean>();
+    liftLimitChooser.setDefaultOption("Yes", true);
+    armLimitChooser.setDefaultOption("Yes", true);
+    liftLimitChooser.addOption("No", false);
+    armLimitChooser.addOption("No", false);
+    SmartDashboard.putData("Lift soft limit", liftLimitChooser);
+    SmartDashboard.putData("Arm soft limit", armLimitChooser);
   }
 
   @Override
@@ -72,6 +81,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     driveCommand.isAuto = true;
+    liftCommand.liftLimit = liftLimitChooser.getSelected();
+    armCommand.armLimit = armLimitChooser.getSelected();
   }
 
   @Override

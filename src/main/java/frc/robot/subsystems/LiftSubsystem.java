@@ -23,9 +23,8 @@ public class LiftSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(Robot.LiftCommand);
+    setDefaultCommand(Robot.liftCommand);
   }
-
   boolean enabled = true;
 
   public void operateLift(double speedPercentage) {
@@ -35,7 +34,6 @@ public class LiftSubsystem extends Subsystem {
 
   public void stopLift() {
     if(!enabled)return;
-    System.out.println("stopping lift");
     RobotMap.lift.set(ControlMode.PercentOutput, 0);
   }
 

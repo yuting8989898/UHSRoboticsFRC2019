@@ -15,7 +15,8 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class LiftCommand extends Command {
-  int targetLevel = 0;
+  private int targetLevel = 0;
+  public boolean liftLimit;
 
   public LiftCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -35,10 +36,11 @@ public class LiftCommand extends Command {
   @Override
   protected void execute() {
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
-    SmartDashboard.putNumber("Lift encoder raw value", RobotMap.liftEncoder.getRaw());
-    // for making the timer work
-
+    SmartDashboard.putNumber("Lift encoder", RobotMap.liftEncoder.getRaw());
+    SmartDashboard.putNumber("lift voltage", RobotMap.lift.getMotorOutputVoltage());
+    SmartDashboard.putNumber("lift output%", RobotMap.lift.getMotorOutputPercent());
     double input = OI.getLift();
+    SmartDashboard.putNumber("Lift Controller", input);
     if (input > 1) {
       // using the pid to move the lift
       if (!Robot.liftPID.getPIDController().isEnabled())
@@ -47,10 +49,19 @@ public class LiftCommand extends Command {
       Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
     } else {
       // for manually controlling the lift
-      if (Robot.liftPID.getPIDController().isEnabled())
-        Robot.liftPID.disable(); // disables the pid if pid enabled
+      if (Robot.liftPID.getPIDController().isEnabled()){
+        Robot.liftPID.disable(); // disables the pid if pid enabled  
+      }
+      if(liftLimit){
+        if(RobotMap.liftEncoder.get() <= -100 &&input < 0){
+            input = 0;
+          }
+          if(RobotMap.liftEncoder.get() >= Constant.liftMaxHeight && input > 0){
+            input = 0;
+          }
+      }
       Robot.liftSubsystem.operateLift(input);
-    }
+    } 
   }
 
   // Make this return true when this Command no longer needs to run execute()

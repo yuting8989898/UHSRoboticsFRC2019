@@ -17,6 +17,7 @@ import frc.robot.RobotMap;
 public class ArmCommand extends Command {
   private int startControl;
   private double lastOutput;
+  public boolean armLimit;
   public ArmCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -37,17 +38,18 @@ public class ArmCommand extends Command {
     SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
     SmartDashboard.putNumber("arm output",RobotMap.arm.getMotorOutputPercent());
     double in = OI.getArm();
-    SmartDashboard.putNumber("arm control", in);
+    SmartDashboard.putNumber("arm controller", in);
+    SmartDashboard.putNumber("arm amp", RobotMap.arm.getOutputCurrent());
     if(in >= 2){ //Using pid
       if(startControl == 1){
         startControl = 0;
         RobotMap.arm.configPeakOutputReverse(-0.45, Constant.kTimeoutMs);
       }
-      if(in != lastOutput){
+      if(in != lastOutput){ //prevent keep setting the target
         lastOutput = in;
         double target = -Constant.armLevels[(int)in-2];
-        SmartDashboard.putNumber("Target ", target);
-        Robot.armSubsystem.rotate(target,true);
+        SmartDashboard.putNumber("Arm Target ", target);
+        Robot.armSubsystem.rotate(target, true);
       }
     }
     else { 
@@ -55,6 +57,14 @@ public class ArmCommand extends Command {
         startControl = 1;
         lastOutput = 0;
         RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
+      }
+      if(armLimit){
+        if(RobotMap.arm.getSelectedSensorPosition() <= 50 && in > 0){
+          in = 0;
+          }
+          if(RobotMap.arm.getSelectedSensorPosition() >= Constant.armMaxHeight && in < 0){
+            in = 0;
+          }
       }
       Robot.armSubsystem.rotate(in, false);
     }
