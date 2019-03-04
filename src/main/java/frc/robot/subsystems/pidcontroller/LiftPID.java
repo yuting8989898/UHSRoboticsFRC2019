@@ -45,13 +45,9 @@ public class LiftPID extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    SmartDashboard.putNumber("Lift PID raw Output", output);
     output = lastOutput + (output - lastOutput)/Constant.liftSmoothingFactor;
     if(output<Constant.liftSmoothingDeadZone&&output>-Constant.liftSmoothingDeadZone)output=0;
     Robot.liftSubsystem.operateLift(output);
-    SmartDashboard.putNumber("Lift PID Setpoint", getSetpoint());
-    SmartDashboard.putNumber("Lift Speed", output);
-    SmartDashboard.putNumber("Lift Actuall Speed", RobotMap.liftEncoder.getRate());
     lastOutput = output;
   }
 

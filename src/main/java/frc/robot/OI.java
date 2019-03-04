@@ -42,7 +42,6 @@ public class OI {
   public static double getArm(){ //negative is going up
     double output = subOI.getRawAxis(5);
     output = output < -0.128 || output > Constant.joystickDeadZone ? output : -0.128;
-    SmartDashboard.putNumber("arm joystick", output);
     if(output == -0.128){
       //1 and 0 reserved for joystick
       if (subOI.getRawButton(1))  output = 2; //hatch loading station
@@ -76,7 +75,6 @@ public class OI {
     if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
     // if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
     }
-    SmartDashboard.putNumber("Lift Controller Value", output);
     return output;
   }
 
