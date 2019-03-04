@@ -18,9 +18,11 @@ public class Constant {
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
     public static double intakeSpeed = 0.4;
-    public static int kTimeoutMs = 30;
+    public static double armHoldSpeed = -0.128;
     public static int liftMaxHeight = 14500;
     public static int armMaxHeight = 2300;
+    
+    public static int kTimeoutMs = 30;
     /**
      * <pre>
      * [0]: default starting position

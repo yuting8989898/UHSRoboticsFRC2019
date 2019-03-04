@@ -14,7 +14,6 @@ import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -119,34 +118,33 @@ public class Robot extends TimedRobot {
       OpenCV is a very good library for vision processing it seems
     */
     new Thread(() -> {
-    try{
-      int width = 176;
-      int height = 144;
-      int crossHair = 20;
-      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(width, height);
-      camera.setFPS(40);
-      CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, height);
-      
-      //OpenCV matrix
-      Mat source = new Mat();
-      Mat output = new Mat();
-      while(!Thread.interrupted()) {
-        cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
-        //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
-        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.line(output,new Point(output.width()/2-crossHair, output.height()/2), new Point(output.width()/2+crossHair,output.height()/2), new Scalar(0,0,255),4);
-        Imgproc.line(output,new Point(output.width()/2, output.height()/2-crossHair), new Point(output.width()/2,output.height()/2+crossHair), new Scalar(0,0,255),4);
-        SmartDashboard.putNumber("Vision 1 width", output.width());
-        SmartDashboard.putNumber("Vision 1 height", output.height());
-        outputStream.putFrame(output);
+      try{
+        int width = 176;
+        int height = 144;
+        //int crossHair = 20;
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(width, height);
+        camera.setFPS(40);
+        /*CvSink cvSink = CameraServer.getInstance().getVideo();
+        CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, height);
+        
+        //OpenCV matrix
+        Mat source = new Mat();
+        Mat output = new Mat();
+        while(!Thread.interrupted()) {
+          cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
+          //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
+          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+          Imgproc.line(output,new Point(output.width()/2-crossHair, output.height()/2), new Point(output.width()/2+crossHair,output.height()/2), new Scalar(0,0,255),4);
+          Imgproc.line(output,new Point(output.width()/2, output.height()/2-crossHair), new Point(output.width()/2,output.height()/2+crossHair), new Scalar(0,0,255),4);
+          SmartDashboard.putNumber("Vision 1 width", output.width());
+          SmartDashboard.putNumber("Vision 1 height", output.height());
+          outputStream.putFrame(output);
+        }*/
       }
-    }
-    catch(Exception e){
-      e.printStackTrace();
-    }
-    
+      catch(Exception e){
+        e.printStackTrace();
+      }
   }).start();
   }
 }
