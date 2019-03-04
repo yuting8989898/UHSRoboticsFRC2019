@@ -52,13 +52,13 @@ public class OI {
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3
       //else if (subOI.getPOV()==0)             output = 9; //cargo level 3
     }
-    if(subOI.getRawButton(6)){ //back left btn
+    if(subOI.getRawButton(6)){ //back right btn
       Robot.armCommand.armLimit = false;
     }
     else{
       Robot.armCommand.armLimit = true;
     }
-    if(subOI.getRawButtonReleased(6)){ //back right btn
+    if(subOI.getRawButtonReleased(6)){
       RobotMap.arm.setSelectedSensorPosition(0);
     }
 
