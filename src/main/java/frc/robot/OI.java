@@ -52,7 +52,13 @@ public class OI {
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3
       //else if (subOI.getPOV()==0)             output = 9; //cargo level 3
     }
-    if(subOI.getRawButtonPressed(6)){ //back right btn
+    if(subOI.getRawButton(6)){ //back left btn
+      Robot.armCommand.armLimit = false;
+    }
+    else{
+      Robot.armCommand.armLimit = true;
+    }
+    if(subOI.getRawButtonReleased(6)){ //back right btn
       RobotMap.arm.setSelectedSensorPosition(0);
     }
 
@@ -78,7 +84,13 @@ public class OI {
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
       //else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
     }
-    if(subOI.getRawButtonPressed(5)){ //back left btn
+    if(subOI.getRawButton(5)){ //back left btn
+      Robot.liftCommand.liftLimit = false;
+    }
+    else{
+      Robot.liftCommand.liftLimit = true;
+    }
+    if(subOI.getRawButtonReleased(5)){
       RobotMap.liftEncoder.reset();
     }
     return output;
