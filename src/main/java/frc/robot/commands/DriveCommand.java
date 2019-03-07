@@ -14,6 +14,10 @@ import frc.robot.Robot;
 
 public class DriveCommand extends Command {
 
+  double right, left;
+  double lastright, lastleft;
+  double leftdif, rightdif;
+
   public boolean isAuto;
   public DriveCommand() {
     isAuto = true;
@@ -23,14 +27,16 @@ public class DriveCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    lastleft = 0;
+    lastright = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double x = OI.getDriveX();
-    double y = OI.getDriveY();
-    double left, right;
+    double x = 0.5*OI.getDriveX();
+    double y = 0.8*OI.getDriveY();
+    // double left, right;
     //Constant speed in autonomous mode
     if(isAuto){
       if(y > 0){
@@ -48,6 +54,18 @@ public class DriveCommand extends Command {
     }
     left = y+x;
     right = y-x;
+
+    // leftdif = left-lastleft;
+    // if(Math.abs(left)<Math.abs(lastleft))leftdif=leftdif*2;
+    // rightdif = right-lastright;
+    // if(Math.abs(right)<Math.abs(lastright))leftdif=leftdif*2;
+    //some sty acceleration/smoothing thing
+    // if(left==0&&math.abs(lastleft))
+    // if(right==0)lastright=0.05;
+    left = lastleft + (left - lastleft)/Constant.driveSmoothingFactor;
+    right = lastright + (right - lastright)/Constant.driveSmoothingFactor;
+    lastleft = left;
+    lastright = right;
     Robot.driveSubsystem.drive(right, left);
     
   }
