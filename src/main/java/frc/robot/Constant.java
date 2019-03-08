@@ -18,7 +18,7 @@ public class Constant {
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
     public static double intakeSpeed = 0.4;
-    public static double armHoldSpeed = -0.130;
+    public static double armHoldSpeed = -0.134;
     public static int liftMaxHeight = 14500;
     public static int armMaxHeight = 2300;
     
@@ -37,6 +37,6 @@ public class Constant {
      * </pre>
      */
     public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 9000, 10000, 14500 };
-    public static double[] armLevels = { 0, 200, 400, 700, 1000, 2000, 2300 };
+    public static double[] armLevels = { 0, 200, 400, 700, 1000, 1500, 2000 };
     public static double driveSmoothingFactor = 5;
 }

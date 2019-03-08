@@ -39,11 +39,11 @@ public class ArmCommand extends Command {
     SmartDashboard.putNumber("arm output",RobotMap.arm.getMotorOutputPercent());
     double in = OI.getArm();
     SmartDashboard.putNumber("arm controller", in);
-    SmartDashboard.putNumber("arm amp", RobotMap.arm.getOutputCurrent());
+    SmartDashboard.putNumber("arm amp", RobotMap.arm.getMotorOutputVoltage());
     if(in >= 2){ //Using pid
       if(startControl == 1){
         startControl = 0;
-        RobotMap.arm.configPeakOutputReverse(-0.45, Constant.kTimeoutMs);
+        RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
       }
       if(in != lastOutput){ //prevent keep setting the target
         lastOutput = in;

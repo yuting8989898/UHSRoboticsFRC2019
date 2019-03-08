@@ -85,11 +85,11 @@ public class RobotMap {
     arm.setSelectedSensorPosition(0);
 		arm.configNominalOutputForward(0, Constant.kTimeoutMs);
 		arm.configNominalOutputReverse(0, Constant.kTimeoutMs);
-    arm.configAllowableClosedloopError(50,0, Constant.kTimeoutMs);
+    arm.configAllowableClosedloopError(0,0, Constant.kTimeoutMs);
     RobotMap.arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
-    arm.config_kP(0, 2.95,Constant.kTimeoutMs);
-    arm.config_kI(0, 0.0001,Constant.kTimeoutMs);
-    arm.config_kD(0, 0.000005,Constant.kTimeoutMs);
+    arm.config_kP(0, 3.0,Constant.kTimeoutMs);
+    arm.config_kI(0, 0.001,Constant.kTimeoutMs);
+    arm.config_kD(0, 0.0005,Constant.kTimeoutMs);
   }
 }
