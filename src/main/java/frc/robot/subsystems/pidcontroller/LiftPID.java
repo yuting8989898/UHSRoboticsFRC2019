@@ -22,11 +22,11 @@ public class LiftPID extends PIDSubsystem {
 
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("LiftPID", 0.035, 0.001, 0.1);
+    super("LiftPID", 0.035, 0.001, 0);
     // getPIDController().setContinuous(true);
     setOutputRange(-1, 1);
     setSetpoint(0);
-    setPercentTolerance(Constant.liftPIDPercentTolerance);
+    setAbsoluteTolerance(100);
   }
 
   @Override

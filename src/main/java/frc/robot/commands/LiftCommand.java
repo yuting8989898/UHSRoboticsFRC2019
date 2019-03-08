@@ -41,7 +41,7 @@ public class LiftCommand extends Command {
     SmartDashboard.putNumber("lift output%", RobotMap.lift.getMotorOutputPercent());
     double input = OI.getLift();
     SmartDashboard.putNumber("Lift Controller", input);
-    if (input > 1) {
+    if (input > 1 && input !=0) {
       // using the pid to move the lift
       if (!Robot.liftPID.getPIDController().isEnabled())
         Robot.liftPID.enable(); // enables the pid if pid not enabled
