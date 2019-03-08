@@ -62,10 +62,10 @@ public class DriveCommand extends Command {
     //some sty acceleration/smoothing thing
     // if(left==0&&math.abs(lastleft))
     // if(right==0)lastright=0.05;
-    left = lastleft + (left - lastleft)/Constant.driveSmoothingFactor;
-    right = lastright + (right - lastright)/Constant.driveSmoothingFactor;
-    lastleft = left;
-    lastright = right;
+    // left = lastleft + (left - lastleft)/Constant.driveSmoothingFactor;
+    // right = lastright + (right - lastright)/Constant.driveSmoothingFactor;
+    // lastleft = left;
+    // lastright = right;
     Robot.driveSubsystem.drive(right, left);
     
   }
