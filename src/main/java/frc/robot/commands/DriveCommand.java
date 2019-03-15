@@ -52,8 +52,15 @@ public class DriveCommand extends Command {
         x = -Constant.autoDriveSpeed;
       }
     }
-    left = y+x;
-    right = y-x;
+    //TODO: make sure this actually works
+    if(y>=0){
+      left = y+x;
+      right = y-x;
+    }else{
+      left = y-x;
+      right = y+x;
+    }
+    
 
     // leftdif = left-lastleft;
     // if(Math.abs(left)<Math.abs(lastleft))leftdif=leftdif*2;
