@@ -41,22 +41,6 @@ public class DriveCommand extends Command {
     else x=-Math.sqrt(x);
     if(y>0) y=Math.sqrt(y);
     else y=-Math.sqrt(y);
-    // double left, right;
-    //Constant speed in autonomous mode
-    if(isAuto){
-      if(y > 0){
-        x = Constant.autoDriveSpeed;
-      }
-      else if(y < 0){
-        x = -Constant.autoDriveSpeed;
-      }
-      if(x > 0){
-        x = Constant.autoDriveSpeed;
-      }
-      else if(x < 0){
-        x = -Constant.autoDriveSpeed;
-      }
-    }
     //TODO: make sure this actually works
     if(y>=0){
       left = y+x;
