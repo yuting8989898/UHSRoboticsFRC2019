@@ -48,7 +48,7 @@ public class IntakeCommand extends Command {
         curSpeed -= increment; //deccelerate in 100ms (1s)
       }
       else if(curSpeed < 0){
-        curSpeed += increment;
+        curSpeed += 3*increment;
       }
       if (Math.abs(curSpeed) < increment) { //tolerance
         curSpeed = 0;
