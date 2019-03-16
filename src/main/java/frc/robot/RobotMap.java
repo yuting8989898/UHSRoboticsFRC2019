@@ -28,7 +28,6 @@ public class RobotMap {
 
   public static VictorSPX lift;
   public static Encoder liftEncoder;
-  public static DigitalInput liftResetSwitch;
 
   public static TalonSRX arm;
   public static TalonSRX wrist;
@@ -45,6 +44,11 @@ public class RobotMap {
     driveLeft2 = new VictorSPX(7);
     driveRight1 = new VictorSPX(9);
     driveRight2 = new VictorSPX(10);
+    //This should fix acceleration (Not decceleration)
+    driveLeft1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+    driveLeft2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+    driveRight1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+    driveRight2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
 
     // the lift stuffs
     lift = new VictorSPX(8);
@@ -56,6 +60,7 @@ public class RobotMap {
     wrist = new TalonSRX(17);
     wrist1 = new VictorSPX(11);
     wrist1.follow(wrist);
+    wrist.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
     intake = new Spark(0);
   
     compressor = new Compressor(0); 
@@ -67,6 +72,7 @@ public class RobotMap {
   }
 
   private static void configArm(){
+    arm.configOpenloopRamp(Constant.armRampRate, Constant.kTimeoutMs);
     /* Ensure sensor velocity is positive when output is positive */
     arm.setSensorPhase(true);
     arm.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
