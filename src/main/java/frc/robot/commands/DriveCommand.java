@@ -34,8 +34,13 @@ public class DriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double x = 0.5*OI.getDriveX();
-    double y = 0.8*OI.getDriveY();
+    double x = OI.getDriveX();
+    double y = OI.getDriveY();
+    //TODO: make sure this works
+    if(x>0) x=Math.sqrt(x);
+    else x=-Math.sqrt(x);
+    if(y>0) y=Math.sqrt(y);
+    else y=-Math.sqrt(y);
     // double left, right;
     //Constant speed in autonomous mode
     if(isAuto){
@@ -52,8 +57,15 @@ public class DriveCommand extends Command {
         x = -Constant.autoDriveSpeed;
       }
     }
-    left = y+x;
-    right = y-x;
+    //TODO: make sure this actually works
+    if(y>=0){
+      left = y+x;
+      right = y-x;
+    }else{
+      left = y-x;
+      right = y+x;
+    }
+    
 
     // leftdif = left-lastleft;
     // if(Math.abs(left)<Math.abs(lastleft))leftdif=leftdif*2;
