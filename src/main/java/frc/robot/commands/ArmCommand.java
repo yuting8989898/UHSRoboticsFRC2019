@@ -15,13 +15,13 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class ArmCommand extends Command {
-  private int startControl;
+  private boolean manualMode;
   private double lastOutput;
   public boolean armLimit;
   public ArmCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    startControl = 0;
+    manualMode = true;
     lastOutput = 0;
     requires(Robot.armSubsystem);
   }
@@ -41,8 +41,8 @@ public class ArmCommand extends Command {
     SmartDashboard.putNumber("arm controller", in);
     SmartDashboard.putNumber("arm amp", RobotMap.arm.getMotorOutputVoltage());
     if(in >= 2){ //Using pid
-      if(startControl == 1){
-        startControl = 0;
+      if(manualMode){
+        manualMode = false;
         RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
       }
       if(in != lastOutput){ //prevent keep setting the target
@@ -52,9 +52,9 @@ public class ArmCommand extends Command {
         Robot.armSubsystem.rotate(target, true);
       }
     }
-    else { 
-      if(startControl == 0) {
-        startControl = 1;
+    else if (in != 0) { 
+      if(!manualMode) {
+        manualMode = true;
         lastOutput = 0;
         RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
       }
@@ -68,7 +68,9 @@ public class ArmCommand extends Command {
       }
       Robot.armSubsystem.rotate(in, false);
     }
-
+    if(in == 0 && manualMode){
+      Robot.armSubsystem.rotate(in, false);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
