@@ -79,5 +79,10 @@ public class RobotMap {
     arm.config_kP(0, 3.0,Constant.kTimeoutMs);
     arm.config_kI(0, 0.001,Constant.kTimeoutMs);
     arm.config_kD(0, 0.0005,Constant.kTimeoutMs);
+    
+    //Motion Magic
+    // arm.config_kF(0,0, Constant.kTimeoutMs);
+    // arm.configMotionAcceleration(sensorUnitsPer100msPerSec, timeoutMs);
+    // arm.configMotionCruiseVelocity(sensorUnitsPer100ms, timeoutMs);
   }
 }

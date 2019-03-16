@@ -32,7 +32,7 @@ public class ArmSubsystem extends Subsystem {
  */
   public void rotate(double val,boolean isPosition){
     if(isPosition){
-      RobotMap.arm.set(ControlMode.Position,val);
+      RobotMap.arm.set(ControlMode.MotionMagic,val);
     }
     else{
       RobotMap.arm.set(ControlMode.PercentOutput,val);
