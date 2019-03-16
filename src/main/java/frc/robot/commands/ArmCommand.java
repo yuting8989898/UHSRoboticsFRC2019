@@ -69,7 +69,7 @@ public class ArmCommand extends Command {
       Robot.armSubsystem.rotate(in, false);
     }
     if(in == 0 && manualMode){
-      Robot.armSubsystem.rotate(in, false);
+      Robot.armSubsystem.rotate(Constant.armMaxHoldPower*Math.cos(Robot.armSubsystem.getAngle()), false);
     }
   }
 

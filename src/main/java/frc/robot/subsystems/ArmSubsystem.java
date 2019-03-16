@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constant;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -19,7 +20,6 @@ import frc.robot.RobotMap;
 public class ArmSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(Robot.armCommand);
@@ -40,10 +40,7 @@ public class ArmSubsystem extends Subsystem {
   }
 
   public double getAngle(){
-    double offset = 30;
-    double gearRatio = 15/24;
-    int countPerDeg = 4096/360;
     int sensorUnit = RobotMap.arm.getSelectedSensorPosition();
-    return sensorUnit*gearRatio/countPerDeg + offset;
+    return Math.toRadians(sensorUnit*Constant.armAngleRatio + Constant.armOffset);
   }
 }
