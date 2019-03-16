@@ -64,7 +64,7 @@ public class LiftCommand extends Command {
       Robot.liftSubsystem.operateLift(input);
     }
     if(input == 0 && !Robot.liftPID.getPIDController().isEnabled()){
-      Robot.liftSubsystem.operateLift(input);
+      Robot.liftSubsystem.operateLift(Constant.liftHoldPower);
     }
   }
 
