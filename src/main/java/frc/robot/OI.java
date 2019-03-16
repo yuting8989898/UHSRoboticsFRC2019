@@ -94,7 +94,6 @@ public class OI {
    * 2 for toggeling solenoidB
    */
   public static int getSolenoid(){
-    //TODO correct button id
   if(mainOI.getRawButtonPressed(1))return 1;
   if(mainOI.getRawButtonReleased(1)) return -1;
   if(mainOI.getRawButtonPressed(2))return 2;
