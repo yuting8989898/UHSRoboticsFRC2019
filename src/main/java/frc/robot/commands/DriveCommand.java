@@ -38,9 +38,9 @@ public class DriveCommand extends Command {
     double y = OI.getDriveY();
     //TODO: make sure this works
     if(x>0) x=Math.sqrt(x);
-    else x=-Math.sqrt(x);
+    else x=-Math.sqrt(-x);
     if(y>0) y=Math.sqrt(y);
-    else y=-Math.sqrt(y);
+    else y=-Math.sqrt(-y);
     //TODO: make sure this actually works
     if(y>=0){
       left = y+x;
@@ -49,8 +49,6 @@ public class DriveCommand extends Command {
       left = y-x;
       right = y+x;
     }
-    
-
     // leftdif = left-lastleft;
     // if(Math.abs(left)<Math.abs(lastleft))leftdif=leftdif*2;
     // rightdif = right-lastright;
