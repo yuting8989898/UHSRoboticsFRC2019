@@ -28,7 +28,7 @@ public class ArmSubsystem extends Subsystem {
 
 
   /**
- * @param val - up is positive
+ * @param val - up is negative
  */
   public void rotate(double val,boolean isPosition){
     if(isPosition){
@@ -37,5 +37,13 @@ public class ArmSubsystem extends Subsystem {
     else{
       RobotMap.arm.set(ControlMode.PercentOutput,val);
     }
+  }
+
+  public double getAngle(){
+    double offset = 30;
+    double gearRatio = 15/24;
+    int countPerDeg = 4096/360;
+    int sensorUnit = RobotMap.arm.getSelectedSensorPosition();
+    return sensorUnit*gearRatio/countPerDeg + offset;
   }
 }
