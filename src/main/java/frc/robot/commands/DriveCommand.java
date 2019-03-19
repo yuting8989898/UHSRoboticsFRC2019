@@ -17,7 +17,6 @@ public class DriveCommand extends Command {
   double lastright, lastleft;
   double leftdif, rightdif;
 
-  public boolean isAuto;
   public DriveCommand() {
     requires(Robot.driveSubsystem);
   }

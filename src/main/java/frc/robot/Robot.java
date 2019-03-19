@@ -79,7 +79,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    driveCommand.isAuto = true;
     liftCommand.liftLimit = liftLimitChooser.getSelected();
     armCommand.armLimit = armLimitChooser.getSelected();
   }
@@ -91,7 +90,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    driveCommand.isAuto = false;
   }
 
   /**
