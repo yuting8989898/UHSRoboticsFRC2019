@@ -27,9 +27,13 @@ public class Constant {
     public static double liftHoldPower = 0.00;
     public static double armMaxHoldPower = -0.34;
 
-    /*   sensorUnit*gearRatio/unitPerDeg   */
-    public static double armAngleRatio = (15.0/24.0)/(4096.0/360.0);
-    public static double armOffset = 10;
+    /*   sensorUnit*gearRatio/unitPerRad
+                    (15.0/24.0)/(4096.0/2PI)     */
+    public static double armAngleRatio = (15.0*2*Math.PI/24.0*4096.0);
+    public static double wristAngleRatio = 2*Math.PI/4096;
+       /*   10 Degree    */
+    public static double armOffset = 10.0*Math.PI/180.0;
+    public static double wristOffset = 0.0;
 
     public static int liftMaxHeight = 15500;
     public static int armMaxHeight = 2300;
@@ -48,5 +52,5 @@ public class Constant {
      * </pre>
      */
     public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 0, 10000, 14500 };
-    public static double[] armLevels = { 0, 200, 400, 700, 1000, 1500, 2000 };
+    public static double[] armLevels = { 10, 30, 60, 90, 100, 110, 120 };
 }

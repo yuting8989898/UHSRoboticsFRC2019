@@ -5,6 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/* TODO For me from tmr
+Try if adding to the hold power will work
+Check the arm-encoder conversion value
+Please get preset arm height done...
+fix the doesn't stop too sensitive turning drive as well... at the end...PLEASE
+*/
 package frc.robot;
 
 import edu.wpi.cscore.*;
@@ -31,6 +37,7 @@ public class Robot extends TimedRobot {
   public static LiftCommand liftCommand;
   public static ArmCommand armCommand;
   public static WristCommand wristCommand;
+  public static WristPID wristPID;
   public static IntakeCommand intakeCommand;
 
   public static SendableChooser<Boolean> liftLimitChooser;
@@ -45,6 +52,7 @@ public class Robot extends TimedRobot {
     liftSubsystem = new LiftSubsystem();
     intakeSubsystem = new IntakeSubsystem();
     liftPID = new LiftPID();
+    wristPID = new WristPID();
     
     driveCommand = new DriveCommand();
     liftCommand = new LiftCommand();
@@ -77,6 +85,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     liftCommand.liftLimit = liftLimitChooser.getSelected();
     armCommand.armLimit = armLimitChooser.getSelected();
+    liftPID.disable();
+    armSubsystem.rotate(0,false);
   }
 
   @Override
@@ -86,6 +96,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    liftPID.disable();
+    armSubsystem.rotate(0,false);
   }
 
   /**

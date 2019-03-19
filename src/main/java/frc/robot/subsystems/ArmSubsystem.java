@@ -42,9 +42,12 @@ public class ArmSubsystem extends Subsystem {
 
   public double getAngle(){
     double sensorUnit = -RobotMap.arm.getSelectedSensorPosition();
-    return Math.toRadians(sensorUnit*Constant.armAngleRatio + Constant.armOffset);
+    return sensorUnit*Constant.armAngleRatio + Constant.armOffset;
   }
 
+  public int angleToSensorUnit(double angle){
+    return (int)((angle - Constant.armOffset)/Constant.armAngleRatio);
+  }
   public double getArmHoldPower(){
     return Constant.armMaxHoldPower*Math.sin(getAngle());
   }

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constant;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -30,5 +31,14 @@ public class WristSubsystem extends Subsystem {
  */
   public void rotate(double val){
     RobotMap.wrist.set(ControlMode.PercentOutput, val);
+  }
+
+  public double getAngle(){
+    double sensorUnit = RobotMap.wristEncoder.get();
+    return sensorUnit*Constant.wristAngleRatio + Constant.wristOffset;
+  }
+
+  public int angleToSensorUnit(double angle){
+    return (int)((angle - Constant.wristOffset)/Constant.wristAngleRatio);
   }
 }

@@ -39,12 +39,13 @@ public class ArmCommand extends Command {
     SmartDashboard.putNumber("arm controller", in);
     SmartDashboard.putNumber("arm amp", RobotMap.arm.getMotorOutputVoltage());
     SmartDashboard.putNumber("Arm Angle",Math.toDegrees(Robot.armSubsystem.getAngle()));
+    SmartDashboard.putNumber("Arm enc Conversion",Robot.armSubsystem.angleToSensorUnit(Robot.armSubsystem.getAngle()));
     if(in >= 2){ //Using pid
       if(manualMode){
         manualMode = false;
         RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
       }
-       double target = -Constant.armLevels[(int)in-2];
+       double target = -Robot.armSubsystem.angleToSensorUnit(Constant.armLevels[(int)in-2]);
        SmartDashboard.putNumber("Arm Target ", target);
        Robot.armSubsystem.rotate(target, true);
     }
@@ -53,6 +54,10 @@ public class ArmCommand extends Command {
         manualMode = true;
         RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
       }
+      //TODO Wrist PID
+      /*if(!Robot.wristPID.getPIDController().isEnabled()){
+        Robot.wristPID.enable();
+      }*/
       if(armLimit){
         if(RobotMap.arm.getSelectedSensorPosition() <= 50 && in > 0){
           in = 0;
@@ -64,9 +69,9 @@ public class ArmCommand extends Command {
       in += Robot.armSubsystem.getArmHoldPower();
       Robot.armSubsystem.rotate(in, false);
     }
-    /*if(in == 0 && manualMode){
+    if(in == 0 && manualMode){
       Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
-    }*/
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

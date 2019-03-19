@@ -32,6 +32,7 @@ public class RobotMap {
   public static TalonSRX arm;
   public static TalonSRX wrist;
   public static VictorSPX wrist1;
+  public static Encoder wristEncoder;
   public static Spark intake;
 
   public static void init() {
@@ -57,6 +58,7 @@ public class RobotMap {
     wrist1 = new VictorSPX(11);
     wrist1.follow(wrist);
     wrist.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+    liftEncoder = new Encoder(2, 3, false, EncodingType.k4X);
     intake = new Spark(0);
   }
 
