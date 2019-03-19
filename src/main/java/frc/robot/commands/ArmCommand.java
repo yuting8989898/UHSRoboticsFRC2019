@@ -61,11 +61,12 @@ public class ArmCommand extends Command {
             in = 0;
           }
       }
+      in += Robot.armSubsystem.getArmHoldPower();
       Robot.armSubsystem.rotate(in, false);
     }
-    if(in == 0 && manualMode){
+    /*if(in == 0 && manualMode){
       Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
-    }
+    }*/
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -24,7 +24,7 @@ public class Constant {
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
     public static double intakeSpeed = 0.4;
-    public static double liftHoldPower = 0.01;
+    public static double liftHoldPower = 0.00;
     public static double armMaxHoldPower = -0.34;
 
     /*   sensorUnit*gearRatio/unitPerDeg   */
