@@ -69,9 +69,13 @@ public class Robot extends TimedRobot {
 
     int width = 176;
     int height = 144;
-    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    camera.setResolution(width, height);
-    camera.setFPS(40);
+    UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+    UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+
+    camera0.setResolution(width, height);
+    camera0.setFPS(40);
+    camera1.setResolution(width, height);
+    camera1.setFPS(40);
   }
 
   @Override
