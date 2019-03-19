@@ -42,7 +42,7 @@ public class Constant {
      * <pre>
      * [0]: default starting position
      * [1]: hatch loading station
-     * [2]: cargo loading station
+     * [2]: cargo pickup
      * [3]: hatch level 1   
      * [4]: cargo level 1
      * [5]: hatch level 2
@@ -52,5 +52,5 @@ public class Constant {
      * </pre>
      */
     public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 0, 10000, 14500 };
-    public static double[] armLevels = { 10, 18, 60, 90, 100, 128, 120 };
+    public static double[] armLevels = { 10, 30, 35, 75, 100, 128, 120 };
 }
