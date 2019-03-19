@@ -13,9 +13,9 @@ package frc.robot;
 public class Constant {
     public static double joystickDeadZone = 0.037;
 
-    public static double driveRampRate = 2.5; //Neutral to full throttle in sec
+    public static double driveRampRate = 1; //Neutral to full throttle in sec
     public static double armRampRate = 1;
-    public static double wristRampRate = 1;
+    public static double wristRampRate = 0.5;
     
     public static double driveSmoothingFactor = 5;
     public static double turnFactor = 50;
@@ -51,6 +51,7 @@ public class Constant {
      * [8]: cargo level 3
      * </pre>
      */
-    public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 0, 10000, 14500 };
-    public static double[] armLevels = { 10, 30, 35, 75, 100, 128, 120 };
+    public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1", "hatch2","cargo2","hatch3","cargo3"};
+    public static double[] liftLevels = { 0, 0, 0, 0, 0, 0, 10000, 14500 };
+    public static double[] armLevels = { 25, 32,32, 75, 90, 128, 130, 130 };
 }
