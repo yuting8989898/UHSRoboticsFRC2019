@@ -16,13 +16,11 @@ import frc.robot.RobotMap;
 
 public class ArmCommand extends Command {
   private boolean manualMode;
-  private double lastOutput;
   public boolean armLimit;
   public ArmCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     manualMode = true;
-    lastOutput = 0;
     requires(Robot.armSubsystem);
   }
 
