@@ -34,10 +34,6 @@ public class RobotMap {
   public static VictorSPX wrist1;
   public static Spark intake;
 
-  public static Compressor compressor;
-  public static DoubleSolenoid solenoid1;
-  public static DoubleSolenoid solenoid2;
-  public static DoubleSolenoid solenoid3;
   public static void init() {
     // the driving stuffs
     driveLeft1 = new VictorSPX(6);
@@ -62,13 +58,6 @@ public class RobotMap {
     wrist1.follow(wrist);
     wrist.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
     intake = new Spark(0);
-  
-    compressor = new Compressor(0); 
-    solenoid1 = new DoubleSolenoid(0, 1);
-    solenoid2 = new DoubleSolenoid(2, 3);
-
-    //the solenoid that's alone
-    solenoid3 = new DoubleSolenoid(4, 5);
   }
 
   private static void configArm(){
@@ -85,10 +74,5 @@ public class RobotMap {
     arm.config_kP(0, 4.0,Constant.kTimeoutMs);
     arm.config_kI(0, 0.001,Constant.kTimeoutMs);
     arm.config_kD(0, 0.0005,Constant.kTimeoutMs);
-    
-    //Motion Magic
-    // arm.config_kF(0,0, Constant.kTimeoutMs);
-    // arm.configMotionAcceleration(sensorUnitsPer100msPerSec, timeoutMs);
-    // arm.configMotionCruiseVelocity(sensorUnitsPer100ms, timeoutMs);
   }
 }
