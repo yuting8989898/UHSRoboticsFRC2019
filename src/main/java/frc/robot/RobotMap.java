@@ -49,7 +49,7 @@ public class RobotMap {
     driveLeft2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
     driveRight1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
     driveRight2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
-
+    
     // the lift stuffs
     lift = new VictorSPX(8);
     liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
@@ -80,9 +80,9 @@ public class RobotMap {
 		arm.configNominalOutputForward(0, Constant.kTimeoutMs);
 		arm.configNominalOutputReverse(0, Constant.kTimeoutMs);
     arm.configAllowableClosedloopError(0,0, Constant.kTimeoutMs);
-    RobotMap.arm.configPeakOutputForward(0, Constant.kTimeoutMs);
+    arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
-    arm.config_kP(0, 3.0,Constant.kTimeoutMs);
+    arm.config_kP(0, 4.0,Constant.kTimeoutMs);
     arm.config_kI(0, 0.001,Constant.kTimeoutMs);
     arm.config_kD(0, 0.0005,Constant.kTimeoutMs);
     

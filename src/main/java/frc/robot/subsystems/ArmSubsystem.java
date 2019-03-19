@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -32,7 +33,7 @@ public class ArmSubsystem extends Subsystem {
  */
   public void rotate(double val,boolean isPosition){
     if(isPosition){
-      RobotMap.arm.set(ControlMode.MotionMagic,val);
+      RobotMap.arm.set(ControlMode.Position,val);
     }
     else{
       RobotMap.arm.set(ControlMode.PercentOutput,val);
@@ -40,7 +41,11 @@ public class ArmSubsystem extends Subsystem {
   }
 
   public double getAngle(){
-    int sensorUnit = RobotMap.arm.getSelectedSensorPosition();
+    double sensorUnit = -RobotMap.arm.getSelectedSensorPosition();
     return Math.toRadians(sensorUnit*Constant.armAngleRatio + Constant.armOffset);
+  }
+
+  public double getArmHoldPower(){
+    return Constant.armMaxHoldPower*Math.sin(getAngle());
   }
 }

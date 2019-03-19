@@ -21,11 +21,11 @@ public class LiftPID extends PIDSubsystem {
 
   public LiftPID() {
     // Intert a subsystem name and PID values here
-    super("LiftPID", 0.035, 0.001, 0);
+    super("LiftPID", 1, 0.001, 2.5);
     // getPIDController().setContinuous(true);
     setOutputRange(-1, 1);
     setSetpoint(0);
-    setAbsoluteTolerance(100);
+    setAbsoluteTolerance(50);
   }
 
   @Override
@@ -53,7 +53,6 @@ public class LiftPID extends PIDSubsystem {
   @Override
   public void disable() {
     super.disable();
-    Robot.liftSubsystem.stopLift();
   }
 
   public void resetLastOutput(){

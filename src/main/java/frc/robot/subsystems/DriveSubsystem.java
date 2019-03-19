@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -26,7 +27,6 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void drive(double right, double left){
-    //since x+y in full power is 2, percentage only reach up to 1
     RobotMap.driveLeft1.set(ControlMode.PercentOutput,left);
     RobotMap.driveLeft2.set(ControlMode.PercentOutput,left);
     RobotMap.driveRight1.set(ControlMode.PercentOutput,-right);

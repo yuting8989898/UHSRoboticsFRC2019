@@ -40,22 +40,19 @@ public class ArmCommand extends Command {
     double in = OI.getArm();
     SmartDashboard.putNumber("arm controller", in);
     SmartDashboard.putNumber("arm amp", RobotMap.arm.getMotorOutputVoltage());
+    SmartDashboard.putNumber("Arm Angle",Math.toDegrees(Robot.armSubsystem.getAngle()));
     if(in >= 2){ //Using pid
       if(manualMode){
         manualMode = false;
         RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
       }
-      if(in != lastOutput){ //prevent keep setting the target
-        lastOutput = in;
-        double target = -Constant.armLevels[(int)in-2];
-        SmartDashboard.putNumber("Arm Target ", target);
-        Robot.armSubsystem.rotate(target, true);
-      }
+       double target = -Constant.armLevels[(int)in-2];
+       SmartDashboard.putNumber("Arm Target ", target);
+       Robot.armSubsystem.rotate(target, true);
     }
     else if (in != 0) { 
       if(!manualMode) {
         manualMode = true;
-        lastOutput = 0;
         RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
       }
       if(armLimit){
@@ -69,7 +66,7 @@ public class ArmCommand extends Command {
       Robot.armSubsystem.rotate(in, false);
     }
     if(in == 0 && manualMode){
-      Robot.armSubsystem.rotate(Constant.armMaxHoldPower*Math.cos(Robot.armSubsystem.getAngle()), false);
+      Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
     }
   }
 

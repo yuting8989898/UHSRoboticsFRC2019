@@ -66,6 +66,9 @@ public class LiftCommand extends Command {
     if(input == 0 && !Robot.liftPID.getPIDController().isEnabled()){
       Robot.liftSubsystem.operateLift(Constant.liftHoldPower);
     }
+    if(Robot.liftPID.onTarget() && Robot.liftPID.getPIDController().isEnabled()){
+      Robot.liftPID.disable();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

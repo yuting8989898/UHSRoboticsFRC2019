@@ -11,11 +11,11 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constant {
-    public static double joystickDeadZone = 0.035;
+    public static double joystickDeadZone = 0.037;
 
-    public static double driveRampRate = 1.5; //Neutral to full throttle in sec
-    public static double armRampRate = 3;
-    public static double wristRampRate = 3;
+    public static double driveRampRate = 2.5; //Neutral to full throttle in sec
+    public static double armRampRate = 1;
+    public static double wristRampRate = 0.5;
     
     public static double driveSmoothingFactor = 5;
     public static double turnFactor = 50;
@@ -24,12 +24,12 @@ public class Constant {
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
     public static double intakeSpeed = 0.4;
-    public static double liftHoldPower = 0.05;
-    public static double armMaxHoldPower = -0.35;
+    public static double liftHoldPower = 0.01;
+    public static double armMaxHoldPower = -0.34;
 
     /*   sensorUnit*gearRatio/unitPerDeg   */
-    public static double armAngleRatio = (15/24)/(4096/360);
-    public static double armOffset = 30;
+    public static double armAngleRatio = (15.0/24.0)/(4096.0/360.0);
+    public static double armOffset = 10;
 
     public static int liftMaxHeight = 15500;
     public static int armMaxHeight = 2300;

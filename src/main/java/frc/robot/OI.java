@@ -39,8 +39,7 @@ public class OI {
   }
 
   public static double getArm(){ //negative is going up
-    double output = 0.7*subOI.getRawAxis(5);
-    output = output < 0 || output > Constant.joystickDeadZone ? output : 0; //value to hold
+    double output = correctJoystick(0.85*subOI.getRawAxis(5));
     if(output == 0){
       //1 and 0 reserved for joystick
       if (subOI.getRawButton(1))  output = 2; //hatch loading station
@@ -50,7 +49,7 @@ public class OI {
       else if (subOI.getRawButton(3))  output = 6; //hatch level 2
       else if (subOI.getPOV()==270)           output = 7; //cargo level 2
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3
-      else if (subOI.getPOV()==0)             output = 9; //cargo level 3
+      //else if (subOI.getPOV()==0)             output = 9; //cargo level 3
     }
 
     return output;
@@ -73,7 +72,7 @@ public class OI {
       else if (subOI.getRawButton(3))  output = 6; //hatch level 2 (right btn)
       else if (subOI.getPOV()==90)           output = 7; //cargo level 2 (right pov)
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
-      else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
+      //else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
     }
     return output;
   }
