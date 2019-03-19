@@ -34,10 +34,10 @@ public class DriveCommand extends Command {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
     //TODO: make sure this works
-    if(x>0) x=Math.pow(x,2);
-    else x=-Math.pow(x,2);
-    if(y>0) y=Math.pow(y,2);
-    else y=-Math.pow(y,2);
+    if(x>0) x=Math.pow(x,0.6);
+    else x=-Math.pow(x,0.6);
+    if(y>0) y=Math.pow(y,0.6);
+    else y=-Math.pow(y,0.6);
     //TODO: make sure this actually works
     if(y>=0){
       left = y+x;
