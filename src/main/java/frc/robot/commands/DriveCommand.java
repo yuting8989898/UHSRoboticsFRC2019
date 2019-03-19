@@ -19,7 +19,6 @@ public class DriveCommand extends Command {
 
   public boolean isAuto;
   public DriveCommand() {
-    isAuto = true;
     requires(Robot.driveSubsystem);
   }
 
