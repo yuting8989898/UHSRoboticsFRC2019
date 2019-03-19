@@ -57,7 +57,7 @@ public class RobotMap {
     wrist = new TalonSRX(17);
     wrist1 = new VictorSPX(11);
     wrist1.follow(wrist);
-    wrist.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+    wrist.configOpenloopRamp(Constant.wristRampRate, Constant.kTimeoutMs);
     liftEncoder = new Encoder(2, 3, false, EncodingType.k4X);
     intake = new Spark(0);
   }
@@ -73,8 +73,8 @@ public class RobotMap {
     arm.configAllowableClosedloopError(0,0, Constant.kTimeoutMs);
     arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
-    arm.config_kP(0, 4.0,Constant.kTimeoutMs);
-    arm.config_kI(0, 0.001,Constant.kTimeoutMs);
-    arm.config_kD(0, 0.0005,Constant.kTimeoutMs);
+    arm.config_kP(0, 1.5,Constant.kTimeoutMs);
+    arm.config_kI(0, 0.00025,Constant.kTimeoutMs);
+    arm.config_kD(0, 33,Constant.kTimeoutMs);
   }
 }

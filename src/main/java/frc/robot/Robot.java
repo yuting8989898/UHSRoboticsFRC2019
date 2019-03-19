@@ -6,8 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 /* TODO For me from tmr
-Try if adding to the hold power will work
-Check the arm-encoder conversion value
 Please get preset arm height done...
 fix the doesn't stop too sensitive turning drive as well... at the end...PLEASE
 */

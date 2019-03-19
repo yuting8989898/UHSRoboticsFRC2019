@@ -15,7 +15,7 @@ public class Constant {
 
     public static double driveRampRate = 2.5; //Neutral to full throttle in sec
     public static double armRampRate = 1;
-    public static double wristRampRate = 0.5;
+    public static double wristRampRate = 1;
     
     public static double driveSmoothingFactor = 5;
     public static double turnFactor = 50;
@@ -29,7 +29,7 @@ public class Constant {
 
     /*   sensorUnit*gearRatio/unitPerRad
                     (15.0/24.0)/(4096.0/2PI)     */
-    public static double armAngleRatio = (15.0*2*Math.PI/24.0*4096.0);
+    public static double armAngleRatio = (15.0*2*Math.PI/(24.0*4096.0));
     public static double wristAngleRatio = 2*Math.PI/4096;
        /*   10 Degree    */
     public static double armOffset = 10.0*Math.PI/180.0;
@@ -52,5 +52,5 @@ public class Constant {
      * </pre>
      */
     public static double[] liftLevels = { 0, 400, 500, 1000, 5000, 7500, 0, 10000, 14500 };
-    public static double[] armLevels = { 10, 30, 60, 90, 100, 110, 120 };
+    public static double[] armLevels = { 10, 18, 60, 90, 100, 128, 120 };
 }
