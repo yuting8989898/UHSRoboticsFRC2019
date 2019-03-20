@@ -36,7 +36,7 @@ public class LiftCommand extends Command {
   @Override
   protected void execute() {
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
-    SmartDashboard.putNumber("Lift encoder", RobotMap.liftEncoder.getRaw());
+    SmartDashboard.putNumber("Lift encoder", -RobotMap.liftEncoder.getRaw());
     SmartDashboard.putNumber("lift voltage", RobotMap.lift.getMotorOutputVoltage());
     SmartDashboard.putNumber("lift output%", RobotMap.lift.getMotorOutputPercent());
     double input = OI.getLift();

@@ -39,7 +39,7 @@ public class LiftPID extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return RobotMap.liftEncoder.getRaw();
+    return -RobotMap.liftEncoder.getRaw();
   }
 
   @Override

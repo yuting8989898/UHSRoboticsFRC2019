@@ -23,6 +23,7 @@ public class WristCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    RobotMap.wristEncoder.reset();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -30,15 +31,15 @@ public class WristCommand extends Command {
   protected void execute() {
     double output = 0.2*OI.getWrist();
     //TODO Wrist PID
-    /*SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.get());
+    SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.get());
     SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
     if(output != 0){
       if(!manualMode){
         manualMode = true;
         Robot.wristPID.disable();
-      }*/
+      }
       Robot.wristSubsystem.rotate(output);
-    //}
+    }
     /*if(Robot.wristPID.getPIDController().isEnabled()){
       Robot.wristPID.setSetpoint(Robot.wristSubsystem.angleToSensorUnit(Robot.armSubsystem.getAngle()));
     }*/

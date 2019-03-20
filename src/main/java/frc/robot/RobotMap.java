@@ -50,6 +50,7 @@ public class RobotMap {
     // the lift stuffs
     lift = new VictorSPX(8);
     liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+    wristEncoder = new Encoder(3, 2, false, EncodingType.k4X);
 
     // the arm stuffs
     arm = new TalonSRX(16);
@@ -58,7 +59,6 @@ public class RobotMap {
     wrist1 = new VictorSPX(11);
     wrist1.follow(wrist);
     wrist.configOpenloopRamp(Constant.wristRampRate, Constant.kTimeoutMs);
-    liftEncoder = new Encoder(2, 3, false, EncodingType.k4X);
     intake = new Spark(0);
   }
 

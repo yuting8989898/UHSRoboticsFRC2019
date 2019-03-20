@@ -27,28 +27,30 @@ public class Constant {
     public static double liftHoldPower = 0.00;
     public static double armMaxHoldPower = -0.34;
 
-    /*   sensorUnit*gearRatio/unitPerRad
-                    (15.0/24.0)/(4096.0/2PI)     */
-    public static double armAngleRatio = (15.0*2*Math.PI/(24.0*4096.0));
-    public static double wristAngleRatio = 2*Math.PI/4096;
+    /*   sensorUnit*gearRatio*RadperUnit
+                    (15.0/24.0)*(2PI/4096)     */
+    public static double armAngleRatio = (15.0/24.0)*(2*Math.PI/4096.0);
+    /* Trial and error: (radian)
+        Angle/encoderVal*/
+        /*   90 Degree/440sensorUnit    */
+    public static double wristAngleRatio = 90.0*Math.PI/(440*180);
        /*   10 Degree    */
     public static double armOffset = 10.0*Math.PI/180.0;
-    public static double wristOffset = 0.0;
+    public static double wristOffset = 10.0*Math.PI/180.0;
 
     public static int liftMaxHeight = 15500;
     public static int armMaxHeight = 2300;
     public static int kTimeoutMs = 30;
     /**
      * <pre>
-     * [0]: default starting position
-     * [1]: hatch loading station
-     * [2]: cargo pickup
-     * [3]: hatch level 1   
-     * [4]: cargo level 1
-     * [5]: hatch level 2
-     * [6]: cargo level 2
-     * [7]: hath level 3
-     * [8]: cargo level 3
+     * [0]: hatch loading station
+     * [1]: cargo pickup
+     * [2]: hatch level 1   
+     * [3]: cargo level 1
+     * [4]: hatch level 2
+     * [5]: cargo level 2
+     * [6]: hath level 3
+     * [7]: cargo level 3
      * </pre>
      */
     public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1","hatch2","cargo2","hatch3","cargo3"};
