@@ -58,13 +58,8 @@ public class OI {
 
   public static double getWrist() {
     double output = correctJoystick(subOI.getRawAxis(4)); //downward (left trigger) 
-    return ((output - correctJoystick(subOI.getRawAxis(3)))); //upward (right trigger)
-
-  }
-
-  public static double getLift() {
-    double output = correctJoystick(-subOI.getRawAxis(1)); //Left joystick
-    /*if(output == 0){
+    output -= correctJoystick(subOI.getRawAxis(3)); //upward (right trigger)
+    if(output == 0){
       //-1~1 is reserved for the joystick
       if (subOI.getRawButton(1))  output = 2; //hatch loading station (left btn)
       else if (subOI.getPOV()==270 )           output = 3; //cargo loading station(left pov)
@@ -73,8 +68,26 @@ public class OI {
       else if (subOI.getRawButton(3))  output = 6; //hatch level 2 (right btn)
       else if (subOI.getPOV()==90)           output = 7; //cargo level 2 (right pov)
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
-      //else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
-    }*/
+      else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
+    }
+    return output;
+
+
+  }
+
+  public static double getLift() {
+    double output = correctJoystick(-subOI.getRawAxis(1)); //Left joystick
+    if(output == 0){
+      //-1~1 is reserved for the joystick
+      if (subOI.getRawButton(1))  output = 2; //hatch loading station (left btn)
+      else if (subOI.getPOV()==270 )           output = 3; //cargo loading station(left pov)
+      else if (subOI.getRawButton(2))  output = 4; //hatch level 1 (down btn)
+      else if (subOI.getPOV()==180)           output = 5; //cargo level 1 (down pov)
+      else if (subOI.getRawButton(3))  output = 6; //hatch level 2 (right btn)
+      else if (subOI.getPOV()==90)           output = 7; //cargo level 2 (right pov)
+      else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
+      else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
+    }
     return output;
   }
 
@@ -89,16 +102,5 @@ public class OI {
   public static double correctJoystick(double input){
     return input > Constant.joystickDeadZone || input < -Constant.joystickDeadZone ? input : 0;
   }
-  /**
-   * 1 for toggeling solenoidA
-   * 2 for toggeling solenoidB
-   */
-  public static int getSolenoid(){
-  if(mainOI.getRawButtonPressed(1))return 1;
-  if(mainOI.getRawButtonReleased(1)) return -1;
-  if(mainOI.getRawButtonPressed(2))return 2;
-  if(mainOI.getRawButtonReleased(2)) return -2;
 
-  return 0;
-  }
 }

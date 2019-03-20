@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -24,22 +25,33 @@ public class WristCommand extends Command {
   @Override
   protected void initialize() {
     RobotMap.wristEncoder.reset();
+    Robot.wristPID.disable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double output = 0.2*OI.getWrist();
+    double in = 0.2*OI.getWrist();
     //TODO Wrist PID
     SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.get());
     SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
-    if(output != 0){
+    /*if(in >= 2){ //Using pid
+      if(manualMode){
+        manualMode = false;
+        RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
+      }
+       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-1]));
+       SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
+       SmartDashboard.putString("Target", Constant.inputLevels[(int)in-2]);
+       Robot.armSubsystem.rotate(target, true);
+    }
+    if(in != 0){
       if(!manualMode){
         manualMode = true;
         Robot.wristPID.disable();
       }
-      Robot.wristSubsystem.rotate(output);
-    }
+      Robot.wristSubsystem.rotate(in);
+    }*/
     /*if(Robot.wristPID.getPIDController().isEnabled()){
       Robot.wristPID.setSetpoint(Robot.wristSubsystem.angleToSensorUnit(Robot.armSubsystem.getAngle()));
     }*/

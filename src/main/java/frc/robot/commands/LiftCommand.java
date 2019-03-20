@@ -16,7 +16,6 @@ import frc.robot.RobotMap;
 
 public class LiftCommand extends Command {
   private int targetLevel = 0;
-  public boolean liftLimit;
 
   public LiftCommand() {
     // Use requires() here to declare subsystem dependencies
@@ -61,13 +60,8 @@ public class LiftCommand extends Command {
       if (Robot.liftPID.getPIDController().isEnabled()){
         Robot.liftPID.disable(); // disables the pid if pid enabled  
       }
-      if(liftLimit){
-        if(RobotMap.liftEncoder.get() <= -100 &&input < 0){
-            input = 0;
-          }
-          if(RobotMap.liftEncoder.get() >= Constant.liftMaxHeight && input > 0){
-            input = 0;
-          }
+      if(!RobotMap.liftLimitSwitch.get()&&input >0){
+        input = 0;
       }
       Robot.liftSubsystem.operateLift(input);
     }

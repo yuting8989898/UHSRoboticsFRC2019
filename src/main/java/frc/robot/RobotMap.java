@@ -28,6 +28,7 @@ public class RobotMap {
 
   public static VictorSPX lift;
   public static Encoder liftEncoder;
+  public static DigitalInput liftLimitSwitch;
 
   public static TalonSRX arm;
   public static TalonSRX wrist;
@@ -50,8 +51,7 @@ public class RobotMap {
     // the lift stuffs
     lift = new VictorSPX(8);
     liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-    wristEncoder = new Encoder(3, 2, false, EncodingType.k4X);
-
+    liftLimitSwitch = new DigitalInput(5);
     // the arm stuffs
     arm = new TalonSRX(16);
     configArm();
@@ -59,6 +59,7 @@ public class RobotMap {
     wrist1 = new VictorSPX(11);
     wrist1.follow(wrist);
     wrist.configOpenloopRamp(Constant.wristRampRate, Constant.kTimeoutMs);
+    wristEncoder = new Encoder(3, 2, false, EncodingType.k4X);
     intake = new Spark(0);
   }
 

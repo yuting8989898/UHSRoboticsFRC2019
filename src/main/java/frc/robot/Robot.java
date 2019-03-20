@@ -64,8 +64,6 @@ public class Robot extends TimedRobot {
     armLimitChooser.setDefaultOption("Yes", true);
     liftLimitChooser.addOption("No", false);
     armLimitChooser.addOption("No", false);
-    SmartDashboard.putData("Lift soft limit", liftLimitChooser);
-    SmartDashboard.putData("Arm soft limit", armLimitChooser);
 
     int width = 176;
     int height = 144;
@@ -85,8 +83,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    liftCommand.liftLimit = liftLimitChooser.getSelected();
-    armCommand.armLimit = armLimitChooser.getSelected();
     liftPID.disable();
     armSubsystem.rotate(0,false);
   }

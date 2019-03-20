@@ -16,7 +16,6 @@ import frc.robot.RobotMap;
 
 public class ArmCommand extends Command {
   private boolean manualMode;
-  public boolean armLimit;
   public ArmCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -43,7 +42,7 @@ public class ArmCommand extends Command {
     if(in >= 2){ //Using pid
       if(manualMode){
         manualMode = false;
-        RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
+        //RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
       }
        double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-1]));
        SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
@@ -54,14 +53,6 @@ public class ArmCommand extends Command {
       if(!manualMode) {
         manualMode = true;
         RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
-      }
-      if(armLimit){
-        if(RobotMap.arm.getSelectedSensorPosition() <= 50 && in > 0){
-          in = 0;
-          }
-          if(RobotMap.arm.getSelectedSensorPosition() >= Constant.armMaxHeight && in < 0){
-            in = 0;
-          }
       }
       in += Robot.armSubsystem.getArmHoldPower();
       Robot.armSubsystem.rotate(in, false);
