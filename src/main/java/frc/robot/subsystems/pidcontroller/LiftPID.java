@@ -8,6 +8,7 @@
 package frc.robot.subsystems.pidcontroller;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.Constant;
@@ -25,7 +26,7 @@ public class LiftPID extends PIDSubsystem {
     // getPIDController().setContinuous(true);
     setOutputRange(-1, 1);
     setSetpoint(0);
-    setAbsoluteTolerance(50);
+    setAbsoluteTolerance(100);
   }
 
   @Override
@@ -39,7 +40,7 @@ public class LiftPID extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return -RobotMap.liftEncoder.getRaw();
+    return RobotMap.liftEncoder.getRaw();
   }
 
   @Override

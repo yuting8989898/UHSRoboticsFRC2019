@@ -8,6 +8,7 @@
 package frc.robot.subsystems.pidcontroller;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -20,7 +21,7 @@ public class WristPID extends PIDSubsystem {
    */
   public WristPID() {
     // Intert a subsystem name and PID values here
-    super("WristPID", 1, 0.001, 2.5);
+    super("WristPID", 0.28, 0.000001, 1);
     setSetpoint(0);
     setOutputRange(-1, 1);
     setAbsoluteTolerance(50);
@@ -39,6 +40,6 @@ public class WristPID extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    Robot.wristSubsystem.rotate(output);
+    Robot.wristSubsystem.rotate(-output);
   }
 }

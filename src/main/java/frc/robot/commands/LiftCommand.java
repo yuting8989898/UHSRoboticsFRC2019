@@ -21,23 +21,24 @@ public class LiftCommand extends Command {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.liftSubsystem);
     requires(Robot.liftPID);
-    targetLevel = 0;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     RobotMap.liftEncoder.reset();
-    Robot.liftPID.enable();
+    Robot.liftPID.disable();
+    targetLevel = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
-    SmartDashboard.putNumber("Lift encoder", -RobotMap.liftEncoder.getRaw());
-    SmartDashboard.putNumber("lift voltage", RobotMap.lift.getMotorOutputVoltage());
-    SmartDashboard.putNumber("lift output%", RobotMap.lift.getMotorOutputPercent());
+    SmartDashboard.putNumber("Lift encoder", RobotMap.liftEncoder.getRaw());
+    SmartDashboard.putBoolean("lift pid", Robot.liftPID.getPIDController().isEnabled());
+    SmartDashboard.putBoolean("lift limit switch", RobotMap.liftLimitSwitch.get());
+
     double input = OI.getLift();
     SmartDashboard.putNumber("Lift Controller", input);
     if(input == 0 && !Robot.liftPID.getPIDController().isEnabled()){
@@ -59,9 +60,6 @@ public class LiftCommand extends Command {
       //for manually controlling the lift
       if (Robot.liftPID.getPIDController().isEnabled()){
         Robot.liftPID.disable(); // disables the pid if pid enabled  
-      }
-      if(!RobotMap.liftLimitSwitch.get()&&input >0){
-        input = 0;
       }
       Robot.liftSubsystem.operateLift(input);
     }

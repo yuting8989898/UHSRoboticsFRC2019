@@ -59,6 +59,7 @@ public class OI {
   public static double getWrist() {
     double output = correctJoystick(subOI.getRawAxis(4)); //downward (left trigger) 
     output -= correctJoystick(subOI.getRawAxis(3)); //upward (right trigger)
+    output *= 0.3;
     if(output == 0){
       //-1~1 is reserved for the joystick
       if (subOI.getRawButton(1))  output = 2; //hatch loading station (left btn)

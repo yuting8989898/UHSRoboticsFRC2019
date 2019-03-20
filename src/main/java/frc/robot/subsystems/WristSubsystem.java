@@ -34,7 +34,7 @@ public class WristSubsystem extends Subsystem {
   }
 
   public double getAngle(){
-    double sensorUnit = RobotMap.wristEncoder.get();
+    double sensorUnit = RobotMap.wristEncoder.getRaw();
     return sensorUnit*Constant.wristAngleRatio + Constant.wristOffset;
   }
 

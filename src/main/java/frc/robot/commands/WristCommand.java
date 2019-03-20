@@ -26,35 +26,39 @@ public class WristCommand extends Command {
   protected void initialize() {
     RobotMap.wristEncoder.reset();
     Robot.wristPID.disable();
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double in = 0.2*OI.getWrist();
+    double in = OI.getWrist();
     //TODO Wrist PID
-    SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.get());
+    SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.getRaw());
     SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
-    /*if(in >= 2){ //Using pid
-      if(manualMode){
-        manualMode = false;
-        RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
-      }
-       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-1]));
-       SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
-       SmartDashboard.putString("Target", Constant.inputLevels[(int)in-2]);
-       Robot.armSubsystem.rotate(target, true);
+    SmartDashboard.putBoolean("wrist pid", Robot.wristPID.getPIDController().isEnabled());
+    if(in == 0 && !Robot.wristPID.getPIDController().isEnabled()){
+      Robot.wristSubsystem.rotate(0);
+      return;
     }
-    if(in != 0){
-      if(!manualMode){
-        manualMode = true;
+    if(Robot.wristPID.onTarget() && Robot.wristPID.getPIDController().isEnabled()){
+      Robot.wristPID.disable();
+      return;
+    }
+    if(in >= 2){ //Using pid
+      if (!Robot.wristPID.getPIDController().isEnabled()){
+        Robot.wristPID.enable(); // enables the pid if pid not enabled
+      }
+       double target = Robot.wristSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
+       SmartDashboard.putNumber("Wrist Target ", target);
+       Robot.wristPID.setSetpoint(target);
+    }
+    else if(in != 0){
+      if(Robot.wristPID.getPIDController().isEnabled()){
         Robot.wristPID.disable();
       }
       Robot.wristSubsystem.rotate(in);
-    }*/
-    /*if(Robot.wristPID.getPIDController().isEnabled()){
-      Robot.wristPID.setSetpoint(Robot.wristSubsystem.angleToSensorUnit(Robot.armSubsystem.getAngle()));
-    }*/
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

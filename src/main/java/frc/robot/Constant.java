@@ -15,7 +15,7 @@ public class Constant {
 
     public static double driveRampRate = 1; //Neutral to full throttle in sec
     public static double armRampRate = 1;
-    public static double wristRampRate = 0.5;
+    public static double wristRampRate = 0.25;
     
     public static double driveSmoothingFactor = 5;
     public static double turnFactor = 50;
@@ -33,7 +33,7 @@ public class Constant {
     /* Trial and error: (radian)
         Angle/encoderVal*/
         /*   90 Degree/440sensorUnit    */
-    public static double wristAngleRatio = 90.0*Math.PI/(440*180);
+    public static double wristAngleRatio = (15.0/28.0)*(2*Math.PI/4096.0);
        /*   10 Degree    */
     public static double armOffset = 10.0*Math.PI/180.0;
     public static double wristOffset = 10.0*Math.PI/180.0;
@@ -54,6 +54,6 @@ public class Constant {
      * </pre>
      */
     public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1","hatch2","cargo2","hatch3","cargo3"};
-    public static double[] liftLevels = {        0       ,      0       ,    0    ,    0    ,    0   ,    0   ,  10000 ,  14500 };
+    public static double[] liftLevels = {        0       ,      0       ,    0    ,    0    ,    0   ,    0   ,  5000 ,  14500 };
     public static double[] armLevels = {        25       ,     32       ,   32    ,   75    ,   90   ,  128   ,   130  ,   130  };
 }

@@ -25,24 +25,17 @@ public class LiftSubsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(Robot.liftCommand);
   }
-  boolean enabled = true;
 
   public void operateLift(double speedPercentage) {
-    if(!enabled)return;
+    if((RobotMap.liftLimitSwitch.get()&&speedPercentage>0))
+    {
+      speedPercentage = 0;
+    }
     RobotMap.lift.set(ControlMode.PercentOutput, speedPercentage);
   }
 
   public void stopLift() {
-    if(!enabled)return;
     RobotMap.lift.set(ControlMode.PercentOutput, 0);
-  }
-
-  public void enable(){
-    enabled = true;
-  }
-
-  public void disable(){
-    enabled = false;
   }
 
 }

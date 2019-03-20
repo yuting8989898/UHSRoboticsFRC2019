@@ -50,8 +50,8 @@ public class RobotMap {
     
     // the lift stuffs
     lift = new VictorSPX(8);
-    liftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-    liftLimitSwitch = new DigitalInput(5);
+    liftEncoder = new Encoder(0, 1, true, EncodingType.k4X);
+    liftLimitSwitch = new DigitalInput(4);
     // the arm stuffs
     arm = new TalonSRX(16);
     configArm();
@@ -59,24 +59,27 @@ public class RobotMap {
     wrist1 = new VictorSPX(11);
     wrist1.follow(wrist);
     wrist.configOpenloopRamp(Constant.wristRampRate, Constant.kTimeoutMs);
+    wrist.configPeakOutputForward(0.35,Constant.kTimeoutMs);
+    wrist.configPeakOutputReverse(-0.35,Constant.kTimeoutMs);
     wristEncoder = new Encoder(3, 2, false, EncodingType.k4X);
     intake = new Spark(0);
   }
 
   private static void configArm(){
     arm.configOpenloopRamp(Constant.armRampRate, Constant.kTimeoutMs);
+    arm.configMaxIntegralAccumulator(0, 50000);
     /* Ensure sensor velocity is positive when output is positive */
     arm.setSensorPhase(true);
     arm.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     arm.setSelectedSensorPosition(0);
 		arm.configNominalOutputForward(0, Constant.kTimeoutMs);
 		arm.configNominalOutputReverse(0, Constant.kTimeoutMs);
-    arm.configAllowableClosedloopError(0,50, Constant.kTimeoutMs);
+    arm.configAllowableClosedloopError(0,0, Constant.kTimeoutMs);
     arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
-    arm.config_kP(0, 1.5,Constant.kTimeoutMs);
+    arm.config_kP(0, 1.9,Constant.kTimeoutMs);
     //TODO Try increasing kI
-    arm.config_kI(0, 0.00025,Constant.kTimeoutMs);
-    arm.config_kD(0, 33,Constant.kTimeoutMs);
+    arm.config_kI(0, 0.005,Constant.kTimeoutMs);
+    arm.config_kD(0, 40,Constant.kTimeoutMs);
   }
 }

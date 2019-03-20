@@ -32,6 +32,7 @@ public class ArmCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    long startTime = System.nanoTime();
     SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
     SmartDashboard.putNumber("arm output",RobotMap.arm.getMotorOutputPercent());
     double in = OI.getArm();
@@ -39,12 +40,16 @@ public class ArmCommand extends Command {
     SmartDashboard.putNumber("arm amp", RobotMap.arm.getMotorOutputVoltage());
     SmartDashboard.putNumber("Arm Angle",Math.toDegrees(Robot.armSubsystem.getAngle()));
     SmartDashboard.putNumber("Arm enc Conversion",Robot.armSubsystem.angleToSensorUnit(Robot.armSubsystem.getAngle()));
+    if(in == 0 && manualMode){
+      Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
+      return;
+    }
     if(in >= 2){ //Using pid
       if(manualMode){
         manualMode = false;
-        //RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
+        RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
       }
-       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-1]));
+       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
        SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
        SmartDashboard.putString("Target", Constant.inputLevels[(int)in-2]);
        Robot.armSubsystem.rotate(target, true);
@@ -57,9 +62,9 @@ public class ArmCommand extends Command {
       in += Robot.armSubsystem.getArmHoldPower();
       Robot.armSubsystem.rotate(in, false);
     }
-    if(in == 0 && manualMode){
-      Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
-    }
+    
+    long endTime = System.nanoTime();
+    SmartDashboard.putNumber("time", (endTime - startTime)/10000);
   }
 
   // Make this return true when this Command no longer needs to run execute()
