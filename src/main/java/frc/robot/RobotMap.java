@@ -70,10 +70,11 @@ public class RobotMap {
     arm.setSelectedSensorPosition(0);
 		arm.configNominalOutputForward(0, Constant.kTimeoutMs);
 		arm.configNominalOutputReverse(0, Constant.kTimeoutMs);
-    arm.configAllowableClosedloopError(0,0, Constant.kTimeoutMs);
+    arm.configAllowableClosedloopError(0,50, Constant.kTimeoutMs);
     arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
     arm.config_kP(0, 1.5,Constant.kTimeoutMs);
+    //TODO Try increasing kI
     arm.config_kI(0, 0.00025,Constant.kTimeoutMs);
     arm.config_kD(0, 33,Constant.kTimeoutMs);
   }
