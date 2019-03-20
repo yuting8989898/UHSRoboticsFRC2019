@@ -6,8 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 /* TODO For me from tmr
-Please get preset arm height done...
-fix the doesn't stop too sensitive turning drive as well... at the end...PLEASE
+Fix that lift encoder...
+Check if wrist encoder-angle conversion is correct
 */
 package frc.robot;
 
