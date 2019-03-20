@@ -55,10 +55,6 @@ public class ArmCommand extends Command {
         manualMode = true;
         RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
       }
-      //TODO Wrist PID
-      /*if(!Robot.wristPID.getPIDController().isEnabled()){
-        Robot.wristPID.enable();
-      }*/
       if(armLimit){
         if(RobotMap.arm.getSelectedSensorPosition() <= 50 && in > 0){
           in = 0;
