@@ -28,7 +28,7 @@ public class WristCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double output = OI.getWrist();
+    double output = 0.2*OI.getWrist();
     //TODO Wrist PID
     /*SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.get());
     SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));

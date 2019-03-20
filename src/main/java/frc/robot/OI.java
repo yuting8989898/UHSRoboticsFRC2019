@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -49,7 +50,7 @@ public class OI {
       else if (subOI.getRawButton(3))  output = 6; //hatch level 2
       else if (subOI.getPOV()==270)           output = 7; //cargo level 2
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3
-      //else if (subOI.getPOV()==0)             output = 9; //cargo level 3
+      else if (subOI.getPOV()==0)             output = 9; //cargo level 3
     }
 
     return output;
@@ -57,13 +58,13 @@ public class OI {
 
   public static double getWrist() {
     double output = correctJoystick(subOI.getRawAxis(4)); //downward (left trigger) 
-    return ((output - correctJoystick(subOI.getRawAxis(3)))*0.25); //upward (right trigger)
+    return ((output - correctJoystick(subOI.getRawAxis(3)))); //upward (right trigger)
 
   }
 
   public static double getLift() {
     double output = correctJoystick(-subOI.getRawAxis(1)); //Left joystick
-    if(output == 0){
+    /*if(output == 0){
       //-1~1 is reserved for the joystick
       if (subOI.getRawButton(1))  output = 2; //hatch loading station (left btn)
       else if (subOI.getPOV()==270 )           output = 3; //cargo loading station(left pov)
@@ -73,7 +74,7 @@ public class OI {
       else if (subOI.getPOV()==90)           output = 7; //cargo level 2 (right pov)
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
       //else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
-    }
+    }*/
     return output;
   }
 

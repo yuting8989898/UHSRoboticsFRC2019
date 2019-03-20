@@ -51,7 +51,7 @@ public class Constant {
      * [8]: cargo level 3
      * </pre>
      */
-    public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1", "hatch2","cargo2","hatch3","cargo3"};
-    public static double[] liftLevels = { 0, 0, 0, 0, 0, 0, 10000, 14500 };
-    public static double[] armLevels = { 25, 32,32, 75, 90, 128, 130, 130 };
+    public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1","hatch2","cargo2","hatch3","cargo3"};
+    public static double[] liftLevels = {        0       ,      0       ,    0    ,    0    ,    0   ,    0   ,  10000 ,  14500 };
+    public static double[] armLevels = {        25       ,     32       ,   32    ,   75    ,   90   ,  128   ,   130  ,   130  };
 }

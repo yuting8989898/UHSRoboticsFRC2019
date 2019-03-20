@@ -45,8 +45,9 @@ public class ArmCommand extends Command {
         manualMode = false;
         RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
       }
-       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
+       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-1]));
        SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
+       SmartDashboard.putString("Target", Constant.inputLevels[(int)in-2]);
        Robot.armSubsystem.rotate(target, true);
     }
     else if (in != 0) { 

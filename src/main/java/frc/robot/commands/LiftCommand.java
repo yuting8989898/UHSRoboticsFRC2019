@@ -41,12 +41,20 @@ public class LiftCommand extends Command {
     SmartDashboard.putNumber("lift output%", RobotMap.lift.getMotorOutputPercent());
     double input = OI.getLift();
     SmartDashboard.putNumber("Lift Controller", input);
+    if(input == 0 && !Robot.liftPID.getPIDController().isEnabled()){
+      Robot.liftSubsystem.operateLift(Constant.liftHoldPower);
+      return;
+    }
+    if(Robot.liftPID.onTarget() && Robot.liftPID.getPIDController().isEnabled()){
+      Robot.liftPID.disable();
+      return;
+    }
     if (input > 1) {
       // using the pid to move the lift
       if (!Robot.liftPID.getPIDController().isEnabled()){
         Robot.liftPID.enable(); // enables the pid if pid not enabled
       }
-      targetLevel = ((int) input) - 1;
+      targetLevel = ((int) input) - 2;
       Robot.liftPID.setSetpoint(Constant.liftLevels[targetLevel]);
     } else if(input !=0) {
       //for manually controlling the lift
@@ -62,12 +70,6 @@ public class LiftCommand extends Command {
           }
       }
       Robot.liftSubsystem.operateLift(input);
-    }
-    if(input == 0 && !Robot.liftPID.getPIDController().isEnabled()){
-      Robot.liftSubsystem.operateLift(Constant.liftHoldPower);
-    }
-    if(Robot.liftPID.onTarget() && Robot.liftPID.getPIDController().isEnabled()){
-      Robot.liftPID.disable();
     }
   }
 
