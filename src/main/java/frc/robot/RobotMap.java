@@ -59,6 +59,7 @@ public class RobotMap {
     wrist1 = new VictorSPX(11);
     wrist1.follow(wrist);
     wrist.configOpenloopRamp(Constant.wristRampRate, Constant.kTimeoutMs);
+    wrist.configClosedloopRamp(Constant.wristRampRate+0.1, Constant.kTimeoutMs);
     wrist.configPeakOutputForward(0.35,Constant.kTimeoutMs);
     wrist.configPeakOutputReverse(-0.35,Constant.kTimeoutMs);
     wristEncoder = new Encoder(3, 2, false, EncodingType.k4X);
@@ -77,7 +78,7 @@ public class RobotMap {
     arm.configAllowableClosedloopError(0,0, Constant.kTimeoutMs);
     arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
-    arm.config_kP(0, 1.9,Constant.kTimeoutMs);
+    arm.config_kP(0, 1.95,Constant.kTimeoutMs);
     //TODO Try increasing kI
     arm.config_kI(0, 0.005,Constant.kTimeoutMs);
     arm.config_kD(0, 40,Constant.kTimeoutMs);
