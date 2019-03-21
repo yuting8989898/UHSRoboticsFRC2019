@@ -36,11 +36,8 @@ public class LiftCommand extends Command {
   protected void execute() {
     SmartDashboard.putNumber("Lift Target Height", Constant.liftLevels[targetLevel]);
     SmartDashboard.putNumber("Lift encoder", RobotMap.liftEncoder.getRaw());
-    SmartDashboard.putBoolean("lift pid", Robot.liftPID.getPIDController().isEnabled());
-    SmartDashboard.putBoolean("lift limit switch", RobotMap.liftLimitSwitch.get());
 
     double input = OI.getLift();
-    SmartDashboard.putNumber("Lift Controller", input);
     if(input == 0 && !Robot.liftPID.getPIDController().isEnabled()){
       Robot.liftSubsystem.operateLift(Constant.liftHoldPower);
       return;

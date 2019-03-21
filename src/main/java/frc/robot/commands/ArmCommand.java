@@ -34,12 +34,8 @@ public class ArmCommand extends Command {
   protected void execute() {
     long startTime = System.nanoTime();
     SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
-    SmartDashboard.putNumber("arm output",RobotMap.arm.getMotorOutputPercent());
     double in = OI.getArm();
-    SmartDashboard.putNumber("arm controller", in);
-    SmartDashboard.putNumber("arm amp", RobotMap.arm.getMotorOutputVoltage());
     SmartDashboard.putNumber("Arm Angle",Math.toDegrees(Robot.armSubsystem.getAngle()));
-    SmartDashboard.putNumber("Arm enc Conversion",Robot.armSubsystem.angleToSensorUnit(Robot.armSubsystem.getAngle()));
     if(in == 0 && manualMode){
       Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
       return;
@@ -64,7 +60,7 @@ public class ArmCommand extends Command {
     }
     
     long endTime = System.nanoTime();
-    SmartDashboard.putNumber("time", (endTime - startTime)/10000);
+    SmartDashboard.putNumber("time", (endTime - startTime)/100000000);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -26,7 +26,7 @@ public class WristCommand extends Command {
   protected void initialize() {
     RobotMap.wristEncoder.reset();
     Robot.wristPID.disable();
-    
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -36,7 +36,6 @@ public class WristCommand extends Command {
     //TODO Wrist PID
     SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.getRaw());
     SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
-    SmartDashboard.putBoolean("wrist pid", Robot.wristPID.getPIDController().isEnabled());
     if(in == 0 && !Robot.wristPID.getPIDController().isEnabled()){
       Robot.wristSubsystem.rotate(0);
       return;
@@ -49,8 +48,7 @@ public class WristCommand extends Command {
       if (!Robot.wristPID.getPIDController().isEnabled()){
         Robot.wristPID.enable(); // enables the pid if pid not enabled
       }
-       double target = Robot.wristSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
-       SmartDashboard.putNumber("Wrist Target ", target);
+       double target = Robot.wristSubsystem.angleToSensorUnit(Math.toRadians(Constant.wristLevels[(int)in-2]));
        Robot.wristPID.setSetpoint(target);
     }
     else if(in != 0){

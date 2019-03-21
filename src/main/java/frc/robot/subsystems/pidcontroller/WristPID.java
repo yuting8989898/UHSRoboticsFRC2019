@@ -21,7 +21,7 @@ public class WristPID extends PIDSubsystem {
    */
   public WristPID() {
     // Intert a subsystem name and PID values here
-    super("WristPID", 0.28, 0.000001, 1);
+    super("WristPID", 0.28, 0.0001, 0.9);
     setSetpoint(0);
     setOutputRange(-1, 1);
     setAbsoluteTolerance(50);
