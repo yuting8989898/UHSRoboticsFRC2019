@@ -16,9 +16,6 @@ public class Constant {
     public static double driveRampRate = 1; //Neutral to full throttle in sec
     public static double armRampRate = 0.9;
     public static double wristRampRate = 0.25;
-    
-    public static double driveSmoothingFactor = 5;
-    public static double turnFactor = 50;
 
     public static double liftPIDPercentTolerance = 0.1; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing

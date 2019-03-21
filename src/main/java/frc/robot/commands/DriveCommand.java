@@ -33,8 +33,8 @@ public class DriveCommand extends Command {
   protected void execute() {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
-    if(x>0)x=Math.pow(x,0.8);
-    else x=-Math.pow(-x,0.8);
+    if(x>0)x=Math.pow(x,0.7);
+    else x=-Math.pow(-x,0.7);
     if(x>0.7)x=0.7;
     else if(x<-0.7)x=-0.7;
     /*if(y>0) y=Math.pow(y,0.6);
@@ -53,10 +53,6 @@ public class DriveCommand extends Command {
     //some sty acceleration/smoothing thing
     // if(left==0&&math.abs(lastleft))
     // if(right==0)lastright=0.05;
-    // left = lastleft + (left - lastleft)/Constant.driveSmoothingFactor;
-    // right = lastright + (right - lastright)/Constant.driveSmoothingFactor;
-    // lastleft = left;
-    // lastright = right;
     Robot.driveSubsystem.drive(right, left);
     
   }
