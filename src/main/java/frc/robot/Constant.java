@@ -51,10 +51,11 @@ public class Constant {
      * [5]: cargo level 2
      * [6]: hath level 3
      * [7]: cargo level 3
+     * [8]: ground pickup
      * </pre>
      */
-    public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1","hatch2","cargo2","hatch3","cargo3"};
-    public static double[] liftLevels = {        0       ,      0       ,    0    ,    0    , 14500  ,  14500 ,  14500 ,  14500 };
-    public static double[] armLevels = {        25       ,     40       ,   40    ,   75    ,   53   ,  128   ,   125  ,   130  };
-    public static double[] wristLevels = {      25       ,     75       ,   40    ,   25    ,   53   ,  108   ,   125  ,   110  };
+    public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1","hatch2","cargo2","hatch3","cargo3","ground"};
+    public static double[] liftLevels = {        0       ,      0       ,    0    ,    0    , 14500  ,  14500 ,  14500 ,  14500 ,    0   };
+    public static double[] armLevels = {        25       ,     40       ,   40    ,   75    ,   53   ,  128   ,   125  ,   130  ,   40   };
+    public static double[] wristLevels = {      25       ,     75       ,   40    ,   25    ,   53   ,  108   ,   125  ,   110  ,   75   };
 }

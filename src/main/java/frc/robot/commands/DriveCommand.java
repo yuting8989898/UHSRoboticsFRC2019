@@ -33,8 +33,8 @@ public class DriveCommand extends Command {
   protected void execute() {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
-    if(x>0)x=Math.pow(x,0.70);
-    else x=-Math.pow(-x,0.70);
+    if(x>0)x=Math.pow(x,0.8);
+    else x=-Math.pow(-x,0.8);
     if(x>0.7)x=0.7;
     else if(x<-0.7)x=-0.7;
     /*if(y>0) y=Math.pow(y,0.6);
