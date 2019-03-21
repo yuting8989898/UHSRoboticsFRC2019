@@ -27,8 +27,6 @@ public class DriveSubsystem extends Subsystem {
   }
 
   public void drive(double right, double left){
-    SmartDashboard.putNumber("left drv", RobotMap.driveLeft1.getMotorOutputPercent());
-    SmartDashboard.putNumber("right drv", RobotMap.driveRight1.getMotorOutputPercent());
     RobotMap.driveLeft1.set(ControlMode.PercentOutput,left);
     RobotMap.driveLeft2.set(ControlMode.PercentOutput,left);
     RobotMap.driveRight1.set(ControlMode.PercentOutput,-right);
