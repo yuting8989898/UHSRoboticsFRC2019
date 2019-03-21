@@ -51,7 +51,7 @@ public class OI {
       else if (subOI.getPOV()==270)           output = 7; //cargo level 2
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3
       else if (subOI.getPOV()==0)             output = 9; //cargo level 3
-      else if (subOI.getRawButton(10)) output = 10; // ground pickup
+      else if (subOI.getRawButton(13)) output = 10; // ground pickup
     }
 
     return output;
@@ -71,7 +71,7 @@ public class OI {
       else if (subOI.getPOV()==270)           output = 7; //cargo level 2 (right pov)
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
       else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
-      else if (subOI.getRawButton(10)) output = 10; // ground pickup
+      else if (subOI.getRawButton(13)) output = 10; // ground pickup
     }
     return output;
 
@@ -90,7 +90,7 @@ public class OI {
       else if (subOI.getPOV()==270)           output = 7; //cargo level 2 (right pov)
       else if (subOI.getRawButton(4))  output = 8; //hatch level 3 (up btn)
       else if (subOI.getPOV()==0)             output = 9; //cargo level 3 (up pov)
-      else if (subOI.getRawButton(10)) output = 10; // ground pickup
+      else if (subOI.getRawButton(13)) output = 10; // ground pickup
     }
     return output;
   }
