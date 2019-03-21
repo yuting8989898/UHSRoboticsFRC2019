@@ -78,9 +78,9 @@ public class RobotMap {
     arm.configAllowableClosedloopError(0,0, Constant.kTimeoutMs);
     arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
-    arm.config_kP(0, 1.95,Constant.kTimeoutMs);
+    arm.config_kP(0, 1.9,Constant.kTimeoutMs);
     //TODO Try increasing kI
     arm.config_kI(0, 0.005,Constant.kTimeoutMs);
-    arm.config_kD(0, 40,Constant.kTimeoutMs);
+    arm.config_kD(0, 50,Constant.kTimeoutMs);
   }
 }

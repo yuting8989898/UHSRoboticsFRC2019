@@ -43,7 +43,7 @@ public class ArmCommand extends Command {
     if(in >= 2){ //Using pid
       if(manualMode){
         manualMode = false;
-        RobotMap.arm.configPeakOutputReverse(-0.6, Constant.kTimeoutMs);
+        RobotMap.arm.configPeakOutputReverse(-0.75, Constant.kTimeoutMs);
       }
        double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
        SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
