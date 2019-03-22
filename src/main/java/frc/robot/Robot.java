@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends TimedRobot {
   //subsystem
@@ -40,8 +41,12 @@ public class Robot extends TimedRobot {
 
   public static SendableChooser<Boolean> liftLimitChooser;
   public static SendableChooser<Boolean> armLimitChooser;
+
+  public static DriverStation driverStation;
   @Override
   public void robotInit() {
+    driverStation = DriverStation.getInstance();
+
     RobotMap.init();
     OI.init();
     driveSubsystem = new DriveSubsystem();
@@ -84,12 +89,13 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     liftPID.disable();
-    armSubsystem.rotate(0,false);
+    armSubsystem.rotate(0,false); 
   }
 
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    OI.init();
   }
 
   @Override
@@ -104,6 +110,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    OI.init();
   }
 
   @Override
