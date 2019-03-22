@@ -33,28 +33,40 @@ public class DriveCommand extends Command {
   protected void execute() {
     double x = OI.getDriveX();
     double y = OI.getDriveY();
-    if(x>0)x=Math.pow(x,0.7);
-    else x=-Math.pow(-x,0.7);
-    if(x>0.7)x=0.7;
-    else if(x<-0.7)x=-0.7;
-    /*if(y>0) y=Math.pow(y,0.6);
-    else y=-Math.pow(-y,0.6);*/
-    // if(y>=0){
-      left = y+x;
-      right = y-x;
-    // }else{
-    //   left = y-x;
-    //   right = y+x;
-    // }
+    if (x > 0)
+      x = Math.pow(x, 0.7);
+    else
+      x = -Math.pow(-x, 0.7);
+    if (x > 0.7)
+      x = 0.7;
+    else if (x < -0.7)
+      x = -0.7;
+    left = y + x;
+    right = y - x;
+    if (left > 1) {
+      right -= left - 1;
+      left = 1;
+    } else if (left < -1) {
+      right -= left + 1;
+      left = -1;
+    }
+    if (right > 1) {
+      left -= right - 1;
+      right = 1;
+    } else if (right < -1) {
+      left -= right + 1;
+      right = -1;
+    }
+
     // leftdif = left-lastleft;
     // if(Math.abs(left)<Math.abs(lastleft))leftdif=leftdif*2;
     // rightdif = right-lastright;
     // if(Math.abs(right)<Math.abs(lastright))leftdif=leftdif*2;
-    //some sty acceleration/smoothing thing
+    // some sty acceleration/smoothing thing
     // if(left==0&&math.abs(lastleft))
     // if(right==0)lastright=0.05;
     Robot.driveSubsystem.drive(right, left);
-    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
