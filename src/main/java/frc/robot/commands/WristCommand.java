@@ -35,7 +35,6 @@ public class WristCommand extends Command {
     double in = OI.getWrist();
     //TODO Wrist PID
     SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.getRaw());
-    SmartDashboard.putNumber("Wrist encoder raw", RobotMap.wristEncoder.getRaw());    
     SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
     if(in == 0 && !Robot.wristPID.getPIDController().isEnabled()){
       Robot.wristSubsystem.rotate(0);

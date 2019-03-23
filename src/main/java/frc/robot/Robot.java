@@ -4,11 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-/* TODO For me from tmr
-Fix that lift encoder...
-Check if wrist encoder-angle conversion is correct
-*/
 package frc.robot;
 
 import edu.wpi.cscore.*;
@@ -23,6 +18,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends TimedRobot {
+  //TODO: test robot
   //subsystem
   public static DriveSubsystem driveSubsystem;
   public static LiftSubsystem liftSubsystem;

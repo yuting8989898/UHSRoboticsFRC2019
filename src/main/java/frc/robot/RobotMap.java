@@ -62,7 +62,7 @@ public class RobotMap {
     wrist.configClosedloopRamp(Constant.wristRampRate+0.1, Constant.kTimeoutMs);
     wrist.configPeakOutputForward(0.35,Constant.kTimeoutMs);
     wrist.configPeakOutputReverse(-0.35,Constant.kTimeoutMs);
-    wristEncoder = new Encoder(3, 2, false, EncodingType.k4X);
+    wristEncoder = new Encoder(2, 3, false, EncodingType.k4X);
     intake = new Spark(0);
   }
 
