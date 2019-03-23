@@ -72,9 +72,9 @@ public class Robot extends TimedRobot {
     UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
 
     camera0.setResolution(width, height);
-    camera0.setFPS(40);
+    camera0.setFPS(20);
     camera1.setResolution(width, height);
-    camera1.setFPS(40);
+    camera1.setFPS(20);
   }
 
   @Override
@@ -84,6 +84,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    OI.init();
     liftPID.disable();
     armSubsystem.rotate(0,false); 
   }
@@ -91,11 +92,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-    OI.init();
   }
 
   @Override
   public void teleopInit() {
+    OI.init();
     liftPID.disable();
     armSubsystem.rotate(0,false);
   }
@@ -106,7 +107,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    OI.init();
   }
 
   @Override
