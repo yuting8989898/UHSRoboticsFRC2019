@@ -8,14 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constant;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveCommand extends Command {
 
-  double right, left;
-  double lastright, lastleft;
-  double leftdif, rightdif;
+  double right, left, x, y;
+  boolean acceleration, leftTank, rightTank;
 
   public DriveCommand() {
     requires(Robot.driveSubsystem);
@@ -24,47 +25,59 @@ public class DriveCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    lastleft = 0;
-    lastright = 0;
+    right = left = x = y = 0;
+    acceleration = true;
+    leftTank = rightTank = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double x = OI.getDriveX();
-    double y = OI.getDriveY();
-    if (x > 0)
-      x = Math.pow(x, 0.7);
-    else
-      x = -Math.pow(-x, 0.7);
-    if (x > 0.7)
-      x = 0.7;
-    else if (x < -0.7)
-      x = -0.7;
-    left = y + x;
-    right = y - x;
-    if (left > 1) {
-      right -= left - 1;
-      left = 1;
-    } else if (left < -1) {
-      right -= left + 1;
-      left = -1;
-    }
-    if (right > 1) {
-      left -= right - 1;
-      right = 1;
-    } else if (right < -1) {
-      left -= right + 1;
-      right = -1;
+    leftTank = OI.getDriveLeft();
+    rightTank = OI.getDriveRight();
+
+    if (leftTank || rightTank) {
+      if(acceleration){
+        RobotMap.driveAccelerationOff();
+        acceleration = false;
+      }
+      if(leftTank)left=Constant.tankDriveSpeed;
+      if(rightTank)right=Constant.tankDriveSpeed;
+    } else {
+      double x = OI.getDriveX();
+      double y = OI.getDriveY();
+      if(!acceleration){
+        RobotMap.driveAccelerationOn();
+        acceleration = true;
+      }
+      //for making sure we can turn while driving foward
+      if (x > 0)
+        x = Math.pow(x, 0.7);
+      else
+        x = -Math.pow(-x, 0.7);
+      if (x > 0.7)
+        x = 0.7;
+      else if (x < -0.7)
+        x = -0.7;
+      left = y + x;
+      right = y - x;
+      if (left > 1) {
+        right -= left - 1;
+        left = 1;
+      } else if (left < -1) {
+        right -= left + 1;
+        left = -1;
+      }
+      if (right > 1) {
+        left -= right - 1;
+        right = 1;
+      } else if (right < -1) {
+        left -= right + 1;
+        right = -1;
+      }
+
     }
 
-    // leftdif = left-lastleft;
-    // if(Math.abs(left)<Math.abs(lastleft))leftdif=leftdif*2;
-    // rightdif = right-lastright;
-    // if(Math.abs(right)<Math.abs(lastright))leftdif=leftdif*2;
-    // some sty acceleration/smoothing thing
-    // if(left==0&&math.abs(lastleft))
-    // if(right==0)lastright=0.05;
     Robot.driveSubsystem.drive(right, left);
 
   }
