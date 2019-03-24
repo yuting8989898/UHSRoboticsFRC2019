@@ -34,8 +34,8 @@ public class Robot extends TimedRobot {
   public static WristPID wristPID;
   public static IntakeCommand intakeCommand;
 
-  public static SendableChooser<Boolean> liftLimitChooser;
-  public static SendableChooser<Boolean> armLimitChooser;
+  // public static SendableChooser<Boolean> liftLimitChooser;
+  // public static SendableChooser<Boolean> armLimitChooser;
 
   public static DriverStation driverStation;
   @Override
@@ -58,12 +58,12 @@ public class Robot extends TimedRobot {
     wristCommand = new WristCommand();
     intakeCommand = new IntakeCommand();
 
-    liftLimitChooser = new SendableChooser<Boolean>();
-    armLimitChooser = new SendableChooser<Boolean>();
-    liftLimitChooser.setDefaultOption("Yes", true);
-    armLimitChooser.setDefaultOption("Yes", true);
-    liftLimitChooser.addOption("No", false);
-    armLimitChooser.addOption("No", false);
+    // liftLimitChooser = new SendableChooser<Boolean>();
+    // armLimitChooser = new SendableChooser<Boolean>();
+    // liftLimitChooser.setDefaultOption("Yes", true);
+    // armLimitChooser.setDefaultOption("Yes", true);
+    // liftLimitChooser.addOption("No", false);
+    // armLimitChooser.addOption("No", false);
 
     int width = 176;
     int height = 144;
