@@ -41,8 +41,15 @@ public class DriveCommand extends Command {
         RobotMap.driveAccelerationOff();
         acceleration = false;
       }
-      if(leftTank)left=Constant.tankDriveSpeed;
-      if(rightTank)right=Constant.tankDriveSpeed;
+      if(leftTank){
+        left=0.4;
+      }
+      if(rightTank){
+        right=0.4;
+      }
+      if(right==0)right=-0.4;
+      if(left==0)left=-0.4;
+
     } else {
       double x = OI.getDriveX();
       double y = OI.getDriveY();

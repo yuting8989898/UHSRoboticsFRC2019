@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     driverStation = DriverStation.getInstance();
-
+    
     RobotMap.init();
     OI.init();
     driveSubsystem = new DriveSubsystem();

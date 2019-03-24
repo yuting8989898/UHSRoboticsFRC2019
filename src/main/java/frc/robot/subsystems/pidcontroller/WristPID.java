@@ -39,6 +39,6 @@ public class WristPID extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    Robot.wristSubsystem.rotate(-output);
+    Robot.wristSubsystem.rotate(output);
   }
 }
