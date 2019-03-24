@@ -76,7 +76,6 @@ public class RobotMap {
     arm.configPeakOutputForward(0, Constant.kTimeoutMs);
 
     arm.config_kP(0, 1.9, Constant.kTimeoutMs);
-    // TODO Try increasing kI
     arm.config_kI(0, 0.005, Constant.kTimeoutMs);
     arm.config_kD(0, 50, Constant.kTimeoutMs);
   }
@@ -89,7 +88,7 @@ public class RobotMap {
     driveRight2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
   }
 
-  //TODO: test this and @yiti should I make the second value 0 as well?
+  //TODO: test this @Kevin: no thats how it prevents the function to hog the whole system
   public static void driveAccelerationOff() {
     // This should fix acceleration (Not decceleration)
     driveLeft1.configOpenloopRamp(0, Constant.kTimeoutMs);
