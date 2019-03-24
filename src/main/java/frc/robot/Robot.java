@@ -34,9 +34,6 @@ public class Robot extends TimedRobot {
   public static WristPID wristPID;
   public static IntakeCommand intakeCommand;
 
-  public static SendableChooser<Boolean> liftLimitChooser;
-  public static SendableChooser<Boolean> armLimitChooser;
-
   public static DriverStation driverStation;
   @Override
   public void robotInit() {
@@ -58,13 +55,6 @@ public class Robot extends TimedRobot {
     wristCommand = new WristCommand();
     intakeCommand = new IntakeCommand();
 
-    liftLimitChooser = new SendableChooser<Boolean>();
-    armLimitChooser = new SendableChooser<Boolean>();
-    liftLimitChooser.setDefaultOption("Yes", true);
-    armLimitChooser.setDefaultOption("Yes", true);
-    liftLimitChooser.addOption("No", false);
-    armLimitChooser.addOption("No", false);
-
     int width = 176;
     int height = 144;
     UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
@@ -83,7 +73,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    OI.init();
+    OI.checkController();
     liftPID.disable();
     armSubsystem.rotate(0,false); 
   }
@@ -95,7 +85,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    OI.init();
+    OI.checkController();
     liftPID.disable();
     armSubsystem.rotate(0,false);
   }

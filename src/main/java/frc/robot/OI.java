@@ -40,6 +40,13 @@ public class OI {
     SmartDashboard.putBoolean("Sub OI connected", usingSubOI);
   }
 
+  public static void checkController(){
+    usingMainOI = Robot.driverStation.getStickButtonCount(0)>0;
+    usingSubOI = Robot.driverStation.getStickButtonCount(1)>0;
+    SmartDashboard.putBoolean("Main OI connected", usingMainOI);
+    SmartDashboard.putBoolean("Sub OI connected", usingSubOI);
+  }
+
   /**
    * Cartesian X-Axis
    */
