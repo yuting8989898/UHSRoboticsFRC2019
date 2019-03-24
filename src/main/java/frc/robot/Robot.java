@@ -18,7 +18,6 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends TimedRobot {
-  //TODO: test robot
   //subsystem
   public static DriveSubsystem driveSubsystem;
   public static LiftSubsystem liftSubsystem;

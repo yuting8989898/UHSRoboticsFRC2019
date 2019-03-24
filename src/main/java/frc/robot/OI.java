@@ -57,6 +57,17 @@ public class OI {
     return correctJoystick(-mainOI.getRawAxis(1)); // Right joystick
   }
 
+  //TODO: make sure there's no "null pointer exception", and the button ids are correct
+  public static boolean getDriveLeft(){
+    if(!usingMainOI)return false;
+    return mainOI.getRawButton(5);
+  }
+  
+  public static boolean getDriveRight(){
+    if(!usingMainOI)return false;
+    return mainOI.getRawButton(6);
+  }
+
   public static double getArm() { // negative is going up
     if(!usingSubOI)return 0;
     double output = correctJoystick(0.85 * subOI.getRawAxis(5));
