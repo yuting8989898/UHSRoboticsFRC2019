@@ -53,6 +53,6 @@ public class Constant {
      */
     public static String[] inputLevels = {"hatch loading","cargo pickup","hatch 1","cargo 1","hatch2","cargo2","hatch3","cargo3","ground"};
     public static double[] liftLevels = {        0       ,      0       ,    0    ,    0    ,   0    ,    0  ,  15000 ,  15000 ,    0   };
-    public static double[] armLevels = {        25       ,     40       ,   40    ,   75    ,   112   ,  128  ,   125  ,   146  ,   25   };
+    public static double[] armLevels = {        26       ,     113       ,   40    ,   75    ,   112   ,  128  ,   125  ,   146  ,   25   };
     public static double[] wristLevels = {      25       ,     75       ,   40    ,   55    ,   53   ,  80   ,   125  ,    80  ,   40   };
 }

@@ -16,6 +16,7 @@ import frc.robot.RobotMap;
 
 public class WristCommand extends Command {
   boolean manualMode;
+
   public WristCommand() {
     requires(Robot.wristSubsystem);
     manualMode = false;
@@ -33,30 +34,31 @@ public class WristCommand extends Command {
   @Override
   protected void execute() {
     double in = OI.getWrist();
-    //TODO Wrist PID
     SmartDashboard.putNumber("Wrist rot", RobotMap.wristEncoder.getRaw());
     SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
-    if(in == 0 && !Robot.wristPID.getPIDController().isEnabled()){
-      Robot.wristSubsystem.rotate(0);
-      return;
-    }
-    if(Robot.wristPID.onTarget() && Robot.wristPID.getPIDController().isEnabled()){
-      Robot.wristPID.disable();
-      return;
-    }
-    if(in >= 2){ //Using pid
-      if (!Robot.wristPID.getPIDController().isEnabled()){
-        Robot.wristPID.enable(); // enables the pid if pid not enabled
-      }
-       double target = Robot.wristSubsystem.angleToSensorUnit(Math.toRadians(Constant.wristLevels[(int)in-2]));
-       Robot.wristPID.setSetpoint(target);
-    }
-    else if(in != 0){
-      if(Robot.wristPID.getPIDController().isEnabled()){
-        Robot.wristPID.disable();
-      }
-      Robot.wristSubsystem.rotate(in);
-    }
+    // if(in == 0 && !Robot.wristPID.getPIDController().isEnabled()){
+    // Robot.wristSubsystem.rotate(0);
+    // return;
+    // }
+    // if(Robot.wristPID.onTarget() &&
+    // Robot.wristPID.getPIDController().isEnabled()){
+    // Robot.wristPID.disable();
+    // return;
+    // }
+    // if(in >= 2){ //Using pid
+    // if (!Robot.wristPID.getPIDController().isEnabled()){
+    // Robot.wristPID.enable(); // enables the pid if pid not enabled
+    // }
+    // double target =
+    // Robot.wristSubsystem.angleToSensorUnit(Math.toRadians(Constant.wristLevels[(int)in-2]));
+    // Robot.wristPID.setSetpoint(target);
+    // }
+    // else if(in != 0){
+    // if(Robot.wristPID.getPIDController().isEnabled()){
+    // Robot.wristPID.disable();
+    // }
+    Robot.wristSubsystem.rotate(in);
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()
