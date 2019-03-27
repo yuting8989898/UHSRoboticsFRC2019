@@ -15,7 +15,7 @@ import frc.robot.RobotMap;
 
 public class DriveCommand extends Command {
 
-  double right, left, x, y, lastY, currentDriveYChangelimit;
+  double right, left, x, y, lastY;
   boolean leftTank, rightTank;
 
   public DriveCommand() {
@@ -32,7 +32,6 @@ public class DriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentDriveYChangelimit = Constant.getDriveYChangelimit();
     leftTank = OI.getDriveLeft();
     rightTank = OI.getDriveRight();
 
@@ -58,10 +57,10 @@ public class DriveCommand extends Command {
         y = -Math.pow(-y, 0.7);
 
       // limiting the change rate of y
-      if (y - lastY > currentDriveYChangelimit)
-        y = lastY + currentDriveYChangelimit;
-      if (y - lastY < -currentDriveYChangelimit)
-        y = lastY - currentDriveYChangelimit;
+      if (y - lastY > Constant.driveYChangelimit)
+        y = lastY + Constant.driveYChangelimit;
+      if (y - lastY < -Constant.driveYChangelimit)
+        y = lastY - Constant.driveYChangelimit;
       lastY = y;
 
       // limiting the maximum turnning speed
