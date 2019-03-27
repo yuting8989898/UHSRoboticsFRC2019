@@ -16,7 +16,15 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends TimedRobot {
-  //subsystem
+  /*
+   * TODO:set the appropriate neutral mode of motors 
+   * TODO:update smart dashboard at a slower rate
+   * TODO:implant our own PID subsystems
+   * TODO:move things from command to subsystems
+   * TODO:change OI from returning inputs to button.whenPressed;
+   * TODO:reorganize Constant
+   */
+  // subsystem
   public static DriveSubsystem driveSubsystem;
   public static LiftSubsystem liftSubsystem;
   public static LiftPID liftPID;
@@ -24,7 +32,7 @@ public class Robot extends TimedRobot {
   public static WristSubsystem wristSubsystem;
   public static IntakeSubsystem intakeSubsystem;
 
-  //command
+  // command
   public static DriveCommand driveCommand;
   public static LiftCommand liftCommand;
   public static ArmCommand armCommand;
@@ -33,10 +41,11 @@ public class Robot extends TimedRobot {
   public static IntakeCommand intakeCommand;
 
   public static DriverStation driverStation;
+
   @Override
   public void robotInit() {
     driverStation = DriverStation.getInstance();
-    
+
     RobotMap.init();
     OI.init();
     driveSubsystem = new DriveSubsystem();
@@ -46,7 +55,7 @@ public class Robot extends TimedRobot {
     intakeSubsystem = new IntakeSubsystem();
     liftPID = new LiftPID();
     wristPID = new WristPID();
-    
+
     driveCommand = new DriveCommand();
     liftCommand = new LiftCommand();
     armCommand = new ArmCommand();
@@ -73,7 +82,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     OI.checkController();
     liftPID.disable();
-    armSubsystem.rotate(0,false); 
+    armSubsystem.rotate(0, false);
   }
 
   @Override
@@ -85,7 +94,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     OI.checkController();
     liftPID.disable();
-    armSubsystem.rotate(0,false);
+    armSubsystem.rotate(0, false);
   }
 
   /**
@@ -97,11 +106,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void testInit(){
+  public void testInit() {
   }
-  
+
   @Override
-  public void testPeriodic(){
+  public void testPeriodic() {
     Scheduler.getInstance().run();
   }
 }
