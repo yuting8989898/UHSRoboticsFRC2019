@@ -7,22 +7,27 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.networktables.*;
+import java.util.Map;
+
 /**
  * Add your docs here.
  */
 public class Constant {
+    private static ShuffleboardTab tab = Shuffleboard.getTab("Constants");
+
     public static double joystickDeadZone = 0.04;
 
-    public static double driveRampRate = 0.7; //Neutral to full throttle in sec.
-    public static double driveYChangelimit = 1/(driveRampRate*50); //Maximum change in y per loop.    
+    public static double defaultdriveRampRate = 0.7; //Neutral to full throttle in sec.
     public static double maxTurningSpeed = 0.7;
-    public static double tankDriveSpeed = 0.3; 
+    public static double tankDriveSpeed = 0.3;
     public static double armRampRate = 0.9;
     public static double wristRampRate = 0.25;
 
-    public static double liftPIDPercentTolerance = 0.1; // Need testing
+    public static double liftPIDPercentTolerance = 0.1;
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
-    public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
+    public static double liftSmoothingDeadZone = 0.1;
     public static double intakeSpeed = 0.4;
     public static double liftHoldPower = 0.00;
     public static double armMaxHoldPower = -0.34;
@@ -34,7 +39,7 @@ public class Constant {
         Angle/encoderVal*/
         /*   90 Degree/440sensorUnit    */
     public static double wristAngleRatio = (15.0/28.0)*(2*Math.PI/4096.0);
-       /*   10 Degree    */
+        /*   10 Degree    */
     public static double armOffset = 10.0*Math.PI/180.0;
     public static double wristOffset = 10.0*Math.PI/180.0;
 
@@ -58,4 +63,17 @@ public class Constant {
     public static double[] liftLevels = {        0       ,      0       ,    0    ,    0    ,   0    ,    0  ,  15000 ,  15000 ,    0   };
     public static double[] armLevels = {        26       ,     113       ,   40    ,   75    ,   112   ,  128  ,   125  ,   146  ,   29   };
     public static double[] wristLevels = {      25       ,     75       ,   40    ,   55    ,   112   ,  80   ,   125  ,    80  ,   48   };
+
+    public static NetworkTableEntry driveRampRateEntry = tab
+    .add("Drive Ramp Rate", defaultdriveRampRate)
+    .withWidget(BuiltInWidgets.kNumberSlider)
+    .withProperties(Map.of("min", 0, "max", 1))
+    .getEntry();
+
+    /**
+     * @return the driveYChangelimit
+     */
+    public static double getDriveYChangelimit() {
+        return (1 / (driveRampRateEntry.getDouble(defaultdriveRampRate) * 50));
+    }
 }
