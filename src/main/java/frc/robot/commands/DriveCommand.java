@@ -15,8 +15,8 @@ import frc.robot.RobotMap;
 
 public class DriveCommand extends Command {
 
-  double right, left, x, y;
-  boolean acceleration, leftTank, rightTank;
+  double right, left, x, y, lastY;
+  boolean leftTank, rightTank;
 
   public DriveCommand() {
     requires(Robot.driveSubsystem);
@@ -25,8 +25,7 @@ public class DriveCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    right = left = x = y = 0;
-    acceleration = true;
+    right = left = x = y = lastY = 0;
     leftTank = rightTank = false;
   }
 
@@ -37,35 +36,38 @@ public class DriveCommand extends Command {
     rightTank = OI.getDriveRight();
 
     if (leftTank || rightTank) {
-      if(acceleration){
-        RobotMap.driveAccelerationOff();
-        acceleration = false;
+      if (leftTank) {
+        left = 0.4;
       }
-      if(leftTank){
-        left=0.4;
+      if (rightTank) {
+        right = 0.4;
       }
-      if(rightTank){
-        right=0.4;
-      }
-      if(right==0)right=-0.4;
-      if(left==0)left=-0.4;
+      if (right == 0)
+        right = -0.4;
+      if (left == 0)
+        left = -0.4;
 
     } else {
       double x = OI.getDriveX();
       double y = OI.getDriveY();
-      if(!acceleration){
-        RobotMap.driveAccelerationOn();
-        acceleration = true;
-      }
-      //for making sure we can turn while driving foward
-      if (x > 0)
-        x = Math.pow(x, 0.7);
+
+      if (y > 0)
+        y = Math.pow(x, 0.7);
       else
-        x = -Math.pow(-x, 0.7);
-      if (x > 0.7)
-        x = 0.7;
-      else if (x < -0.7)
-        x = -0.7;
+        y = -Math.pow(-y, 0.7);
+
+      // limiting the change rate of y
+      if (y - lastY > Constant.driveYChangelimit)
+        y = lastY + Constant.driveYChangelimit;
+      if (y - lastY < -Constant.driveYChangelimit)
+        y = lastY - Constant.driveYChangelimit;
+      lastY = y;
+
+      // limiting the maximum turnning speed
+      if (x > Constant.maxTurningSpeed)
+        x = Constant.maxTurningSpeed;
+      else if (x < -Constant.maxTurningSpeed)
+        x = -Constant.maxTurningSpeed;
       left = y + x;
       right = y - x;
       if (left > 1) {

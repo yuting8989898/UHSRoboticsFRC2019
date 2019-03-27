@@ -43,7 +43,7 @@ public class RobotMap {
     driveRight1 = new VictorSPX(9);
     driveRight2 = new VictorSPX(10);
 
-    driveAccelerationOn();
+    // driveAccelerationOn();
 
     // the lift stuffs
     lift = new VictorSPX(8);
@@ -80,20 +80,19 @@ public class RobotMap {
     arm.config_kD(0, 50, Constant.kTimeoutMs);
   }
 
-  public static void driveAccelerationOn() {
-    // This should fix acceleration (Not decceleration)
-    driveLeft1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
-    driveLeft2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
-    driveRight1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
-    driveRight2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
-  }
+  // public static void driveAccelerationOn() {
+  //   // This should fix acceleration (Not decceleration)
+  //   driveLeft1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+  //   driveLeft2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+  //   driveRight1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+  //   driveRight2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
+  // }
 
-  //TODO: test this @Kevin: no thats how it prevents the function to hog the whole system
-  public static void driveAccelerationOff() {
-    // This should fix acceleration (Not decceleration)
-    driveLeft1.configOpenloopRamp(0, Constant.kTimeoutMs);
-    driveLeft2.configOpenloopRamp(0, Constant.kTimeoutMs);
-    driveRight1.configOpenloopRamp(0, Constant.kTimeoutMs);
-    driveRight2.configOpenloopRamp(0, Constant.kTimeoutMs);
-  }
+  // public static void driveAccelerationOff() {
+  //   // This should fix acceleration (Not decceleration)
+  //   driveLeft1.configOpenloopRamp(0, Constant.kTimeoutMs);
+  //   driveLeft2.configOpenloopRamp(0, Constant.kTimeoutMs);
+  //   driveRight1.configOpenloopRamp(0, Constant.kTimeoutMs);
+  //   driveRight2.configOpenloopRamp(0, Constant.kTimeoutMs);
+  // }
 }

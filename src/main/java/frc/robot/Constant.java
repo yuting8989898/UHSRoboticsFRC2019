@@ -14,7 +14,9 @@ public class Constant {
     public static double joystickDeadZone = 0.04;
 
     public static double driveRampRate = 0.7; //Neutral to full throttle in sec.
-    public static double tankDriveSpeed = 0.3;
+    public static double driveYChangelimit = 1/(driveRampRate*50); //Maximum change in y per loop.    
+    public static double maxTurningSpeed = 0.7;
+    public static double tankDriveSpeed = 0.3; 
     public static double armRampRate = 0.9;
     public static double wristRampRate = 0.25;
 
