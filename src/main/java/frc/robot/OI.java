@@ -17,88 +17,38 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
   public static Joystick mainOI;
   public static Joystick subOI;
-  public static boolean usingMainOI = false;
-  public static boolean usingSubOI = false;
 
-  /**
-   * Initialize all the controller
-   */
-  public static void init() {
-    if (Robot.driverStation.getStickButtonCount(0) > 0) {
-      mainOI = new Joystick(0);
-      usingMainOI = true;
-    } else {
-      usingMainOI = false;
-    }
-    if (Robot.driverStation.getStickButtonCount(1) > 0) {
-      subOI = new Joystick(1);
-      usingSubOI = true;
-    } else {
-      usingSubOI = false;
-    }
-    SmartDashboard.putBoolean("Main OI connected", usingMainOI);
-    SmartDashboard.putBoolean("Sub OI connected", usingSubOI);
-  }
-
-  public static void checkController() {
-    usingMainOI = Robot.driverStation.getStickButtonCount(0) > 0;
-    usingSubOI = Robot.driverStation.getStickButtonCount(1) > 0;
-    SmartDashboard.putBoolean("Main OI connected", usingMainOI);
-    SmartDashboard.putBoolean("Sub OI connected", usingSubOI);
+  public static void init(){
+    mainOI = new Joystick(Constant.mainOI);
+    subOI = new Joystick(Constant.subOI);
   }
 
   /**
    * Cartesian X-Axis
    */
   public static double getDriveX() {
-    if (!usingMainOI)
-      return 0;
-    try {
-      return correctJoystick(mainOI.getRawAxis(2)); // Left joystick
-    } catch (Exception e) {
-      return 0;
-    }
+    return correctJoystick(mainOI.getRawAxis(Constant.rightXAxis));
   }
 
   /**
    * Cartesian Y-Axis
    */
   public static double getDriveY() {
-    if (!usingMainOI)
-      return 0;
-    try {
-      return correctJoystick(-mainOI.getRawAxis(1)); // Right joystick
-    } catch (Exception e) {
-      return 0;
-    }
+    return correctJoystick(-mainOI.getRawAxis(Constant.leftYAxis));
   }
 
   // TODO: make sure there's no "null pointer exception", and the button ids are
   // correct
   public static boolean getDriveLeft() {
-    if (!usingMainOI)
-      return false;
-    try {
-      return mainOI.getRawButton(6);
-    } catch (Exception e) {
-      return false;
-    }
+    return mainOI.getRawButton(Constant.r1);
   }
 
   public static boolean getDriveRight() {
-    if (!usingMainOI)
-      return false;
-    try {
-      return mainOI.getRawButton(5);
-    } catch (Exception e) {
-      return false;
-    }
+    return mainOI.getRawButton(Constant.l1);
   }
 
   public static double getArm() { // negative is going up
-    if (!usingSubOI)
-      return 0;
-    double output = correctJoystick(0.85 * subOI.getRawAxis(5));
+    double output = correctJoystick(0.85 * subOI.getRawAxis(Constant.rightYAxis));
     if (output == 0) {
       // 1 and 0 reserved for joystick
       if (subOI.getRawButton(1))
@@ -125,10 +75,8 @@ public class OI {
   }
 
   public static double getWrist() {
-    if (!usingSubOI)
-      return 0;
-    double output = correctJoystick(subOI.getRawAxis(4)); // downward (left trigger)
-    output -= correctJoystick(subOI.getRawAxis(3)); // upward (right trigger)
+    double output = correctJoystick(subOI.getRawAxis(Constant.l2Axis));
+    output -= correctJoystick(subOI.getRawAxis(Constant.r2Axis));
     output *= 0.3;
     if (output == 0) {
       // -1~1 is reserved for the joystick
@@ -156,9 +104,7 @@ public class OI {
   }
 
   public static double getLift() {
-    if (!usingSubOI)
-      return 0;
-    double output = correctJoystick(-subOI.getRawAxis(1)); // Left joystick
+    double output = correctJoystick(-subOI.getRawAxis(Constant.leftYAxis)); // Left joystick
     if (output == 0) {
       // -1~1 is reserved for the joystick
       if (subOI.getRawButton(1))
@@ -184,19 +130,14 @@ public class OI {
   }
 
   public static boolean getIntakePressed() {
-    if (!usingSubOI)
-      return false;
-    return subOI.getRawButton(5); // Back Left btn
+    return subOI.getRawButton(Constant.l1); // Back Left btn
   }
 
   public static boolean getRevIntakePressed() {
-    if (!usingSubOI)
-      return false;
-    return subOI.getRawButton(6); // back right btn
+    return subOI.getRawButton(Constant.r1); // back right btn
   }
 
   public static double correctJoystick(double input) {
     return input > Constant.joystickDeadZone || input < -Constant.joystickDeadZone ? input : 0;
   }
-
 }

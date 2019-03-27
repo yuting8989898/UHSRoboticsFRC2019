@@ -80,7 +80,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    OI.checkController();
     liftPID.disable();
     armSubsystem.rotate(0, false);
   }
@@ -92,7 +91,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    OI.checkController();
     liftPID.disable();
     armSubsystem.rotate(0, false);
   }
