@@ -38,7 +38,6 @@ public class Robot extends TimedRobot {
   public static ArmCommand armCommand;
   public static WristCommand wristCommand;
   public static WristPID wristPID;
-  public static IntakeCommand intakeCommand;
 
   public static DriverStation driverStation;
 
@@ -60,7 +59,6 @@ public class Robot extends TimedRobot {
     liftCommand = new LiftCommand();
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
-    intakeCommand = new IntakeCommand();
 
     int width = 176;
     int height = 144;

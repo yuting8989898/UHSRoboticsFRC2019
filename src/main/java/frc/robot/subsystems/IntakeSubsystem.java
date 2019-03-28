@@ -19,7 +19,7 @@ public class IntakeSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(Robot.intakeCommand);
+    // setDefaultCommand(Robot.intakeCommand);
   }
 
   /**

@@ -9,52 +9,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constant;
-import frc.robot.OI;
 import frc.robot.Robot;
 
-public class IntakeCommand extends Command {
+public class CargoShoot extends Command {
 
-  private double curSpeed;
-  private double increment;
-  public IntakeCommand() {
+
+  public CargoShoot() {
     requires(Robot.intakeSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    curSpeed = 0;
-    increment = Constant.intakeSpeed/10;
+    // curSpeed = 0;
   }
-  
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.getIntakePressed()){
-      if(curSpeed < Constant.intakeSpeed){
-        curSpeed += increment; //accelerate in 100ms (1s)
-      }
-      else{
-        curSpeed = Constant.intakeSpeed;
-      }
-    }
-    else if(OI.getRevIntakePressed()){
-      
-        curSpeed = -3*Constant.intakeSpeed;
-    }
-    else{ //nothing pressed
-      if(curSpeed > 0) {
-        curSpeed -= increment; //deccelerate in 100ms (1s)
-      }
-      else if(curSpeed < 0){
-        curSpeed += 3*increment;
-      }
-      if (Math.abs(curSpeed) < increment) { //tolerance
-        curSpeed = 0;
-      }
-    }
-    Robot.intakeSubsystem.set(curSpeed);
+    Robot.intakeSubsystem.set(-Constant.intakeSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -66,11 +39,13 @@ public class IntakeCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.intakeSubsystem.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -8,7 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.CargoIntake;
+import frc.robot.commands.CargoShoot;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,10 +20,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
   public static Joystick mainOI;
   public static Joystick subOI;
+  public static JoystickButton cargoIntake; //L1
+  public static JoystickButton cargoShoot; //R1
+
 
   public static void init(){
     mainOI = new Joystick(Constant.mainOI);
     subOI = new Joystick(Constant.subOI);
+
+    //intake stufs
+    cargoIntake = new JoystickButton(subOI, Constant.l1);
+    cargoIntake.whileHeld(new CargoIntake());
+
+    cargoShoot = new JoystickButton(subOI, Constant.r1);
+    cargoShoot.whileHeld(new CargoShoot());
   }
 
   /**
@@ -127,14 +140,6 @@ public class OI {
         output = 10; // ground pickup (ps button)
     }
     return output;
-  }
-
-  public static boolean getIntakePressed() {
-    return subOI.getRawButton(Constant.l1); // Back Left btn
-  }
-
-  public static boolean getRevIntakePressed() {
-    return subOI.getRawButton(Constant.r1); // back right btn
   }
 
   public static double correctJoystick(double input) {
