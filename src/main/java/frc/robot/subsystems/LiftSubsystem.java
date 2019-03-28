@@ -9,9 +9,13 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+import frc.robot.commands.LiftManual;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.Constant;;
 
 /**
  * Add your docs here.
@@ -23,12 +27,12 @@ public class LiftSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(Robot.liftCommand);
+    setDefaultCommand(new LiftManual());
   }
 
   public void operateLift(double speedPercentage) {
-    if((RobotMap.liftLimitSwitch.get()&&speedPercentage>0))
-    {
+    if ((RobotMap.liftLimitSwitch.get() && speedPercentage > 0)
+        || (getLiftEncoderValue() <= Constant.liftLowerLimit && speedPercentage < 0)) {
       speedPercentage = 0;
     }
     RobotMap.lift.set(ControlMode.PercentOutput, speedPercentage);
@@ -38,4 +42,19 @@ public class LiftSubsystem extends Subsystem {
     RobotMap.lift.set(ControlMode.PercentOutput, 0);
   }
 
+  public void resetLiftEncoder() {
+    RobotMap.liftEncoder.reset();
+  }
+
+  public double getLiftEncoderValue() {
+    return RobotMap.liftEncoder.getRaw();
+  }
+
+  public void setBrake(){
+    RobotMap.lift.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setCoast(){
+    RobotMap.lift.setNeutralMode(NeutralMode.Coast);
+  }
 }

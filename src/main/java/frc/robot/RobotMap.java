@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -44,7 +45,6 @@ public class RobotMap {
     driveRight2 = new VictorSPX(10);
 
     // driveAccelerationOn();
-
     // the lift stuffs
     lift = new VictorSPX(8);
     liftEncoder = new Encoder(0, 1, true, EncodingType.k4X);

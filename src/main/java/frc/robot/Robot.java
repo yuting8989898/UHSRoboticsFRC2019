@@ -19,7 +19,6 @@ public class Robot extends TimedRobot {
   /*
    * TODO:set the appropriate neutral mode of motors 
    * TODO:update smart dashboard at a slower rate
-   * TODO:implant our own PID subsystems
    * TODO:move things from command to subsystems
    * TODO:change OI from returning inputs to button.whenPressed;
    * TODO:reorganize Constant
@@ -27,14 +26,12 @@ public class Robot extends TimedRobot {
   // subsystem
   public static DriveSubsystem driveSubsystem;
   public static LiftSubsystem liftSubsystem;
-  public static LiftPID liftPID;
   public static ArmSubsystem armSubsystem;
   public static WristSubsystem wristSubsystem;
   public static IntakeSubsystem intakeSubsystem;
 
   // command
   public static DriveCommand driveCommand;
-  public static LiftCommand liftCommand;
   public static ArmCommand armCommand;
   public static WristCommand wristCommand;
   public static WristPID wristPID;
@@ -52,11 +49,9 @@ public class Robot extends TimedRobot {
     wristSubsystem = new WristSubsystem();
     liftSubsystem = new LiftSubsystem();
     intakeSubsystem = new IntakeSubsystem();
-    liftPID = new LiftPID();
     wristPID = new WristPID();
 
     driveCommand = new DriveCommand();
-    liftCommand = new LiftCommand();
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
 
@@ -72,25 +67,29 @@ public class Robot extends TimedRobot {
   }
 
   @Override
+  public void disabledInit() {
+    liftSubsystem.setCoast();
+  }
+
+  @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
   }
 
   @Override
   public void autonomousInit() {
-    liftPID.disable();
-    armSubsystem.rotate(0, false);
+    generalInit();
   }
 
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    OI.check();
   }
 
   @Override
   public void teleopInit() {
-    liftPID.disable();
-    armSubsystem.rotate(0, false);
+    generalInit();
   }
 
   /**
@@ -99,14 +98,23 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    OI.check();
   }
 
   @Override
   public void testInit() {
+    generalInit();
   }
 
   @Override
   public void testPeriodic() {
     Scheduler.getInstance().run();
+    OI.check();
+  }
+
+  private void generalInit(){
+    liftSubsystem.setBrake();
+    liftSubsystem.resetLiftEncoder();
+    armSubsystem.rotate(0, false);
   }
 }

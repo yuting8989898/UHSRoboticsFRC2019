@@ -11,18 +11,31 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constant {
-    //controllers
-    public static int
-        mainOI = 0,
-        subOI = 1,
-        leftYAxis = 1,
-        rightXAxis = 2,
-        rightYAxis = 5,
-        l2Axis=4,
-        r2Axis=3,
-        tankDriveLeft = 6,
-        l1 = 5,
-        r1 = 6;
+    //controller buttons
+    public static int mainOI = 0;
+    public static int subOI = 1;
+
+    public static class DualShock4{
+        public static int leftYAxis = 1;
+        public static int rightXAxis = 2;
+        public static int rightYAxis = 5;
+        public static int l2Axis=4;
+        public static int r2Axis=3;
+        public static int l1 = 5;
+        public static int r1 = 6;
+        public static int left = 1;
+        public static int down = 2;
+        public static int right = 3;
+        public static int up = 4;
+        public static int ps = 4;
+        public static int povRight = 90;
+        public static int povDown = 180;
+        public static int povLeft = 270;
+        public static int povUp = 0;
+
+    }
+
+    
     
 
         
@@ -35,11 +48,19 @@ public class Constant {
     public static double armRampRate = 0.9;
     public static double wristRampRate = 0.25;
 
-    public static double liftPIDPercentTolerance = 0.1; // Need testing
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
     public static double intakeSpeed = 0.4;
     public static double liftHoldPower = 0.00;
+    public static double liftkp = 1;
+    public static double liftki = 0.001;
+    public static double liftkd = 2.5;
+    public static double liftTolerance = 100;
+    public static double liftLowerLimit = -50;
+
+
+    public static double dt = 0.02;
+
     public static double armMaxHoldPower = -0.34;
 
     /*   sensorUnit*gearRatio*RadperUnit
@@ -56,6 +77,8 @@ public class Constant {
     public static int liftMaxHeight = 15500;
     public static int armMaxHeight = 2300;
     public static int kTimeoutMs = 30;
+
+    public static int hatchLoading = 0, cargoPickup = 1, hatch1 = 2, cargo1 = 3, hatch2 = 4, cargo2 = 5, hatch3 = 6, cargo3 = 7, ground = 8;
     /**
      * <pre>
      * [0]: hatch loading station
