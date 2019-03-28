@@ -82,7 +82,7 @@ public class OI {
    * Cartesian X-Axis
    */
   public static double getDriveX() {
-    return correctJoystick(mainOI.getRawAxis(Constant.DualShock4.rightXAxis));
+    return correctJoystick(-mainOI.getRawAxis(Constant.DualShock4.rightYAxis));
   }
 
   /**

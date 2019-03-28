@@ -43,7 +43,6 @@ public class Robot extends TimedRobot {
     driverStation = DriverStation.getInstance();
 
     RobotMap.init();
-    OI.init();
     driveSubsystem = new DriveSubsystem();
     armSubsystem = new ArmSubsystem();
     wristSubsystem = new WristSubsystem();
@@ -51,9 +50,10 @@ public class Robot extends TimedRobot {
     intakeSubsystem = new IntakeSubsystem();
     wristPID = new WristPID();
 
-    driveCommand = new DriveCommand();
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
+    OI.init();
+    driveCommand = new DriveCommand();
 
     int width = 176;
     int height = 144;

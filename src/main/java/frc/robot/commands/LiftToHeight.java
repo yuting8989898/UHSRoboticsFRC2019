@@ -38,16 +38,23 @@ public class LiftToHeight extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    System.out.println("Executing Lift PID");
     SmartDashboard.putNumber("Lift Target Height", setpoint);
     SmartDashboard.putNumber("Lift encoder", Robot.liftSubsystem.getLiftEncoderValue());
-    error = setpoint - setpoint;
+    error = setpoint - Robot.liftSubsystem.getLiftEncoderValue();
     integral = integral + error * dt;
     derivative = (error - previous_error) / dt;
     output = kp * error + ki * integral + kd * derivative;
+    SmartDashboard.putNumber("Lift output", output);
     if (output > 1)
       output = 1;
     if (output < -1)
       output = -1;
+    SmartDashboard.putNumber("Lift error", error);
+    SmartDashboard.putNumber("Lift derivative", derivative);
+    SmartDashboard.putNumber("Lift integral", integral);
+
+
 
     // output = lastOutput + (output - lastOutput)/Constant.liftSmoothingFactor;
     // if(output<Constant.liftSmoothingDeadZone&&output>-Constant.liftSmoothingDeadZone)output=0;

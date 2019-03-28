@@ -50,39 +50,44 @@ public class DriveCommand extends Command {
       double x = OI.getDriveX();
       double y = OI.getDriveY();
 
-      if (y > 0)
-        y = Math.pow(x, 0.7);
-      else
-        y = -Math.pow(-y, 0.7);
+      // if (y > 0)
+      //   y = Math.pow(x, 0.7);
+      // else
+      //   y = -Math.pow(-y, 0.7);
 
       // limiting the change rate of y
-      if (y - lastY > Constant.driveYChangelimit)
-        y = lastY + Constant.driveYChangelimit;
-      if (y - lastY < -Constant.driveYChangelimit)
-        y = lastY - Constant.driveYChangelimit;
-      lastY = y;
+      // if (y - lastY > Constant.driveYChangelimit)
+      //   y = lastY + Constant.driveYChangelimit;
+      // if (y - lastY < -Constant.driveYChangelimit)
+      //   y = lastY - Constant.driveYChangelimit;
+      // lastY = y;
 
       // limiting the maximum turnning speed
-      if (x > Constant.maxTurningSpeed)
-        x = Constant.maxTurningSpeed;
-      else if (x < -Constant.maxTurningSpeed)
-        x = -Constant.maxTurningSpeed;
-      left = y + x;
-      right = y - x;
-      if (left > 1) {
-        right -= left - 1;
-        left = 1;
-      } else if (left < -1) {
-        right -= left + 1;
-        left = -1;
-      }
-      if (right > 1) {
-        left -= right - 1;
-        right = 1;
-      } else if (right < -1) {
-        left -= right + 1;
-        right = -1;
-      }
+      // if (x > Constant.maxTurningSpeed)
+      //   x = Constant.maxTurningSpeed;
+      // else if (x < -Constant.maxTurningSpeed)
+      //   x = -Constant.maxTurningSpeed;
+
+
+      
+      // left = y + x;
+      // right = y - x;
+      // if (left > 1) {
+      //   right -= left - 1;
+      //   left = 1;
+      // } else if (left < -1) {
+      //   right -= left + 1;
+      //   left = -1;
+      // }
+      // if (right > 1) {
+      //   left -= right - 1;
+      //   right = 1;
+      // } else if (right < -1) {
+      //   left -= right + 1;
+      //   right = -1;
+      // }
+      left=y;
+      right=x;
 
     }
 

@@ -30,12 +30,12 @@ public class CargoIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (curSpeed < Constant.intakeSpeed) {
-      curSpeed += increment; // accelerate in 100ms (1s)
-    } else {
-      curSpeed = Constant.intakeSpeed;
-    }
-    Robot.intakeSubsystem.set(curSpeed);
+    // if (curSpeed < Constant.intakeSpeed) {
+    //   curSpeed += increment; // accelerate in 100ms (1s)
+    // } else {
+    //   curSpeed = Constant.intakeSpeed;
+    // }
+    Robot.intakeSubsystem.set(1);
   }
 
   // Make this return true when this Command no longer needs to run execute()
