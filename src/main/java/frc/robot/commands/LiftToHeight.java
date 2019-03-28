@@ -17,7 +17,7 @@ import frc.robot.RobotMap;
 import frc.robot.subsystems.LiftSubsystem;
 
 public class LiftToHeight extends Command {
-  double setpoint, kp, ki, kd, error, integral, derivative, previous_error, dt, output;
+  double setpoint, kp, ki, kd, error, integral, derivative, previous_error, dt, output, lastOutput;
 
   public LiftToHeight(double targetHeight) {
     requires(Robot.liftSubsystem);
@@ -31,7 +31,7 @@ public class LiftToHeight extends Command {
     ki = Constant.liftki;
     kd = Constant.liftkd;
     dt = Constant.dt;
-    integral = 0;
+    integral = lastOutput = 0;
     previous_error = error = setpoint - Robot.liftSubsystem.getLiftEncoderValue();
   }
 
@@ -42,14 +42,18 @@ public class LiftToHeight extends Command {
     SmartDashboard.putNumber("Lift Target Height", setpoint);
     SmartDashboard.putNumber("Lift encoder", Robot.liftSubsystem.getLiftEncoderValue());
     error = setpoint - Robot.liftSubsystem.getLiftEncoderValue();
-    integral = integral + error * dt;
-    derivative = (error - previous_error) / dt;
+    integral = integral + error/dt;
+    derivative = (error - previous_error) / (1000/dt);
     output = kp * error + ki * integral + kd * derivative;
-    SmartDashboard.putNumber("Lift output", output);
     if (output > 1)
       output = 1;
     if (output < -1)
       output = -1;
+    
+    output = lastOutput + (output - lastOutput)/Constant.liftSmoothingFactor;
+    if(output<Constant.liftSmoothingDeadZone&&output>-Constant.liftSmoothingDeadZone)output=0;
+    lastOutput = output;
+    SmartDashboard.putNumber("Lift output", output);
     SmartDashboard.putNumber("Lift error", error);
     SmartDashboard.putNumber("Lift derivative", derivative);
     SmartDashboard.putNumber("Lift integral", integral);
