@@ -15,6 +15,7 @@ import frc.robot.RobotMap;
 import frc.robot.Constant;
 
 public class WristCommand extends Command {
+  //TODO: redo wrist command and PID
   boolean manualMode;
 
   public WristCommand() {

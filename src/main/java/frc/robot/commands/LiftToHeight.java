@@ -38,7 +38,6 @@ public class LiftToHeight extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("Executing Lift PID");
     SmartDashboard.putNumber("Lift Target Height", setpoint);
     SmartDashboard.putNumber("Lift encoder", Robot.liftSubsystem.getLiftEncoderValue());
     error = setpoint - Robot.liftSubsystem.getLiftEncoderValue();

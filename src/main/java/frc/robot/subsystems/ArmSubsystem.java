@@ -10,7 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -32,6 +32,7 @@ public class ArmSubsystem extends Subsystem {
  * @param val - up is negative
  */
   public void rotate(double val,boolean isPosition){
+    SmartDashboard.putNumber("Arm Power", val);
     if(isPosition){
       RobotMap.arm.set(ControlMode.Position,val);
     }
