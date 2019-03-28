@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -30,5 +31,8 @@ public class DriveSubsystem extends Subsystem {
     RobotMap.driveLeft2.set(ControlMode.PercentOutput,left);
     RobotMap.driveRight1.set(ControlMode.PercentOutput,-right);
     RobotMap.driveRight2.set(ControlMode.PercentOutput,-right);
+  }
+  public void setCoast(){
+    RobotMap.driveLeft1.setNeutralMode(NeutralMode.Coast);
   }
 }

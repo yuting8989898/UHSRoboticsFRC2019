@@ -35,7 +35,7 @@ public class CargoIntake extends Command {
     // } else {
     //   curSpeed = Constant.intakeSpeed;
     // }
-    Robot.intakeSubsystem.set(1);
+    Robot.intakeSubsystem.set(Constant.intakeSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

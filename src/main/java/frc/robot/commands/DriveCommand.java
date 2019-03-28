@@ -26,6 +26,7 @@ public class DriveCommand extends Command {
   protected void initialize() {
     right = left = x = y = lastY = 0;
     leftTank = rightTank = false;
+    Robot.driveSubsystem.setCoast();
   }
 
   // Called repeatedly when this Command is scheduled to run

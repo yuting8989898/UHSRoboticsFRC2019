@@ -19,6 +19,8 @@ public class Constant {
         public static int leftYAxis = 1;
         public static int rightXAxis = 2;
         public static int rightYAxis = 5;
+        public static int l2 = 7;
+        public static int r2 = 8;
         public static int l2Axis=4;
         public static int r2Axis=3;
         public static int l1 = 5;
@@ -39,7 +41,7 @@ public class Constant {
     
 
         
-    public static double joystickDeadZone = 0.04;
+    public static double joystickDeadZone = 0.01;
 
     public static double driveRampRate = 0.7; //Neutral to full throttle in sec.
     public static double driveYChangelimit = 1/(driveRampRate*50); //Maximum change in y per loop.    
