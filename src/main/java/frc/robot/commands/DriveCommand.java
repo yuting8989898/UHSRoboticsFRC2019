@@ -48,8 +48,8 @@ public class DriveCommand extends Command {
         left = -0.4;
 
     } else {
-      double x = OI.getDriveX();
-      double y = OI.getDriveY();
+      x = OI.getDriveX();
+      y = OI.getDriveY();
 
       // if (y > 0)
       //   y = Math.pow(x, 0.7);
