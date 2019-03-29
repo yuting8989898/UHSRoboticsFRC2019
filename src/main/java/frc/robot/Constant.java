@@ -16,32 +16,30 @@ public class Constant {
     public static int subOI = 1;
 
     public static class DualShock4{
+        //axis
         public static int leftYAxis = 1;
         public static int rightXAxis = 2;
-        public static int rightYAxis = 5;
-        public static int l2 = 7;
-        public static int r2 = 8;
-        public static int l2Axis=4;
         public static int r2Axis=3;
-        public static int l1 = 5;
-        public static int r1 = 6;
+        public static int l2Axis=4;
+        public static int rightYAxis = 5;
+        //buttons
         public static int left = 1;
         public static int down = 2;
         public static int right = 3;
         public static int up = 4;
-        public static int ps = 4;
+        public static int l1 = 5;
+        public static int r1 = 6;
+        public static int l2 = 7;
+        public static int r2 = 8;
+        public static int ps = 13;
+        //pov
         public static int povRight = 90;
         public static int povDown = 180;
         public static int povLeft = 270;
         public static int povUp = 0;
-
     }
 
-    
-    
-
-        
-    public static double joystickDeadZone = 0.01;
+    public static double joystickDeadZone = 0.02;
 
     public static double driveRampRate = 0.7; //Neutral to full throttle in sec.
     public static double driveYChangelimit = 1/(driveRampRate*50); //Maximum change in y per loop.    

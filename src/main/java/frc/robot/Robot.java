@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
   public static IntakeSubsystem intakeSubsystem;
 
   // command
-  public static DriveCommand driveCommand;
+  // public static DriveCommand driveCommand;
   public static ArmCommand armCommand;
   public static WristCommand wristCommand;
   public static WristPID wristPID;
@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
     armCommand = new ArmCommand();
     wristCommand = new WristCommand();
     OI.init();
-    driveCommand = new DriveCommand();
+    // driveCommand = new DriveCommand();
 
     int width = 176;
     int height = 144;

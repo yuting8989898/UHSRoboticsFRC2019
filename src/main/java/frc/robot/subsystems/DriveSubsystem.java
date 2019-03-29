@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.DriveCommand;
 
 /**
  * Add your docs here.
@@ -23,7 +24,7 @@ public class DriveSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(Robot.driveCommand);
+    setDefaultCommand(new DriveCommand());
   }
 
   public void drive(double right, double left){
