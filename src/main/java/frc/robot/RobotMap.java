@@ -80,6 +80,10 @@ public class RobotMap {
     arm.config_kD(0, 50, Constant.kTimeoutMs);
   }
 
+  public static void resetEncoders(){
+    wristEncoder.reset();
+    liftEncoder.reset();
+  }
   // public static void driveAccelerationOn() {
   //   // This should fix acceleration (Not decceleration)
   //   driveLeft1.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);

@@ -11,7 +11,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
 import frc.robot.commands.*;
-import frc.robot.subsystems.pidcontroller.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -32,8 +31,6 @@ public class Robot extends TimedRobot {
   // command
   // public static DriveCommand driveCommand;
   public static ArmCommand armCommand;
-  public static WristCommand wristCommand;
-  public static WristPID wristPID;
 
   public static DriverStation driverStation;
 
@@ -47,10 +44,8 @@ public class Robot extends TimedRobot {
     wristSubsystem = new WristSubsystem();
     liftSubsystem = new LiftSubsystem();
     intakeSubsystem = new IntakeSubsystem();
-    wristPID = new WristPID();
 
     armCommand = new ArmCommand();
-    wristCommand = new WristCommand();
     OI.init();
     // driveCommand = new DriveCommand();
 
@@ -113,7 +108,7 @@ public class Robot extends TimedRobot {
 
   private void generalInit(){
     liftSubsystem.setBrake();
-    liftSubsystem.resetLiftEncoder();
+    RobotMap.resetEncoders();
     armSubsystem.rotate(0, false);
   }
 }

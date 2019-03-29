@@ -51,11 +51,16 @@ public class Constant {
 
     //wrist
     public static double wristRampRate = 0.25;
+    public static double wristkp = 0.28;
+    public static double wristki = 0.0001;
+    public static double wristkd = 0.9;
+    public static double wristTolerance = 50;
+
 
     //intake
     public static double intakeRampRate = 8; //Neutral to full in 20ms cycle counts.
     
-
+    //lift
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.
     public static double intakeSpeed = 0.4;

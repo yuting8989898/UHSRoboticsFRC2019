@@ -49,6 +49,7 @@ public class LiftToHeight extends Command {
     output = lastOutput + (output - lastOutput)/Constant.liftSmoothingFactor;
     if(output<Constant.liftSmoothingDeadZone&&output>-Constant.liftSmoothingDeadZone)output=0;
     lastOutput = output;
+    previous_error = error;
     SmartDashboard.putNumber("Lift output", output);
     SmartDashboard.putNumber("Lift error", error);
     SmartDashboard.putNumber("Lift derivative", derivative);
