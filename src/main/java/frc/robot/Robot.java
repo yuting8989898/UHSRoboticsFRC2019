@@ -21,7 +21,6 @@ public class Robot extends TimedRobot {
    * TODO:update smart dashboard at a slower rate
    * TODO:move things from command to subsystems
    * TODO:change OI from returning inputs to button.whenPressed;
-   * TODO:reorganize Constant
    */
   // subsystem
   public static DriveSubsystem driveSubsystem;

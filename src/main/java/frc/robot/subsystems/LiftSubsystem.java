@@ -13,7 +13,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import frc.robot.commands.LiftManual;
 
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.Constant;;
 
