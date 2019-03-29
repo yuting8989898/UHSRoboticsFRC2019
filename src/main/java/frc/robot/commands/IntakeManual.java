@@ -10,13 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constant;
 import frc.robot.Robot;
+import frc.robot.OI;
 
-public class CargoIntake extends Command {
+public class IntakeManual extends Command {
 
   private double curSpeed;
   private double increment;
 
-  public CargoIntake() {
+  public IntakeManual() {
     requires(Robot.intakeSubsystem);
   }
 
@@ -24,18 +25,36 @@ public class CargoIntake extends Command {
   @Override
   protected void initialize() {
     curSpeed = 0;
-    increment = Constant.intakeSpeed / 10;
+    increment = Constant.intakeSpeed/Constant.intakeRampRate;
   }
+  
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // if (curSpeed < Constant.intakeSpeed) {
-    //   curSpeed += increment; // accelerate in 100ms (1s)
-    // } else {
-    //   curSpeed = Constant.intakeSpeed;
-    // }
-    Robot.intakeSubsystem.set(Constant.intakeSpeed);
+    if(OI.getIntakePressed()){
+      if(curSpeed < Constant.intakeSpeed){
+        curSpeed += increment; //accelerates slowly (relatively)
+      }
+      else{
+        curSpeed = Constant.intakeSpeed;
+      }
+    }
+    else if(OI.getRevIntakePressed()){
+        curSpeed = -1; //instantly goes to max speed
+    }
+    else{ //nothing pressed
+      if(curSpeed > 0) {
+        curSpeed -= increment; //deccelerate slowly (relatively)
+      }
+      else if(curSpeed < 0){
+        curSpeed += 3*increment; //decelerates faster
+      }
+      if (Math.abs(curSpeed) <= increment) { //tolerance
+        curSpeed = 0;
+      }
+    }
+    Robot.intakeSubsystem.set(curSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

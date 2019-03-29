@@ -35,13 +35,6 @@ public class OI {
     mainOI = new Joystick(Constant.mainOI);
     subOI = new Joystick(Constant.subOI);
 
-    //intake stufs
-    cargoIntake = new JoystickButton(subOI, Constant.DualShock4.l1);
-    cargoIntake.whileHeld(new CargoIntake());
-
-    cargoShoot = new JoystickButton(subOI, Constant.DualShock4.r1);
-    cargoShoot.whileHeld(new CargoShoot());
-
     hatchLoadingStation = new JoystickButton(subOI, Constant.DualShock4.left);
     hatchLoadingStation.whenPressed(new goToSetHeight(Constant.hatchLoading));
 
@@ -162,6 +155,16 @@ public class OI {
     return correctJoystick(-subOI.getRawAxis(Constant.DualShock4.leftYAxis)); // Left joystick
   }
 
+  //cargo stuufs
+  public static boolean getIntakePressed() {
+    return subOI.getRawButtonPressed(Constant.DualShock4.l1);
+  }
+
+  public static boolean getRevIntakePressed() {
+    return subOI.getRawButtonPressed(Constant.DualShock4.r1);
+  }
+
+  //general things
   public static double correctJoystick(double input) {
     return input > Constant.joystickDeadZone || input < -Constant.joystickDeadZone ? input : 0;
   }

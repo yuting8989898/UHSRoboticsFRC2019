@@ -11,9 +11,10 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constant {
-    //controller buttons
+    //controller stuffs
     public static int mainOI = 0;
     public static int subOI = 1;
+    public static double joystickDeadZone = 0.02;
 
     public static class DualShock4{
         //axis
@@ -39,14 +40,21 @@ public class Constant {
         public static int povUp = 0;
     }
 
-    public static double joystickDeadZone = 0.02;
-
+    //driving
     public static double driveRampRate = 0.7; //Neutral to full throttle in sec.
     public static double driveYChangelimit = 1/(driveRampRate*50); //Maximum change in y per loop.    
     public static double maxTurningSpeed = 0.7;
     public static double tankDriveSpeed = 0.3; 
+    
+    //arm
     public static double armRampRate = 0.9;
+
+    //wrist
     public static double wristRampRate = 0.25;
+
+    //intake
+    public static double intakeRampRate = 8; //Neutral to full in 20ms cycle counts.
+    
 
     public static int liftSmoothingFactor = 7; //Larger number = More smoothing
     public static double liftSmoothingDeadZone = 0.1; //Too complicated to explain, just dont touch it.

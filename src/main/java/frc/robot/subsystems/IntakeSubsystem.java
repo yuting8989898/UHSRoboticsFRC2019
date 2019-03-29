@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
+import frc.robot.commands.IntakeManual;
 
 /**
  * Add your docs here.
@@ -19,7 +20,7 @@ public class IntakeSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // setDefaultCommand(Robot.intakeCommand);
+    setDefaultCommand(new IntakeManual());
   }
 
   /**
