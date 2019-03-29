@@ -10,16 +10,19 @@ import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends TimedRobot {
+  public static final boolean DEBUG = true;
+  public static boolean updateSmartDashboard = false;
+
   /*
-   * TODO:set the appropriate neutral mode of motors 
-   * TODO:update smart dashboard at a slower rate
-   * TODO:move things from command to subsystems
-   * TODO:change OI from returning inputs to button.whenPressed;
+   * TODO:set the appropriate neutral mode of motors TODO:update smart dashboard
+   * at a slower rate TODO:move things from command to subsystems TODO:change OI
+   * from returning inputs to button.whenPressed;
    */
   // subsystem
   public static DriveSubsystem driveSubsystem;
@@ -32,13 +35,21 @@ public class Robot extends TimedRobot {
   // public static DriveCommand driveCommand;
   public static ArmCommand armCommand;
 
+  public static int loopCount, dashboardUpdatePeriod;
+  public static double deltaTime;
+  public static double lastTime;
+
   public static DriverStation driverStation;
 
   @Override
   public void robotInit() {
-    driverStation = DriverStation.getInstance();
-
+    if(DEBUG)updateSmartDashboard = true;
     RobotMap.init();
+
+    driverStation = DriverStation.getInstance();
+    loopCount = 0;
+    dashboardUpdatePeriod = Constant.dashboardUpdatePeriod;
+
     driveSubsystem = new DriveSubsystem();
     armSubsystem = new ArmSubsystem();
     wristSubsystem = new WristSubsystem();
@@ -46,18 +57,35 @@ public class Robot extends TimedRobot {
     intakeSubsystem = new IntakeSubsystem();
 
     armCommand = new ArmCommand();
+
     OI.init();
     // driveCommand = new DriveCommand();
 
+    // starting camera
     int width = 176;
     int height = 144;
     UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
     UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-
     camera0.setResolution(width, height);
     camera0.setFPS(20);
     camera1.setResolution(width, height);
     camera1.setFPS(20);
+  }
+
+  @Override
+  public void robotPeriodic() {
+    if(!DEBUG){
+      if (loopCount > dashboardUpdatePeriod) {
+        updateSmartDashboard = true;
+        loopCount = 0;
+      } else {
+        updateSmartDashboard = false;
+        loopCount++;
+      }
+    }
+    deltaTime = (System.currentTimeMillis() - lastTime) / 1000;
+    lastTime = System.currentTimeMillis();
+    SmartDashboard.putNumber("Delta Time", deltaTime);
   }
 
   @Override
@@ -106,7 +134,7 @@ public class Robot extends TimedRobot {
     OI.check();
   }
 
-  private void generalInit(){
+  private void generalInit() {
     liftSubsystem.setBrake();
     RobotMap.resetEncoders();
     armSubsystem.rotate(0, false);

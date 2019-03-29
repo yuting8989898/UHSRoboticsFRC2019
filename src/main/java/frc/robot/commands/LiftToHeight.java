@@ -35,8 +35,7 @@ public class LiftToHeight extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putNumber("Lift Target Height", setpoint);
-    SmartDashboard.putNumber("Lift encoder", Robot.liftSubsystem.getLiftEncoderValue());
+
     error = setpoint - Robot.liftSubsystem.getLiftEncoderValue();
     integral = integral + error/dt;
     derivative = (error - previous_error) / (1000/dt);
@@ -50,12 +49,13 @@ public class LiftToHeight extends Command {
     if(output<Constant.liftSmoothingDeadZone&&output>-Constant.liftSmoothingDeadZone)output=0;
     lastOutput = output;
     previous_error = error;
-    SmartDashboard.putNumber("Lift output", output);
-    SmartDashboard.putNumber("Lift error", error);
-    SmartDashboard.putNumber("Lift derivative", derivative);
-    SmartDashboard.putNumber("Lift integral", integral);
-
-
+    if(Robot.updateSmartDashboard){
+      SmartDashboard.putNumber("Lift encoder", Robot.liftSubsystem.getLiftEncoderValue());
+      SmartDashboard.putNumber("Lift output", output);
+      SmartDashboard.putNumber("Lift error", error);
+      SmartDashboard.putNumber("Lift derivative", derivative);
+      SmartDashboard.putNumber("Lift integral", integral);
+    }
 
     // output = lastOutput + (output - lastOutput)/Constant.liftSmoothingFactor;
     // if(output<Constant.liftSmoothingDeadZone&&output>-Constant.liftSmoothingDeadZone)output=0;

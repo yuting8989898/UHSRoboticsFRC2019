@@ -17,7 +17,7 @@ import frc.robot.RobotMap;
 public class ArmCommand extends Command {
   private boolean manualMode;
   double in;
-  long startTime, endTime;
+
   public ArmCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -34,35 +34,31 @@ public class ArmCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    startTime = System.nanoTime();
-    SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
     in = OI.getArm();
-    SmartDashboard.putNumber("Arm Angle",Math.toDegrees(Robot.armSubsystem.getAngle()));
-    if(in == 0 && manualMode){
+    if (in == 0 && manualMode) {
       Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
       return;
     }
-    if(in >= 2){ //Using pid
-      if(manualMode){
+    if (in >= 2) { // Using pid
+      if (manualMode) {
         manualMode = false;
         RobotMap.arm.configPeakOutputReverse(-0.75, Constant.kTimeoutMs);
       }
-       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
-       SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
-       SmartDashboard.putString("Target", Constant.inputLevels[(int)in-2]);
-       Robot.armSubsystem.rotate(target, true);
-    }
-    else if (in != 0) { 
-      if(!manualMode) {
+      double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int) in - 2]));
+      Robot.armSubsystem.rotate(target, true);
+    } else if (in != 0) {
+      if (!manualMode) {
         manualMode = true;
         RobotMap.arm.configPeakOutputReverse(-1, Constant.kTimeoutMs);
       }
       in += Robot.armSubsystem.getArmHoldPower();
       Robot.armSubsystem.rotate(in, false);
     }
-    
-    endTime = System.nanoTime();
-    SmartDashboard.putNumber("delta time", (endTime - startTime)/100000000);
+
+    if (Robot.updateSmartDashboard) {
+      SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
+      SmartDashboard.putNumber("Arm Angle", Math.toDegrees(Robot.armSubsystem.getAngle()));
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

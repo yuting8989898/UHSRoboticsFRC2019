@@ -38,21 +38,23 @@ public class WristToAngle extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putNumber("Wrist rot", Robot.wristSubsystem.getWristEncoderValue());
-    SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
     error = setpoint - Robot.wristSubsystem.getWristEncoderValue();
     integral = integral + error / dt;
     derivative = (error - previous_error) / (1000 / dt);
     output = kp * error + ki * integral + kd * derivative;
     if (output > 1)
-      output = 1;
+    output = 1;
     if (output < -1)
-      output = -1;
+    output = -1;
     previous_error = error;
-    SmartDashboard.putNumber("Wrist output", output);
-    SmartDashboard.putNumber("Wrist error", error);
-    SmartDashboard.putNumber("Wrist derivative", derivative);
-    SmartDashboard.putNumber("Wrist integral", integral);
+    if(Robot.updateSmartDashboard){
+      SmartDashboard.putNumber("Wrist encoder", Robot.wristSubsystem.getWristEncoderValue());
+      SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
+      SmartDashboard.putNumber("Wrist output", output);
+      SmartDashboard.putNumber("Wrist error", error);
+      SmartDashboard.putNumber("Wrist derivative", derivative);
+      SmartDashboard.putNumber("Wrist integral", integral);
+    }
     Robot.wristSubsystem.rotate(output);
   }
 

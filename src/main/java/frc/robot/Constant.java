@@ -11,6 +11,8 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constant {
+    public static int dashboardUpdatePeriod = 25;
+
     //controller stuffs
     public static int mainOI = 0;
     public static int subOI = 1;
