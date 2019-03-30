@@ -7,25 +7,26 @@
 package frc.robot;
 
 import org.opencv.core.*;
-import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.*;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.vision.VisionThread;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.vision.GripTest;
 
 public class Robot extends TimedRobot {
+  // smartDashboard things
   public static final boolean DEBUG = true;
   public static boolean updateSmartDashboard = false;
 
   /*
-   * TODO:set the appropriate neutral mode of motors TODO:update smart dashboard
-   * at a slower rate TODO:move things from command to subsystems TODO:change OI
-   * from returning inputs to button.whenPressed;
+   * TODO:set the appropriate neutral mode of motors TODO:change OI from returning
+   * inputs to button.whenPressed;
    */
   // subsystem
   public static DriveSubsystem driveSubsystem;
@@ -35,18 +36,20 @@ public class Robot extends TimedRobot {
   public static IntakeSubsystem intakeSubsystem;
 
   // command
-  // public static DriveCommand driveCommand;
   public static ArmCommand armCommand;
 
+  // others
   public static int loopCount, dashboardUpdatePeriod;
   public static double deltaTime;
   public static double lastTime;
-
   public static DriverStation driverStation;
+  public static VisionThread visionThread;
+  public static CvSource output;
 
   @Override
   public void robotInit() {
-    if(DEBUG)updateSmartDashboard = true;
+    if (DEBUG)
+      updateSmartDashboard = true;
     RobotMap.init();
 
     driverStation = DriverStation.getInstance();
@@ -73,11 +76,27 @@ public class Robot extends TimedRobot {
     camera0.setFPS(20);
     camera1.setResolution(width, height);
     camera1.setFPS(20);
+    output = CameraServer.getInstance().putVideo("Grip", width, height);
+
+    visionThread = new VisionThread(camera0, new GripTest(), pipeline -> {
+      KeyPoint[] blobsList = pipeline.findBlobsOutput().toArray();
+      if (blobsList.length != 0) {
+        SmartDashboard.putNumber("Blobs Count", blobsList.length);
+        for (int i = 0; i < blobsList.length; i++) {
+          System.out.println("Blob #" + (i + 1) + "\nAngle: " + blobsList[i].angle + " Id: " + blobsList[i].class_id
+              + " Octave: " + blobsList[i].octave + " pt: " + blobsList[i].pt.x + " " + blobsList[i].pt.y
+              + " Response: " + blobsList[i].response + " Size: " + blobsList[i].size);
+        }
+        output.putFrame(pipeline.cvErodeOutput());
+      }
+    });
+
+    visionThread.start();
   }
 
   @Override
   public void robotPeriodic() {
-    if(!DEBUG){
+    if (!DEBUG) {
       if (loopCount > dashboardUpdatePeriod) {
         updateSmartDashboard = true;
         loopCount = 0;
@@ -141,43 +160,5 @@ public class Robot extends TimedRobot {
     liftSubsystem.setBrake();
     RobotMap.resetEncoders();
     armSubsystem.rotate(0, false);
-  }
-  
-  public void cameraThread(){
-    /*Ask me if you don't understand the description of these method (hover over them)
-      I am just following this
-      https://wpilib.screenstepslive.com/s/currentCS/m/vision/l/669166-using-the-cameraserver-on-the-roborio
-      OpenCV is a very good library for vision processing it seems
-    */
-    new Thread(() -> {
-    try{
-      int width = 176;
-      int height = 144;
-      int crossHair = 20;
-      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(width, height);
-      camera.setFPS(40);
-      CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("Vision", width, height);
-      
-      //OpenCV matrix
-      Mat source = new Mat();
-      Mat output = new Mat();
-      while(!Thread.interrupted()) {
-        cvSink.grabFrameNoTimeout(source); //store image file in three 3-bit channels in BGR format
-        //Imgproc.line(source,new Point(width/2-crossHair, length/2), new Point(width/2+crossHair,length/2), new Scalar(0,0,255));
-        Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.line(output,new Point(output.width()/2-crossHair, output.height()/2), new Point(output.width()/2+crossHair,output.height()/2), new Scalar(0,0,255),4);
-        Imgproc.line(output,new Point(output.width()/2, output.height()/2-crossHair), new Point(output.width()/2,output.height()/2+crossHair), new Scalar(0,0,255),4);
-        SmartDashboard.putNumber("Vision 1 width", output.width());
-        SmartDashboard.putNumber("Vision 1 height", output.height());
-        outputStream.putFrame(output);
-      }
-    }
-    catch(Exception e){
-      e.printStackTrace();
-    }
-    
-  }).start();
   }
 }
