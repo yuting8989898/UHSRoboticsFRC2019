@@ -7,6 +7,7 @@
 package frc.robot;
 
 import org.opencv.core.*;
+import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.*;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -65,13 +66,13 @@ public class Robot extends TimedRobot {
     armCommand = new ArmCommand();
 
     OI.init();
-    // driveCommand = new DriveCommand();
 
-    // starting camera
+    // Camera things
     int width = 176;
     int height = 144;
     UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
     UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+    Mat gripOutput ;
     camera0.setResolution(width, height);
     camera0.setFPS(20);
     camera1.setResolution(width, height);
@@ -82,11 +83,14 @@ public class Robot extends TimedRobot {
       KeyPoint[] blobsList = pipeline.findBlobsOutput().toArray();
       if (blobsList.length != 0) {
         SmartDashboard.putNumber("Blobs Count", blobsList.length);
+        pipeline.cvErodeOutput().copyTo(gripOutput);
         for (int i = 0; i < blobsList.length; i++) {
           System.out.println("Blob #" + (i + 1) + "\nAngle: " + blobsList[i].angle + " Id: " + blobsList[i].class_id
               + " Octave: " + blobsList[i].octave + " pt: " + blobsList[i].pt.x + " " + blobsList[i].pt.y
               + " Response: " + blobsList[i].response + " Size: " + blobsList[i].size);
+        Imgproc.circle(gripOutput, blobsList[i].pt, (int)blobsList[i].size, new Scalar(255, 0, 0));
         }
+
         output.putFrame(pipeline.cvErodeOutput());
       }
     });
