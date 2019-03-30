@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
     int height = 144;
     UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
     UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-    Mat gripOutput ;
+    Mat gripOutput = new Mat();
     camera0.setResolution(width, height);
     camera0.setFPS(20);
     camera1.setResolution(width, height);
@@ -90,8 +90,7 @@ public class Robot extends TimedRobot {
               + " Response: " + blobsList[i].response + " Size: " + blobsList[i].size);
         Imgproc.circle(gripOutput, blobsList[i].pt, (int)blobsList[i].size, new Scalar(255, 0, 0));
         }
-
-        output.putFrame(pipeline.cvErodeOutput());
+        output.putFrame(gripOutput);
       }
     });
 
