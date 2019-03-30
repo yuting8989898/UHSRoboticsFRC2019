@@ -110,14 +110,43 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Delta Time", deltaTime);
   }
 
-  @Override
-  public void disabledInit() {
-    liftSubsystem.setCoast();
+  private void generalInit() {
+    liftSubsystem.setBrake();
+    RobotMap.resetEncoders();
+    armSubsystem.rotate(0, false);
   }
 
+  private void generalPeriodic() {
+    Scheduler.getInstance().run();
+    OI.check();
+  }
+
+  //Periodics
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+  }
+
+  @Override
+  public void autonomousPeriodic() {
+    generalPeriodic();
+  }
+
+  @Override
+  public void teleopPeriodic() {
+    generalPeriodic();
+
+  }
+
+  @Override
+  public void testPeriodic() {
+    generalPeriodic();
+  }
+  
+  //Inits
+  @Override
+  public void disabledInit() {
+    liftSubsystem.setCoast();
   }
 
   @Override
@@ -126,39 +155,12 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
-    OI.check();
-  }
-
-  @Override
   public void teleopInit() {
     generalInit();
   }
-
-  /**
-   * This function is called periodically during operator control.
-   */
-  @Override
-  public void teleopPeriodic() {
-    Scheduler.getInstance().run();
-    OI.check();
-  }
-
+  
   @Override
   public void testInit() {
     generalInit();
-  }
-
-  @Override
-  public void testPeriodic() {
-    Scheduler.getInstance().run();
-    OI.check();
-  }
-
-  private void generalInit() {
-    liftSubsystem.setBrake();
-    RobotMap.resetEncoders();
-    armSubsystem.rotate(0, false);
   }
 }
