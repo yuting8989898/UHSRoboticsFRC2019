@@ -34,15 +34,15 @@ public class GripTest implements VisionPipeline {
 	 */
 	@Override	public void process(Mat source0) {
 		// Step CV_resize0:
-		Mat cvResizeSrc = source0;
-		Size cvResizeDsize = new Size(0, 0);
-		double cvResizeFx = 0.3;
-		double cvResizeFy = 0.3;
-		int cvResizeInterpolation = Imgproc.INTER_LINEAR;
-		cvResize(cvResizeSrc, cvResizeDsize, cvResizeFx, cvResizeFy, cvResizeInterpolation, cvResizeOutput);
+		// Mat cvResizeSrc = source0;
+		// Size cvResizeDsize = new Size(0, 0);
+		// double cvResizeFx = 0.3;
+		// double cvResizeFy = 0.3;
+		// int cvResizeInterpolation = Imgproc.INTER_LINEAR;
+		// cvResize(cvResizeSrc, cvResizeDsize, cvResizeFx, cvResizeFy, cvResizeInterpolation, cvResizeOutput);
 
 		// Step HSV_Threshold0:
-		Mat hsvThresholdInput = cvResizeOutput;
+		Mat hsvThresholdInput = source0;
 		double[] hsvThresholdHue = {152.15827338129498, 180.0};
 		double[] hsvThresholdSaturation = {121.53776978417265, 255.0};
 		double[] hsvThresholdValue = {38.98381294964029, 248.56060606060606};
