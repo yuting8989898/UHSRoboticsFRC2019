@@ -23,6 +23,7 @@ public class ArmToAngle extends Command {
     // eg. requires(chassis);
     requires(Robot.armSubsystem);
     this.setpoint = setpoint;
+		SmartDashboard.putNumber("Arm Target ", setpoint);
   }
 
   // Called just before this Command runs the first time

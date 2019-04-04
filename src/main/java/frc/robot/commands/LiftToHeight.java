@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constant;
+import frc.robot.OI;
 import frc.robot.Robot;
 
 public class LiftToHeight extends Command {
@@ -19,11 +20,13 @@ public class LiftToHeight extends Command {
   public LiftToHeight(double targetHeight) {
     requires(Robot.liftSubsystem);
     setpoint = targetHeight;
+    SmartDashboard.putNumber("Lift Target", targetHeight);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    SmartDashboard.putBoolean("Lift PID enabled", true);
     kp = Constant.liftkp;
     ki = Constant.liftki;
     kd = Constant.liftkd;
@@ -67,14 +70,17 @@ public class LiftToHeight extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (setpoint - Robot.liftSubsystem.getLiftEncoderValue() < Constant.liftTolerance
-        && setpoint - Robot.liftSubsystem.getLiftEncoderValue() > -Constant.liftTolerance);
+    // return (setpoint - Robot.liftSubsystem.getLiftEncoderValue() < Constant.liftTolerance
+    //     && setpoint - Robot.liftSubsystem.getLiftEncoderValue() > -Constant.liftTolerance);
+    return (OI.getLift()!=0);
+    // return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.liftSubsystem.stopLift();
+    SmartDashboard.putBoolean("Lift PID enabled", false);
     Scheduler.getInstance().add(new LiftManual());
   }
 

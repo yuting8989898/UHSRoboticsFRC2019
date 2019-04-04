@@ -21,6 +21,7 @@ public class WristToAngle extends Command {
   public WristToAngle(double targetAngle) {
     requires(Robot.wristSubsystem);
     setpoint = -Robot.wristSubsystem.angleToSensorUnit(Math.toRadians(targetAngle));
+		SmartDashboard.putNumber("Wrist Target", targetAngle);
   }
 
   // Called just before this Command runs the first time
