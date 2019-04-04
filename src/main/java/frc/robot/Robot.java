@@ -18,7 +18,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import frc.robot.vision.GripTest;
+// import frc.robot.vision.GripFindCargo;
 
 public class Robot extends TimedRobot {
   // smartDashboard things
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
   public static double lastTime;
   public static DriverStation driverStation;
   public static VisionThread visionThread;
-  public static CvSource output;
+  // public static CvSource output;
 
   @Override
   public void robotInit() {
@@ -71,30 +71,31 @@ public class Robot extends TimedRobot {
     int width = 176;
     int height = 144;
     UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
-    UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+    // UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
     Mat gripOutput = new Mat();
     camera0.setResolution(width, height);
     camera0.setFPS(20);
-    camera1.setResolution(width, height);
-    camera1.setFPS(20);
-    output = CameraServer.getInstance().putVideo("Grip", width, height);
+    // camera1.setResolution(width, height);
+    // camera1.setFPS(20);
+    // output = CameraServer.getInstance().putVideo("Grip", width, height);
 
-    visionThread = new VisionThread(camera0, new GripTest(), pipeline -> {
+    
+    /*visionThread = new VisionThread(camera0, new GripFindCargo(), pipeline -> {
       KeyPoint[] blobsList = pipeline.findBlobsOutput().toArray();
+      pipeline.cvErodeOutput().copyTo(gripOutput);
       if (blobsList.length != 0) {
         SmartDashboard.putNumber("Blobs Count", blobsList.length);
-        pipeline.cvErodeOutput().copyTo(gripOutput);
         for (int i = 0; i < blobsList.length; i++) {
           System.out.println("Blob #" + (i + 1) + "\nAngle: " + blobsList[i].angle + " Id: " + blobsList[i].class_id
               + " Octave: " + blobsList[i].octave + " pt: " + blobsList[i].pt.x + " " + blobsList[i].pt.y
               + " Response: " + blobsList[i].response + " Size: " + blobsList[i].size);
-        Imgproc.circle(gripOutput, blobsList[i].pt, (int)blobsList[i].size, new Scalar(255, 0, 0));
-        }
-        output.putFrame(gripOutput);
+          Imgproc.circle(gripOutput, blobsList[i].pt, (int)blobsList[i].size/2, new Scalar(255, 0, 0));
+        } 
       }
+      output.putFrame(gripOutput);
     });
-
     visionThread.start();
+    */
   }
 
   @Override

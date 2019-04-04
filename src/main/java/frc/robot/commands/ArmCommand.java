@@ -34,6 +34,7 @@ public class ArmCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    /*
     in = OI.getArm();
     if (in == 0 && manualMode) {
       Robot.armSubsystem.rotate(Robot.armSubsystem.getArmHoldPower(), false);
@@ -59,6 +60,7 @@ public class ArmCommand extends Command {
       SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
       SmartDashboard.putNumber("Arm Angle", Math.toDegrees(Robot.armSubsystem.getAngle()));
     }
+    */
   }
 
   // Make this return true when this Command no longer needs to run execute()
