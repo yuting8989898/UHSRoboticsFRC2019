@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.ArmManual;
 
 /**
  * Add your docs here.
@@ -23,7 +24,7 @@ public class ArmSubsystem extends Subsystem {
   // here. Call these from Commands.
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(Robot.armCommand);
+    setDefaultCommand(new ArmManual());
     rotate(0,false);
   }
 

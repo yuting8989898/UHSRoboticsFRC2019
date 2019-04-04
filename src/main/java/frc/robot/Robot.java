@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
-import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 // import frc.robot.vision.GripFindCargo;
 
@@ -35,10 +34,6 @@ public class Robot extends TimedRobot {
   public static ArmSubsystem armSubsystem;
   public static WristSubsystem wristSubsystem;
   public static IntakeSubsystem intakeSubsystem;
-
-  // command
-  public static ArmCommand armCommand;
-
   // others
   public static int loopCount, dashboardUpdatePeriod;
   public static double deltaTime;
@@ -62,8 +57,6 @@ public class Robot extends TimedRobot {
     wristSubsystem = new WristSubsystem();
     liftSubsystem = new LiftSubsystem();
     intakeSubsystem = new IntakeSubsystem();
-
-    armCommand = new ArmCommand();
 
     OI.init();
 

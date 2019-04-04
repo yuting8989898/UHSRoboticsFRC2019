@@ -83,6 +83,7 @@ public class RobotMap {
   public static void resetEncoders(){
     wristEncoder.reset();
     liftEncoder.reset();
+    RobotMap.arm.getSensorCollection().setQuadraturePosition(0, Constant.kTimeoutMs);    
   }
   // public static void driveAccelerationOn() {
   //   // This should fix acceleration (Not decceleration)

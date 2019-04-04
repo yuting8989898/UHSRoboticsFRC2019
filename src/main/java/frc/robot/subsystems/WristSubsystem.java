@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constant;
 import frc.robot.RobotMap;
 import frc.robot.commands.WristManual;
@@ -31,6 +32,7 @@ public class WristSubsystem extends Subsystem {
  */
   public void rotate(double val){
     RobotMap.wrist.set(ControlMode.PercentOutput, val);
+    SmartDashboard.putNumber("Wrist encoder", getWristEncoderValue());
   }
 
   public void stopWrist(){

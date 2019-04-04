@@ -33,8 +33,8 @@ public class DriveSubsystem extends Subsystem {
     RobotMap.driveLeft2.set(ControlMode.PercentOutput,left);
     RobotMap.driveRight1.set(ControlMode.PercentOutput,-right);
     RobotMap.driveRight2.set(ControlMode.PercentOutput,-right);
-    SmartDashboard.putNumber("Drive left", left);
-    SmartDashboard.putNumber("Drive right", right);
+    // SmartDashboard.putNumber("Drive left", left);
+    // SmartDashboard.putNumber("Drive right", right);
   }
   public void setCoast(){
     RobotMap.driveLeft1.setNeutralMode(NeutralMode.Coast);

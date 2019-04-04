@@ -50,11 +50,10 @@ public class LiftToHeight extends Command {
     lastOutput = output;
     previous_error = error;
     if(Robot.updateSmartDashboard){
-      SmartDashboard.putNumber("Lift encoder", Robot.liftSubsystem.getLiftEncoderValue());
-      SmartDashboard.putNumber("Lift output", output);
-      SmartDashboard.putNumber("Lift error", error);
-      SmartDashboard.putNumber("Lift derivative", derivative);
-      SmartDashboard.putNumber("Lift integral", integral);
+      // SmartDashboard.putNumber("Lift output", output);
+      // SmartDashboard.putNumber("Lift error", error);
+      // SmartDashboard.putNumber("Lift derivative", derivative);
+      // SmartDashboard.putNumber("Lift integral", integral);
     }
 
     // output = lastOutput + (output - lastOutput)/Constant.liftSmoothingFactor;

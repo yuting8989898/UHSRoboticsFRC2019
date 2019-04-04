@@ -46,7 +46,6 @@ public class OI {
 
     groundPickup = new JoystickButton(subOI, Constant.DualShock4.ps);
     groundPickup.whenPressed(new goToSetHeight(Constant.ground));
-
   }
 
   public static void check() {
@@ -66,8 +65,8 @@ public class OI {
       //   return;
       }
     }
-    if (getWrist() != 0)
-      new LiftManual();
+    // if (getWrist() != 0)
+    //   new LiftManual();
   }
 
   /**
@@ -95,30 +94,7 @@ public class OI {
   }
 
   public static double getArm() { // negative is going up
-    double output = correctJoystick(0.85 * subOI.getRawAxis(Constant.DualShock4.rightYAxis));
-    // if (output == 0) {
-    //   // 1 and 0 reserved for joystick
-    //   if (subOI.getRawButton(1))
-    //     output = 2; // hatch loading station (left btn)
-    //   else if (subOI.getPOV() == 90)
-    //     output = 3; // cargo loading station (right pov)
-    //   else if (subOI.getRawButton(2))
-    //     output = 4; // hatch level 1 (down btn)
-    //   else if (subOI.getPOV() == 180)
-    //     output = 5; // cargo level 1 (down pov)
-    //   else if (subOI.getRawButton(3))
-    //     output = 6; // hatch level 2 (right btn)
-    //   else if (subOI.getPOV() == 270)
-    //     output = 7; // cargo level 2 (left pov)
-    //   else if (subOI.getRawButton(4))
-    //     output = 8; // hatch level 3 (up btn)
-    //   else if (subOI.getPOV() == 0)
-    //     output = 9; // cargo level 3 (up pov)
-    //   else if (subOI.getRawButton(13))
-    //     output = 10; // ground pickup (ps button)
-    // }
-
-    return output;
+    return correctJoystick(0.85 * subOI.getRawAxis(Constant.DualShock4.rightYAxis));
   }
 
   public static double getWrist() {
@@ -132,11 +108,11 @@ public class OI {
 
   // cargo stuufs
   public static boolean getIntakePressed() {
-    return subOI.getRawButtonPressed(Constant.DualShock4.l1);
+    return subOI.getRawButton(Constant.DualShock4.l1);
   }
 
   public static boolean getRevIntakePressed() {
-    return subOI.getRawButtonPressed(Constant.DualShock4.r1);
+    return subOI.getRawButton(Constant.DualShock4.r1);
   }
 
   // general things

@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
@@ -35,6 +37,7 @@ public class LiftSubsystem extends Subsystem {
       speedPercentage = 0;
     }
     RobotMap.lift.set(ControlMode.PercentOutput, speedPercentage);
+    SmartDashboard.putNumber("Lift encoder", getLiftEncoderValue());    
   }
 
   public void stopLift() {

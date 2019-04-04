@@ -48,12 +48,11 @@ public class WristToAngle extends Command {
     output = -1;
     previous_error = error;
     if(Robot.updateSmartDashboard){
-      SmartDashboard.putNumber("Wrist encoder", Robot.wristSubsystem.getWristEncoderValue());
-      SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
-      SmartDashboard.putNumber("Wrist output", output);
-      SmartDashboard.putNumber("Wrist error", error);
-      SmartDashboard.putNumber("Wrist derivative", derivative);
-      SmartDashboard.putNumber("Wrist integral", integral);
+      // SmartDashboard.putNumber("Wrist angle", Math.toDegrees(Robot.wristSubsystem.getAngle()));
+      // SmartDashboard.putNumber("Wrist output", output);
+      // SmartDashboard.putNumber("Wrist error", error);
+      // SmartDashboard.putNumber("Wrist derivative", derivative);
+      // SmartDashboard.putNumber("Wrist integral", integral);
     }
     Robot.wristSubsystem.rotate(output);
   }
