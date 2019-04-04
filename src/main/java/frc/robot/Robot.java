@@ -53,15 +53,15 @@ public class Robot extends TimedRobot {
     wristCommand = new WristCommand();
     intakeCommand = new IntakeCommand();
 
-    int width = 176;
-    int height = 144;
-    UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
-    UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+    // int width = 176;
+    // int height = 144;
+    // UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
+    // UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
 
-    camera0.setResolution(width, height);
-    camera0.setFPS(20);
-    camera1.setResolution(width, height);
-    camera1.setFPS(20);
+    // camera0.setResolution(width, height);
+    // camera0.setFPS(20);
+    // camera1.setResolution(width, height);
+    // camera1.setFPS(20);
   }
 
   @Override

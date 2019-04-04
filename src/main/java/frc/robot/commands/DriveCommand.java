@@ -26,7 +26,8 @@ public class DriveCommand extends Command {
   @Override
   protected void initialize() {
     right = left = x = y = 0;
-    acceleration = true;
+    // acceleration = true;
+    RobotMap.driveAccelerationOff();
     leftTank = rightTank = false;
   }
 
@@ -36,28 +37,33 @@ public class DriveCommand extends Command {
     leftTank = OI.getDriveLeft();
     rightTank = OI.getDriveRight();
 
-    if (leftTank || rightTank) {
-      if(acceleration){
-        RobotMap.driveAccelerationOff();
-        acceleration = false;
-      }
-      if(leftTank){
-        left=0.4;
-      }
-      if(rightTank){
-        right=0.4;
-      }
-      if(right==0)right=-0.4;
-      if(left==0)left=-0.4;
+    // if (leftTank || rightTank) {
+    //   // if(acceleration){
+    //   //   RobotMap.driveAccelerationOff();
+    //   //   acceleration = false;
+    //   // }
+    //   if(leftTank){
+    //     left=0.4;
+    //   }
+    //   if(rightTank){
+    //     right=0.4;
+    //   }
+    //   if(right==0)right=-0.4;
+    //   if(left==0)left=-0.4;
 
-    } else {
+    // } else {
       double x = OI.getDriveX();
       double y = OI.getDriveY();
-      if(!acceleration){
-        RobotMap.driveAccelerationOn();
-        acceleration = true;
+      if(leftTank||rightTank){
+        x*=0.5;
+        y*=0.5;
       }
+      // if(!acceleration){
+      //   RobotMap.driveAccelerationOn();
+      //   acceleration = true;
+      // }
       //for making sure we can turn while driving foward
+      
       if (x > 0)
         x = Math.pow(x, 0.7);
       else
@@ -83,7 +89,7 @@ public class DriveCommand extends Command {
         right = -1;
       }
 
-    }
+    // }
 
     Robot.driveSubsystem.drive(right, left);
 

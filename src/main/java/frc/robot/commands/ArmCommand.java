@@ -41,14 +41,14 @@ public class ArmCommand extends Command {
       return;
     }
     if(in >= 2){ //Using pid
-      if(manualMode){
-        manualMode = false;
-        RobotMap.arm.configPeakOutputReverse(-0.75, Constant.kTimeoutMs);
-      }
-       double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
-       SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
-       SmartDashboard.putString("Target", Constant.inputLevels[(int)in-2]);
-       Robot.armSubsystem.rotate(target, true);
+      // if(manualMode){
+      //   manualMode = false;
+      //   RobotMap.arm.configPeakOutputReverse(-0.75, Constant.kTimeoutMs);
+      // }
+      //  double target = -Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[(int)in-2]));
+      //  SmartDashboard.putNumber("Arm Target ", Constant.armLevels[(int)in-2]);
+      //  SmartDashboard.putString("Target", Constant.inputLevels[(int)in-2]);
+      //  Robot.armSubsystem.rotate(target, true);
     }
     else if (in != 0) { 
       if(!manualMode) {
