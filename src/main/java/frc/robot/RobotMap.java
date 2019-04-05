@@ -93,11 +93,11 @@ public class RobotMap {
   //   driveRight2.configOpenloopRamp(Constant.driveRampRate, Constant.kTimeoutMs);
   // }
 
-  // public static void driveAccelerationOff() {
-  //   // This should fix acceleration (Not decceleration)
-  //   driveLeft1.configOpenloopRamp(0, Constant.kTimeoutMs);
-  //   driveLeft2.configOpenloopRamp(0, Constant.kTimeoutMs);
-  //   driveRight1.configOpenloopRamp(0, Constant.kTimeoutMs);
-  //   driveRight2.configOpenloopRamp(0, Constant.kTimeoutMs);
-  // }
+  public static void driveAccelerationOff() {
+    // This should fix acceleration (Not decceleration)
+    driveLeft1.configOpenloopRamp(0, Constant.kTimeoutMs);
+    driveLeft2.configOpenloopRamp(0, Constant.kTimeoutMs);
+    driveRight1.configOpenloopRamp(0, Constant.kTimeoutMs);
+    driveRight2.configOpenloopRamp(0, Constant.kTimeoutMs);
+  }
 }
