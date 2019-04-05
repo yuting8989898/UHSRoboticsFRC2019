@@ -61,13 +61,13 @@ public class Robot extends TimedRobot {
     OI.init();
 
     // Camera things
-    int width = 176;
-    int height = 144;
-    UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
+    // int width = 176;
+    // int height = 144;
+    // UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
     // UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-    Mat gripOutput = new Mat();
-    camera0.setResolution(width, height);
-    camera0.setFPS(20);
+    // Mat gripOutput = new Mat();
+    // camera0.setResolution(width, height);
+    // camera0.setFPS(20);
     // camera1.setResolution(width, height);
     // camera1.setFPS(20);
     // output = CameraServer.getInstance().putVideo("Grip", width, height);

@@ -11,7 +11,7 @@ import frc.robot.commands.WristToAngle;
 public class goToSetHeight extends CommandGroup {
 	public goToSetHeight(int level) {
 		SmartDashboard.putString("Target", Constant.inputLevels[level]);
-		addParallel(new ArmToAngle(-Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[level]))));
+		// addParallel(new ArmToAngle(-Robot.armSubsystem.angleToSensorUnit(Math.toRadians(Constant.armLevels[level]))));
 		addParallel(new LiftToHeight(Constant.liftLevels[level]));
 		addParallel(new WristToAngle(Constant.wristLevels[level]));
 	}
