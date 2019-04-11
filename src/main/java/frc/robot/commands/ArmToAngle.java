@@ -30,12 +30,12 @@ public class ArmToAngle extends Command {
   @Override
   protected void initialize() {
     RobotMap.arm.configPeakOutputReverse(-0.75, Constant.kTimeoutMs);
+    Robot.armSubsystem.rotate(setpoint, true);    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.armSubsystem.rotate(setpoint, true);
     if (Robot.updateSmartDashboard) {
       SmartDashboard.putNumber("Arm Rotation", RobotMap.arm.getSelectedSensorPosition());
       SmartDashboard.putNumber("Arm Angle", Math.toDegrees(Robot.armSubsystem.getAngle()));

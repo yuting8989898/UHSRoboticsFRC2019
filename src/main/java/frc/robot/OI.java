@@ -27,31 +27,47 @@ public class OI {
   public static JoystickButton hatchLevel3; // Up
   public static JoystickButton groundPickup; // PS button
   private static int lastPOV = -1;
+  
 
   public static void init() {
     mainOI = new Joystick(Constant.mainOI);
     subOI = new Joystick(Constant.subOI);
+  
+    hatchLoadingStation = new JoystickButton(subOI, Constant.DualShock4.left);
+    hatchLoadingStation.whenPressed(new goToSetHeight(Constant.hatchLoading));
+
+    hatchLevel1 = new JoystickButton(subOI, Constant.DualShock4.down);
+    hatchLevel1.whenPressed(new goToSetHeight(Constant.hatch1));
+
+    hatchLevel2 = new JoystickButton(subOI, Constant.DualShock4.right);
+    hatchLevel2.whenPressed(new goToSetHeight(Constant.hatch2));
+
+    hatchLevel3 = new JoystickButton(subOI, Constant.DualShock4.up);
+    hatchLevel3.whenPressed(new goToSetHeight(Constant.hatch3));
+
+    groundPickup = new JoystickButton(subOI, Constant.DualShock4.ps);
+    groundPickup.whenPressed(new goToSetHeight(Constant.ground));
   }
 
   public static void check() {
-    if (subOI.getRawButton(Constant.DualShock4.left))
-      new goToSetHeight(Constant.hatchLoading).start();
-    else if (subOI.getPOV() == 90)
-      new goToSetHeight(Constant.cargoPickup).start();
-    else if (subOI.getRawButton(Constant.DualShock4.down))
-      new goToSetHeight(Constant.hatch1).start();
-    else if (subOI.getPOV() == 180)
-      new goToSetHeight(Constant.cargo1).start();
-    else if (subOI.getRawButton(Constant.DualShock4.right))
-      new goToSetHeight(Constant.hatch2).start();
-    else if (subOI.getPOV() == 270)
-      new goToSetHeight(Constant.cargo2).start();
-    else if (subOI.getRawButton(Constant.DualShock4.up))
-      new goToSetHeight(Constant.hatch3).start();
-    else if (subOI.getPOV() == 0)
-      new goToSetHeight(Constant.cargo3).start();
-    else if (subOI.getRawButton(Constant.DualShock4.ps))
-      new goToSetHeight(Constant.ground).start();
+    if (lastPOV != subOI.getPOV()) {
+      switch (subOI.getPOV()) {
+      case 90:
+        new goToSetHeight(Constant.cargoPickup);
+        return;
+      case 180:
+        new goToSetHeight(Constant.cargo1);
+        return;
+      case 270:
+        new goToSetHeight(Constant.cargo2);
+        return;
+      // case 0:
+      //   new goToSetHeight(Constant.cargo3);
+      //   return;
+      }
+    }
+    // if (getWrist() != 0)
+    //   new LiftManual();
   }
 
   /**

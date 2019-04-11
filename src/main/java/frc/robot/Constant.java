@@ -56,7 +56,7 @@ public class Constant {
     public static double wristkp = 0.28;
     public static double wristki = 0.0001;
     public static double wristkd = 0.9;
-    public static double wristTolerance = 50;
+    public static double wristTolerance = 25;
 
 
     //intake
