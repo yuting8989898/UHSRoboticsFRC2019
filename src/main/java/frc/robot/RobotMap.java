@@ -43,7 +43,7 @@ public class RobotMap {
     driveRight1 = new VictorSPX(9);
     driveRight2 = new VictorSPX(10);
 
-    driveAccelerationOn();
+    // driveAccelerationOn();
 
     // the lift stuffs
     lift = new VictorSPX(8);
