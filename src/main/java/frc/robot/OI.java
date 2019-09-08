@@ -75,21 +75,10 @@ public class OI {
 
   // TODO: make sure there's no "null pointer exception", and the button ids are
   // correct
-  public static boolean getDriveLeft() {
-    if (!usingMainOI)
-      return false;
-    try {
-      return mainOI.getRawButton(6);
-    } catch (Exception e) {
-      return false;
-    }
-  }
 
-  public static boolean getDriveRight() {
-    if (!usingMainOI)
-      return false;
+  public static boolean getDriveUnlock() {
     try {
-      return mainOI.getRawButton(5);
+      return mainOI.getRawButton(6)||mainOI.getRawButton(5);
     } catch (Exception e) {
       return false;
     }

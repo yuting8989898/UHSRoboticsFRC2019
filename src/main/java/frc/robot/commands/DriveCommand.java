@@ -16,7 +16,6 @@ import frc.robot.RobotMap;
 public class DriveCommand extends Command {
 
   double right, left, x, y;
-  boolean acceleration, leftTank, rightTank;
 
   public DriveCommand() {
     requires(Robot.driveSubsystem);
@@ -28,66 +27,50 @@ public class DriveCommand extends Command {
     right = left = x = y = 0;
     // acceleration = true;
     RobotMap.driveAccelerationOff();
-    leftTank = rightTank = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    leftTank = OI.getDriveLeft();
-    rightTank = OI.getDriveRight();
+    double x = OI.getDriveX();
+    double y = OI.getDriveY();
+    // if(!acceleration){
+    // RobotMap.driveAccelerationOn();
+    // acceleration = true;
+    // }
+    // for making sure we can turn while driving foward
 
-    // if (leftTank || rightTank) {
-    //   // if(acceleration){
-    //   //   RobotMap.driveAccelerationOff();
-    //   //   acceleration = false;
-    //   // }
-    //   if(leftTank){
-    //     left=0.4;
-    //   }
-    //   if(rightTank){
-    //     right=0.4;
-    //   }
-    //   if(right==0)right=-0.4;
-    //   if(left==0)left=-0.4;
-
-    // } else {
-      double x = OI.getDriveX();
-      double y = OI.getDriveY();
-      if(leftTank||rightTank){
-        x*=0.5;
-        y*=0.5;
-      }
-      // if(!acceleration){
-      //   RobotMap.driveAccelerationOn();
-      //   acceleration = true;
-      // }
-      //for making sure we can turn while driving foward
-      
-      if (x > 0)
-        x = Math.pow(x, 0.7);
-      else
-        x = -Math.pow(-x, 0.7);
-      if (x > 0.7)
-        x = 0.7;
-      else if (x < -0.7)
-        x = -0.7;
-      left = y + x;
-      right = y - x;
-      if (left > 1) {
-        right -= left - 1;
-        left = 1;
-      } else if (left < -1) {
-        right -= left + 1;
-        left = -1;
-      }
-      if (right > 1) {
-        left -= right - 1;
-        right = 1;
-      } else if (right < -1) {
-        left -= right + 1;
-        right = -1;
-      }
+    if (x > 0)
+      x = Math.pow(x, 0.6);
+    else
+      x = -Math.pow(-x, 0.6);
+    if (OI.getDriveUnlock()) {
+      if (x > 0.8)
+        x = 0.8;
+      else if (x < -0.8)
+        x = -0.8;
+    } else {
+      if (x > 0.5)
+        x = 0.5;
+      else if (x < -0.5)
+        x = -0.5;
+    }
+    left = y + x;
+    right = y - x;
+    if (left > 1) {
+      right -= left - 1;
+      left = 1;
+    } else if (left < -1) {
+      right -= left + 1;
+      left = -1;
+    }
+    if (right > 1) {
+      left -= right - 1;
+      right = 1;
+    } else if (right < -1) {
+      left -= right + 1;
+      right = -1;
+    }
 
     // }
 
