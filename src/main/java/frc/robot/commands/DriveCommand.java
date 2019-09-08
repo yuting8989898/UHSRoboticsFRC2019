@@ -44,17 +44,12 @@ public class DriveCommand extends Command {
       x = Math.pow(x, 0.6);
     else
       x = -Math.pow(-x, 0.6);
-    if (OI.getDriveUnlock()) {
-      if (x > 0.8)
-        x = 0.8;
-      else if (x < -0.8)
-        x = -0.8;
-    } else {
-      if (x > 0.5)
-        x = 0.5;
-      else if (x < -0.5)
-        x = -0.5;
-    }
+
+    if (x > 0.8)
+      x = 0.8;
+    else if (x < -0.8)
+      x = -0.8;
+
     left = y + x;
     right = y - x;
     if (left > 1) {

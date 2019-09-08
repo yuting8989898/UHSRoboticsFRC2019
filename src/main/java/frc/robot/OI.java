@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
   public static Joystick mainOI;
   public static Joystick subOI;
+  public static Joystick safeOI;
   public static boolean usingMainOI = false;
   public static boolean usingSubOI = false;
 
@@ -36,6 +37,7 @@ public class OI {
     } else {
       usingSubOI = false;
     }
+    safeOI = new Joystick(2);
     SmartDashboard.putBoolean("Main OI connected", usingMainOI);
     SmartDashboard.putBoolean("Sub OI connected", usingSubOI);
   }
@@ -54,7 +56,10 @@ public class OI {
     if (!usingMainOI)
       return 0;
     try {
-      return correctJoystick(mainOI.getRawAxis(2)); // Left joystick
+      //only uses safeOI if mainOI not in use and override button not pressed
+      return (correctJoystick(mainOI.getRawAxis(2)) != 0 || mainOI.getRawButton(5) || mainOI.getRawButton(6))
+          ? correctJoystick(mainOI.getRawAxis(2))
+          : correctJoystick(safeOI.getRawAxis(2)) * 0.4;
     } catch (Exception e) {
       return 0;
     }
@@ -67,7 +72,10 @@ public class OI {
     if (!usingMainOI)
       return 0;
     try {
-      return correctJoystick(-mainOI.getRawAxis(1)); // Right joystick
+      //only uses safeOI if mainOI not in use and override button not pressed
+      return (correctJoystick(-mainOI.getRawAxis(1)) != 0 || mainOI.getRawButton(5) || mainOI.getRawButton(6))
+      ? correctJoystick(-mainOI.getRawAxis(1))
+      : correctJoystick(-safeOI.getRawAxis(1)) * 0.6;
     } catch (Exception e) {
       return 0;
     }
@@ -75,40 +83,22 @@ public class OI {
 
   // TODO: make sure there's no "null pointer exception", and the button ids are
   // correct
-
-  public static boolean getDriveUnlock() {
-    try {
-      return mainOI.getRawButton(6)||mainOI.getRawButton(5);
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
   public static double getArm() { // negative is going up
     if (!usingSubOI)
       return 0;
     double output = correctJoystick(0.85 * subOI.getRawAxis(5));
-    /*if (output == 0) {
-      // 1 and 0 reserved for joystick
-      if (subOI.getRawButton(1))
-        output = 2; // hatch loading station (left btn)
-      else if (subOI.getPOV() == 90)
-        output = 3; // cargo loading station (right pov)
-      else if (subOI.getRawButton(2))
-        output = 4; // hatch level 1 (down btn)
-      else if (subOI.getPOV() == 180)
-        output = 5; // cargo level 1 (down pov)
-      else if (subOI.getRawButton(3))
-        output = 6; // hatch level 2 (right btn)
-      else if (subOI.getPOV() == 270)
-        output = 7; // cargo level 2 (left pov)
-      else if (subOI.getRawButton(4))
-        output = 8; // hatch level 3 (up btn)
-      else if (subOI.getPOV() == 0)
-        output = 9; // cargo level 3 (up pov)
-      else if (subOI.getRawButton(13))
-        output = 10; // ground pickup (ps button)
-    }*/
+    /*
+     * if (output == 0) { // 1 and 0 reserved for joystick if
+     * (subOI.getRawButton(1)) output = 2; // hatch loading station (left btn) else
+     * if (subOI.getPOV() == 90) output = 3; // cargo loading station (right pov)
+     * else if (subOI.getRawButton(2)) output = 4; // hatch level 1 (down btn) else
+     * if (subOI.getPOV() == 180) output = 5; // cargo level 1 (down pov) else if
+     * (subOI.getRawButton(3)) output = 6; // hatch level 2 (right btn) else if
+     * (subOI.getPOV() == 270) output = 7; // cargo level 2 (left pov) else if
+     * (subOI.getRawButton(4)) output = 8; // hatch level 3 (up btn) else if
+     * (subOI.getPOV() == 0) output = 9; // cargo level 3 (up pov) else if
+     * (subOI.getRawButton(13)) output = 10; // ground pickup (ps button) }
+     */
 
     return output;
   }
@@ -119,27 +109,18 @@ public class OI {
     double output = correctJoystick(subOI.getRawAxis(4)); // downward (left trigger)
     output -= correctJoystick(subOI.getRawAxis(3)); // upward (right trigger)
     output *= 0.3;
-    /*if (output == 0) {
-      // -1~1 is reserved for the joystick
-      if (subOI.getRawButton(1))
-        output = 2; // hatch loading station (left btn)
-      else if (subOI.getPOV() == 90)
-        output = 3; // cargo loading station(right pov)
-      else if (subOI.getRawButton(2))
-        output = 4; // hatch level 1 (down btn)
-      else if (subOI.getPOV() == 180)
-        output = 5; // cargo level 1 (down pov)
-      else if (subOI.getRawButton(3))
-        output = 6; // hatch level 2 (right btn)
-      else if (subOI.getPOV() == 270)
-        output = 7; // cargo level 2 (left pov)
-      else if (subOI.getRawButton(4))
-        output = 8; // hatch level 3 (up btn)
-      else if (subOI.getPOV() == 0)
-        output = 9; // cargo level 3 (up pov)
-      else if (subOI.getRawButton(13))
-        output = 10; // ground pickup (ps button)
-    }*/
+    /*
+     * if (output == 0) { // -1~1 is reserved for the joystick if
+     * (subOI.getRawButton(1)) output = 2; // hatch loading station (left btn) else
+     * if (subOI.getPOV() == 90) output = 3; // cargo loading station(right pov)
+     * else if (subOI.getRawButton(2)) output = 4; // hatch level 1 (down btn) else
+     * if (subOI.getPOV() == 180) output = 5; // cargo level 1 (down pov) else if
+     * (subOI.getRawButton(3)) output = 6; // hatch level 2 (right btn) else if
+     * (subOI.getPOV() == 270) output = 7; // cargo level 2 (left pov) else if
+     * (subOI.getRawButton(4)) output = 8; // hatch level 3 (up btn) else if
+     * (subOI.getPOV() == 0) output = 9; // cargo level 3 (up pov) else if
+     * (subOI.getRawButton(13)) output = 10; // ground pickup (ps button) }
+     */
     return output;
 
   }
@@ -148,27 +129,18 @@ public class OI {
     if (!usingSubOI)
       return 0;
     double output = correctJoystick(-subOI.getRawAxis(1)); // Left joystick
-    /*if (output == 0) {
-      // -1~1 is reserved for the joystick
-      if (subOI.getRawButton(1))
-        output = 2; // hatch loading station (left btn)
-      else if (subOI.getPOV() == 90)
-        output = 3; // cargo loading station(right pov)
-      else if (subOI.getRawButton(2))
-        output = 4; // hatch level 1 (down btn)
-      else if (subOI.getPOV() == 180)
-        output = 5; // cargo level 1 (down pov)
-      else if (subOI.getRawButton(3))
-        output = 6; // hatch level 2 (right btn)
-      else if (subOI.getPOV() == 270)
-        output = 7; // cargo level 2 (left pov)
-      else if (subOI.getRawButton(4))
-        output = 8; // hatch level 3 (up btn)
-      else if (subOI.getPOV() == 0)
-        output = 9; // cargo level 3 (up pov)
-      else if (subOI.getRawButton(13))
-        output = 10; // ground pickup (ps button)
-    }*/
+    /*
+     * if (output == 0) { // -1~1 is reserved for the joystick if
+     * (subOI.getRawButton(1)) output = 2; // hatch loading station (left btn) else
+     * if (subOI.getPOV() == 90) output = 3; // cargo loading station(right pov)
+     * else if (subOI.getRawButton(2)) output = 4; // hatch level 1 (down btn) else
+     * if (subOI.getPOV() == 180) output = 5; // cargo level 1 (down pov) else if
+     * (subOI.getRawButton(3)) output = 6; // hatch level 2 (right btn) else if
+     * (subOI.getPOV() == 270) output = 7; // cargo level 2 (left pov) else if
+     * (subOI.getRawButton(4)) output = 8; // hatch level 3 (up btn) else if
+     * (subOI.getPOV() == 0) output = 9; // cargo level 3 (up pov) else if
+     * (subOI.getRawButton(13)) output = 10; // ground pickup (ps button) }
+     */
     return output;
   }
 
