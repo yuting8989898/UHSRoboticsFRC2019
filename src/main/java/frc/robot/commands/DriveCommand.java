@@ -38,7 +38,6 @@ public class DriveCommand extends Command {
     // RobotMap.driveAccelerationOn();
     // acceleration = true;
     // }
-    // for making sure we can turn while driving foward
 
     if (x > 0)
       x = Math.pow(x, 0.6);
@@ -50,6 +49,7 @@ public class DriveCommand extends Command {
     else if (x < -0.8)
       x = -0.8;
 
+    // lowers motor speed when necessary to prioritize steering control
     left = y + x;
     right = y - x;
     if (left > 1) {
@@ -66,8 +66,6 @@ public class DriveCommand extends Command {
       left -= right + 1;
       right = -1;
     }
-
-    // }
 
     Robot.driveSubsystem.drive(right, left);
 
