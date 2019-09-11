@@ -59,7 +59,7 @@ public class OI {
       // only uses safeOI if mainOI not in use and override button not pressed
       return (correctJoystick(mainOI.getRawAxis(2)) != 0 || mainOI.getRawButton(5) || mainOI.getRawButton(6))
           ? correctJoystick(mainOI.getRawAxis(2))
-          : correctJoystick(safeOI.getRawAxis(2)) * 0.4;
+          : correctJoystick(safeOI.getRawAxis(2)) * 0.3;
     } catch (Exception e) {
       return 0;
     }
