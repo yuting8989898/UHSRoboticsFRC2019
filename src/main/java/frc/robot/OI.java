@@ -73,7 +73,6 @@ public class OI {
     }
   }
 
-  // TODO: make sure there's no "null pointer exception", and the button ids are
   // correct
   public static boolean getDriveLeft() {
     if (!usingMainOI)
